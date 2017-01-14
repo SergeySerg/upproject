@@ -10,7 +10,7 @@ class Category extends Translate {
 
     public function hasField($field_name){
         $fields = json_decode($this->fields);
-        foreach($fields as $field){
+        foreach($fields->base as $field){
             if($field == $field_name){
                 return true;
             }

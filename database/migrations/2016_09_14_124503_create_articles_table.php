@@ -20,9 +20,7 @@ class CreateArticlesTable extends Migration {
 			$table->text('title');
 			$table->text('short_description');
 			$table->text('description');
-			$table->text('price');
-			$table->text('term');
-			$table->integer('quantity');
+			$table->text('attributes');
 			$table->text('imgs');
 			$table->text('files');
 			$table->integer('priority')->default(0);

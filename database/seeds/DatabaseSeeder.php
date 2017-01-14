@@ -51,44 +51,29 @@ class CategoriesSeeder extends Seeder {
             'id' => "1",
             'name' => 'Головна',
             'link' => 'main',
-            'fields' => '["title","short_description","description"]',
+            'fields' => '{"base": ["title", "description"],"attributes": [{"price": {"type": "input","lang": "false"}},{"specification": {"type": "textearea","lang": "true"}},{"quantity": {"type": "input","lang_active": false}}]}',
         ]);
         Category::create([
             'id' => "2",
             'name' => 'Візи',
             'link' => 'visas',
-            'fields' => '["title","price","short_description","description","gallery","priority","active"]',
+            'fields' => '
+            {
+                "base": ["title", "description"],
+                "attributes": [{
+                    "price": {
+                        "type": "input",
+                        "lang": "false"
+                    }
+                }, {
+                    "specification": {
+                        "type": "textearea",
+                        "lang": "true"
+                    }
+                }]
+            }',
         ]);
-        Category::create([
-            'id' => "3",
-            'name' => 'Візові центри',
-            'link' => 'visas_center',
-            'fields' => '["title","price","short_description","description","priority","active","term"]',
-        ]);
-        Category::create([
-            'id' => "4",
-            'name' => 'Новини',
-            'link' => 'news',
-            'fields' => '["title","short_description","description","gallery","date","priority","active"]',
-        ]);
-        Category::create([
-            'id' => "5",
-            'name' => 'Послуги',
-            'link' => 'services',
-            'fields' => '["title","short_description","description","gallery","priority","price","active"]',
-        ]);
-        Category::create([
-            'id' => "6",
-            'name' => 'Поради',
-            'link' => 'advices',
-            'fields' => '["title","short_description","description","priority","active"]',
-        ]);
-        Category::create([
-            'id' => "7",
-            'name' => 'Seo',
-            'link' => 'seo',
-            'fields' => '["title","meta_title","meta_description","meta_keywords"]',
-        ]);
+
         /*Category::create([
             'id' => "2",
             'name' => 'Про компанію',

@@ -16,6 +16,8 @@ class CreateCategoriesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
+			$table->text('short_description');
+			$table->text('description');
 			$table->string('link');
 			$table->text('fields');
 			$table->timestamp('created_at');

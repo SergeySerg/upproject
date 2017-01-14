@@ -31,12 +31,14 @@ class AdminArticlesController extends Controller {
 	{
 		App::setLocale('ua');
 		$admin_category = Category::where("link","=","$type")->first();
+
 		$admin_articles = $admin_category->articles;
 
 		return view('backend.articles.list', [
-			'admin_category'=>$admin_category,
-			'admin_articles'=>$admin_articles,
-			'type'=>$type
+			'admin_category' => $admin_category,
+			'admin_articles' => $admin_articles,
+			'type' => $type,
+
 		]);
 	}
 
@@ -153,15 +155,17 @@ class AdminArticlesController extends Controller {
 		$langs = Lang::all();
 		$admin_article = Article::where("id","=","$id")->first();
 		$admin_category = Category::where("link","=","$type")->first();
+		$fields = json_decode($admin_category->fields);
+		$attributes_fields = $fields->attributes;
 
-
-
+		//dd($attributes_fields);
 		return view('backend.articles.edit',[
 			'admin_article'=>$admin_article,
 			'admin_category' => $admin_category,
 			'type'=>$type,
 			'langs'=>$langs,
-			'action_method' => 'put'
+			'action_method' => 'put',
+			'attributes_fields' => $attributes_fields,
 		]);
 	}
 

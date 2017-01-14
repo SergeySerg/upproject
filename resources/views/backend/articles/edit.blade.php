@@ -42,38 +42,34 @@
             <!--PAGE CONTENT BEGINS-->
 
             <form class="form-horizontal" id="resource-form" method="POST" action="" />
-                @if($admin_category->hasField('price'))
-                    <div class="control-group">
-                        <label class="control-label" for="form-field-1">Вартість</label>
-                        <div class="controls">
-                            <input type="text" id="form-field-1" name="price" @if(isset($admin_article)) value='{{$admin_article->price}}'@endif  />
-                        </div>
-                    </div>
-                @endif
-                @if($admin_category->hasField('code'))
-                    <div class="control-group">
-                        <label class="control-label" for="form-field-11">Код </label>
-                        <div class="controls">
-                            <input type="text" id="form-field-11" name="code" @if(isset($admin_article)) value='{{$admin_article->code}}'@endif  />
-                        </div>
-                    </div>
-                @endif
-                @if($admin_category->hasField('term'))
-                    <div class="control-group">
-                        <label class="control-label" for="form-field-1">Термін виконання</label>
-                        <div class="controls">
-                            <input type="text" id="form-field-1" name="term" @if(isset($admin_article)) value='{{$admin_article->term}}'@endif  />
-                        </div>
-                    </div>
-                @endif
-                @if($admin_category->hasField('quantity'))
-                    <div class="control-group">
-                        <label class="control-label" for="form-field-2">Кількість</label>
+                @if($attributes_fields)
+                    @foreach($attributes_fields as $attributes)
+                        @if(is_object($attributes))
+                            @foreach($attributes as $key => $attribute)
+                                @if(!$attribute->lang_active)
+                                    @if($attribute->type == 'input' )
+                                        <div class="control-group">
+                                            <label class="control-label" for="form-field-2">{{ $key }}</label>
 
-                        <div class="controls">
-                            <input type="number" id="form-field-2" name="quantity" @if(isset($admin_article)) value='{{$admin_article->quantity}}' @endif  />
-                        </div>
-                    </div>
+                                            <div class="controls">
+                                                <input type="text" id="form-field-2" name="{{ $key }}" @if(isset($admin_article)) value='{{$admin_article->quantity}}' @endif  />
+                                            </div>
+                                        </div>
+                                    @elseif ($attribute->type == 'textarea' )
+                                        <h4 class="header blue clearfix">{{ $key }}</h4>
+                                        <div class="control-group">
+                                            <textarea name="{{ $key }}" class="span12" id="{{ $key }}" placeholder="Опис">{{ $key }}</textarea>
+                                        </div>
+                                    @elseif ($attribute->type == 'textarea-no-wysiwyg' )
+                                        <h4 class="header blue clearfix">{{ $key }}</h4>
+                                        <div class="control-group">
+                                            <textarea name="{{ $key }}" class="span12 no-wysiwyg" id="{{ $key }}" placeholder="Опис">{{ $key }}</textarea>
+                                        </div>
+                                    @endif
+                                @endif
+                            @endforeach
+                        @endif
+                    @endforeach
                 @endif
                 @if($admin_category->hasField('priority'))
                     <div class="control-group">
@@ -115,113 +111,145 @@
                 <div class="space-12"></div>
                 <div class="row-fluid">
                     <div class="span12">
-                            <div class="tabbable">
-                                <ul class="nav nav-tabs" id="myTab2">
-                                    @foreach($langs as $lang)
-                                        <li @if(($lang->lang) == 'ua') class="active" @endif >
-                                            <a data-toggle="tab" href="#{{$lang->lang}}">{{$lang->lang}}</a>
-                                        </li>
-                                    @endforeach
-
-                                </ul>
-                            </div>
-
-                            <div class="tab-content">
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs" id="myTab2">
                                 @foreach($langs as $lang)
-                                    <div id="{{$lang->lang}}" @if(($lang->lang) == 'ua') class="tab-pane in active" @else class="tab-pane" @endif>
-                                        @if($admin_category->hasField('title'))
-                                            <div class="control-group">
-                                                <label class="control-label" for="form-field-3">Назва</label>
+                                    <li @if(($lang->lang) == 'ua') class="active" @endif >
+                                        <a data-toggle="tab" href="#{{$lang->lang}}">{{$lang->lang}}</a>
+                                    </li>
+                                @endforeach
 
-                                                <div class="controls">
-                                                    <input type="text" name="title_{{$lang->lang}}" value='@if(isset($admin_article)){{ $admin_article->getTranslate('title', $lang->lang) }}@endif' id="form-field-3" placeholder="Назва номеру,події,послуги" />
-                                                </div>
+                            </ul>
+                        </div>
+
+                        <div class="tab-content">
+                            @foreach($langs as $lang)
+                                <div id="{{$lang->lang}}" @if(($lang->lang) == 'ua') class="tab-pane in active" @else class="tab-pane" @endif>
+                                    @if($admin_category->hasField('title'))
+                                        <div class="control-group">
+                                            <label class="control-label" for="form-field-3">Назва</label>
+
+                                            <div class="controls">
+                                                <input type="text" name="title_{{$lang->lang}}" value='@if(isset($admin_article)){{ $admin_article->getTranslate('title', $lang->lang) }}@endif' id="form-field-3" placeholder="Назва номеру,події,послуги" />
                                             </div>
-                                        @endif
-                                        @if($admin_category->hasField('specification'))
-                                            <div class="control-group">
-                                                <label class="control-label" for="form-field-10">Тип</label>
+                                        </div>
+                                    @endif
+                                    @if($admin_category->hasField('specification'))
+                                        <div class="control-group">
+                                            <label class="control-label" for="form-field-10">Тип</label>
 
-                                                <div class="controls">
-                                                    <input type="text" name="specification_{{$lang->lang}}" value='@if(isset($admin_article)){{ $admin_article->getTranslate('specification', $lang->lang) }}@endif' id="form-field-10" placeholder="Тип" />
-                                                </div>
+                                            <div class="controls">
+                                                <input type="text" name="specification_{{$lang->lang}}" value='@if(isset($admin_article)){{ $admin_article->getTranslate('specification', $lang->lang) }}@endif' id="form-field-10" placeholder="Тип" />
                                             </div>
+                                        </div>
+                                    @endif
+
+                                        @if($attributes_fields)
+                                            @foreach($attributes_fields as $attributes)
+                                                @if(is_object($attributes))
+                                                    @foreach($attributes as $key => $attribute)
+                                                        @if($attribute->lang_active)
+                                                            @if($attribute->type == 'input' )
+                                                                <div class="control-group">
+                                                                    <label class="control-label" for="form-field-2">{{ $key }}</label>
+
+                                                                    <div class="controls">
+                                                                        <input type="text" name="{{ $key }}_{{$lang->lang}}" value='@if(isset($admin_article)){{ $admin_article->getTranslate('title', $lang->lang) }}@endif' id="form-field-{{ $key }}" placeholder="Назва" />
+                                                                    </div>
+                                                                </div>
+                                                            @elseif ($attribute->type == 'textarea' )
+                                                                <h4 class="header blue clearfix">{{ $key }}</h4>
+                                                                <div class="control-group">
+                                                                    <textarea name="{{ $key }}_{{$lang->lang}}"class="span12" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getTranslate('short_description',$lang->lang) }}@endif</textarea>
+                                                                </div>
+                                                            @elseif ($attribute->type == 'textarea-no-wysiwyg' )
+                                                                <h4 class="header blue clearfix">{{ $key }}</h4>
+                                                                <div class="control-group">
+                                                                    <textarea name="{{ $key }}_{{$lang->lang}}"class="span12 no-wysiwyg" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getTranslate('short_description',$lang->lang) }}@endif</textarea>
+                                                                </div>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
                                         @endif
-                                        @if($admin_category->hasField('meta_title'))
-                                            <h4 class="header blue clearfix">SEO</h4>
 
+                                    @if($admin_category->hasField('meta_title'))
+                                        <h4 class="header blue clearfix">SEO</h4>
+                                        <div class="control-group">
+                                            <label class="control-label" for="form-field-4">META Title</label>
 
-                                            <div class="control-group">
-                                                <label class="control-label" for="form-field-4">META Title</label>
+                                            <div class="controls">
+                                                <input type="text" id="form-field-4" name="meta_title_{{$lang->lang}}" value="@if(isset($admin_article)){{ $admin_article->getTranslate('meta_title',$lang->lang) }}@endif"/>
 
-                                                <div class="controls">
-                                                    <input type="text" id="form-field-4" name="meta_title_{{$lang->lang}}" value="@if(isset($admin_article)){{ $admin_article->getTranslate('meta_title',$lang->lang) }}@endif"/>
-
-                                                </div>
                                             </div>
-                                        @endif
-                                        @if($admin_category->hasField('meta_description'))
-                                            <div class="control-group">
-                                                <label class="control-label" for="form-field-5">META Description</label>
+                                        </div>
+                                    @endif
+                                    @if($admin_category->hasField('meta_description'))
+                                        <div class="control-group">
+                                            <label class="control-label" for="form-field-5">META Description</label>
 
-                                                <div class="controls">
-                                                    <input type="text" id="form-field-5" name="meta_description_{{$lang->lang}}" value="@if(isset($admin_article)){{ $admin_article->getTranslate('meta_description',$lang->lang)}}@endif"/>
-                                                </div>
+                                            <div class="controls">
+                                                <input type="text" id="form-field-5" name="meta_description_{{$lang->lang}}" value="@if(isset($admin_article)){{ $admin_article->getTranslate('meta_description',$lang->lang)}}@endif"/>
                                             </div>
-                                        @endif
-                                        @if($admin_category->hasField('meta_keywords'))
-                                            <div class="control-group">
-                                                <label class="control-label" for="form-field-tags">META Keywords</label>
+                                        </div>
+                                    @endif
+                                    @if($admin_category->hasField('meta_keywords'))
+                                        <div class="control-group">
+                                            <label class="control-label" for="form-field-tags">META Keywords</label>
 
-                                                <div class="controls">
-                                                    <input type="text" name="meta_keywords_{{$lang->lang}}" class="form-field-tags" value="@if(isset($admin_article)){{ $admin_article->getTranslate('meta_keywords',$lang->lang)}}@endif" placeholder="Введіть ключові слова ..." />
-                                                </div>
+                                            <div class="controls">
+                                                <input type="text" name="meta_keywords_{{$lang->lang}}" class="form-field-tags" value="@if(isset($admin_article)){{ $admin_article->getTranslate('meta_keywords',$lang->lang)}}@endif" placeholder="Введіть ключові слова ..." />
                                             </div>
-                                        @endif
-                                        @if($admin_category->hasField('short_description'))
+                                        </div>
+                                    @endif
+                                    @if($admin_category->hasField('short_description'))
                                         <h4 class="header blue clearfix">Короткий опис</h4>
                                         <div class="control-group">
                                             <textarea name="short_description_{{$lang->lang}}"class="span12" id="form-field-8" placeholder="Короткий опис вакансії, новини, слайда і т. д.">@if(isset($admin_article)){{ $admin_article->getTranslate('short_description',$lang->lang) }}@endif</textarea>
 
 
                                         </div>
-                                        @endif
-                                        @if($admin_category->hasField('description'))
-                                            <h4 class="header blue clearfix">Текст</h4>
-                                               <div class="control-group">
-                                                   <textarea name="description_{{$lang->lang}}"class="span12" id="form-field-8" placeholder="Повний опис вакансії, новини, слайда і т. д.">@if(isset($admin_article)){{ $admin_article->getTranslate('description',$lang->lang) }}@endif</textarea>
-
-
-                                                </div>
-                                        @endif
-
-                                    </div>
-                                @endforeach
-                                @if ($admin_category->hasField('gallery'))
-                                    @if(isset($admin_article))
-                                    <h4 class="header green clearfix">
-                                        Gallery
-                                    </h4>
-                                    <iframe
-                                        frameborder="0"
-                                        src="/js/backend/kcfinder/browse.php?type=images&langCode=ru&homedir=/{{$admin_article->id}}/&config=articles"
-                                        style="width: 100%; height: 400px"
-                                        title="Визуальный файловый браузер"
-                                        tabindex="0"
-                                        allowtransparency="true"></iframe>
-                                    @else
-                                    <div class="alert alert-warning">
-                                        <button type="button" class="close" data-dismiss="alert">
-                                            <i class="icon-remove"></i>
-                                        </button>
-                                        <strong>Увага!</strong>
-
-                                        Форма завантаження файлів до галереї буде доступною після створення даного запису (при наступному редагуванні)
-                                        <br>
-                                    </div>
                                     @endif
+                                    @if($admin_category->hasField('description'))
+                                        <h4 class="header blue clearfix">Текст</h4>
+                                        <div class="control-group">
+                                            <textarea name="description_{{$lang->lang}}"class="span12" id="form-field-8" placeholder="Повний опис вакансії, новини, слайда і т. д.">@if(isset($admin_article)){{ $admin_article->getTranslate('description',$lang->lang) }}@endif</textarea>
+
+
+                                        </div>
+                                    @endif
+
+                                </div>
+                            @endforeach
+
+                            @if ($admin_category->hasField('gallery'))
+                                @if(isset($admin_article))
+                                <h4 class="header green clearfix">
+                                    Gallery
+                                </h4>
+                                <iframe
+                                    frameborder="0"
+                                    src="/js/backend/kcfinder/browse.php?type=images&langCode=ru&homedir=/{{$admin_article->id}}/&config=articles"
+                                    style="width: 100%; height: 400px"
+                                    title="Визуальный файловый браузер"
+                                    tabindex="0"
+                                    allowtransparency="true"></iframe>
+                                @else
+                                <div class="alert alert-warning">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <i class="icon-remove"></i>
+                                    </button>
+                                    <strong>Увага!</strong>
+
+                                    Форма завантаження файлів до галереї буде доступною після створення даного запису (при наступному редагуванні)
+                                    <br>
+                                </div>
                                 @endif
-                            </div>
+                            @endif
+
+                        </div>
+
 
                     </div>
                 </div>
@@ -282,4 +310,14 @@
                 <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                 <input type="button" class='article-save' value="Сохранить">
             </form>
+            @if($fields->base)
+                                            @foreach($fields->base as $key => $required_field)
+                                                <div class="control-group">
+                                                    <label class="control-label" for="form-field-{{ $key }}">Назва</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="{{ $required_field }}_{{$lang->lang}}" value='@if(isset($admin_article)){{ $admin_article->getTranslate($required_field, $lang->lang) }}@endif' id="form-field-{{ $key }}" placeholder="{{ $required_field }}" />
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
     </div>--}}
