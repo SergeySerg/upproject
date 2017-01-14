@@ -3,7 +3,12 @@
 use Closure;
 use App;
 
-
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use App\Models\Article;
+use App\Models\Category;
+use App\Models\Text;
+use App\Models\Lang;
 use League\Flysystem\Config;
 
 class BackendInit {
@@ -18,12 +23,13 @@ class BackendInit {
 
 	public function handle($request, Closure $next)
 	{
+		$admin_categories = Category::all();
 		//Подключение в Backend url типа
 		$url = url('adminSha4');
 		//Подключение в Backend version
 		view()->share('version', config('app.version'));
 		view()->share('url', $url);
-
+		view()->share('admin_categories', $admin_categories);
 		return $next($request);
 	}
 

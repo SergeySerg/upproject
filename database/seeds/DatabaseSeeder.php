@@ -51,7 +51,7 @@ class CategoriesSeeder extends Seeder {
             'id' => "1",
             'name' => 'Головна',
             'link' => 'main',
-            'fields' => '{"base": ["title", "description"],"attributes": [{"price": {"type": "input","lang": "false"}},{"specification": {"type": "textearea","lang": "true"}},{"quantity": {"type": "input","lang_active": false}}]}',
+            'fields' => '{"base": ["title", "description"],"attributes": [{"price": {"type": "input","lang_active": false}},{"specification": {"type": "textearea","lang_active": true}},{"quantity": {"type": "input","lang_active": false}}]}',
         ]);
         Category::create([
             'id' => "2",
@@ -63,23 +63,38 @@ class CategoriesSeeder extends Seeder {
                 "attributes": [{
                     "price": {
                         "type": "input",
-                        "lang": "false"
+                        "lang_active": false
                     }
                 }, {
                     "specification": {
                         "type": "textearea",
-                        "lang": "true"
+                        "lang_active": true
                     }
                 }]
             }',
         ]);
 
-        /*Category::create([
-            'id' => "2",
-            'name' => 'Про компанію',
-            'link' => 'company',
-            'fields' => '["title","short_description","description"]',
-        ]);*/
+
+       Category::create([
+            'id' => "3",
+            'name' => 'Поради',
+            'link' => 'advices',
+           'fields' => '
+            {
+                "base": ["title","short_description", "description"],
+                "attributes": [{
+                    "price": {
+                        "type": "input",
+                        "lang_active": true
+                    }
+                }, {
+                    "specification": {
+                        "type": "textearea",
+                        "lang_active": true
+                    }
+                }]
+            }',
+       ]);
 
 
 

@@ -151,53 +151,37 @@
         </div><!--#sidebar-shortcuts-->
 
         <ul class="nav nav-list">
-            <li @if(Request::is('*/main'))class="active"@endif>
-                <a href="{{ $url }}/articles/main">
-                    <i class="icon-list"></i>
-                    <span class="menu-text"> Головна </span>
+            <li @if( isset($type) && Request::is('*/'.$type.'')|| Request::is('*/'.$type.'/*') ) class="active open" @endif>
+                <a href="#" class="dropdown-toggle">
+                    <i class="icon-desktop"></i>
+                    <span class="menu-text"> Категорії </span>
+
+                    <b class="arrow icon-angle-down"></b>
                 </a>
-            </li>
-            <li @if(Request::is('*/visas'))class="active"@endif>
-                <a href="{{ $url }}/articles/visas">
-                    <i class="icon-fighter-jet"></i>
-                    <span class="menu-text"> Візи </span>
-                </a>
+
+                <ul class="submenu">
+                    @foreach($admin_categories as $admin_category)
+                        <li @if(Request::is('*/'.$admin_category->link.'') || Request::is('*/'.$admin_category->link.'/*')) class="active" @endif>
+                            <a href="{{ $url }}/articles/{{ $admin_category->link }}">
+                                <i class="icon-double-angle-right"></i>
+                                {{ $admin_category->name }}
+                            </a>
+                        </li>
+                    @endforeach
+                    @if( (Auth::user()->name) == 'root' )
+                        <li>
+                            <a href="elements.html">
+                                <button style="float:left" class="btn btn-small btn-warning">
+                                    <i class="icon-plus"></i>
+                                    Додати категорию
+                                </button>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+
             </li>
 
-            <li @if(Request::is('*/visas_center'))class="active"@endif>
-                <a href="{{ $url }}/articles/visas_center">
-                    <i class="icon-home"></i>
-                    <span class="menu-text"> Візові центри </span>
-                </a>
-            </li>
-
-            <li @if(Request::is('*/news'))class="active"@endif>
-                <a href="{{ $url }}/articles/news">
-                    <i class="icon-hospital"></i>
-                    <span class="menu-text"> Новини </span>
-                </a>
-            </li>
-
-            <li @if(Request::is('*/services'))class="active"@endif>
-                <a href="{{ $url }}/articles/services">
-                    <i class="icon-list"></i>
-                    <span class="menu-text"> Послуги </span>
-                </a>
-            </li>
-
-            <li @if(Request::is('*/advices'))class="active"@endif>
-                <a href="{{ $url }}/articles/advices">
-                    <i class="icon-bullhorn"></i>
-                    <span class="menu-text"> Поради </span>
-                </a>
-            </li>
-
-            <li @if(Request::is('*/orders'))class="active"@endif>
-                <a href="{{ $url }}/orders">
-                    <i class="icon-envelope-alt"></i>
-                    <span class="menu-text"> Повідомлення </span>
-                </a>
-            </li>
 
             <li @if(Request::is('*/texts'))class="active"@endif>
                 <a href="{{ $url }}/texts">
@@ -205,12 +189,7 @@
                     <span class="menu-text"> Текстові блоки </span>
                 </a>
             </li>
-            <li @if(Request::is('*/seo'))class="active"@endif>
-                <a href="{{ $url }}/articles/seo">
-                    <i class="icon-file-alt"></i>
-                    <span class="menu-text"> SEO </span>
-                </a>
-            </li>
+
 
 
         </ul><!--/.nav-list-->
