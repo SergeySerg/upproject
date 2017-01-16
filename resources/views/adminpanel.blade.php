@@ -151,7 +151,7 @@
         </div><!--#sidebar-shortcuts-->
 
         <ul class="nav nav-list">
-            <li @if( isset($type) && Request::is('*/'.$type.'')|| Request::is('*/'.$type.'/*') ) class="active open" @endif>
+            <li @if( isset($type) && Request::is('*/'.$type.'')|| Request::is('*/'.$type.'/*')) class="active open" @endif>
                 <a href="#" class="dropdown-toggle">
                     <i class="icon-desktop"></i>
                     <span class="menu-text"> Категорії </span>
