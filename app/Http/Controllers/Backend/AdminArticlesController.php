@@ -91,6 +91,7 @@ class AdminArticlesController extends Controller {
 		$admin_category = Category::where("link","=","$type")->first();
 		$fields = json_decode($admin_category->fields);
 		$attributes_fields = $fields->attributes;
+		//dd($attributes_fields);
 		return view('backend.articles.edit',[
 			'langs'=>$langs,
 			'admin_category'=>$admin_category,

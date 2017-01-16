@@ -25,7 +25,7 @@ class AdminCategoriesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($type	)
+	public function index($type)
 	{
 		$admin_categories = Category::all();
 		return view('backend.article.list', [
@@ -74,9 +74,15 @@ class AdminCategoriesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($type = null)
 	{
-		//
+		$langs = Lang::all();
+		$admin_category = Category::where("link","=","$type")->first();
+		return view('backend.categories.edit', [
+			'admin_category' => $admin_category,
+			'langs' => $langs,
+			'type' => $type
+		]);
 	}
 
 	/**
