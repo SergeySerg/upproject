@@ -25,10 +25,10 @@ class AdminCategoriesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($type = null)
+	public function index($type	)
 	{
 		$admin_categories = Category::all();
-		return view('adminpanel', [
+		return view('backend.article.list', [
 			'admin_categories' => $admin_categories
 		]);
 	}
@@ -40,7 +40,11 @@ class AdminCategoriesController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		$langs = Lang::all();
+
+		return view('backend.categories.edit',[
+			'langs'=>$langs
+		]);
 	}
 
 	/**

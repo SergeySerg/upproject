@@ -42,7 +42,7 @@
                 <!--PAGE CONTENT BEGINS-->
 
                 <form class="form-horizontal" id="resource-form" method="POST" action="" />
-                @if($attributes_fields)
+                @if(isset($attributes_fields))
                     @foreach($attributes_fields as $attributes)
                         @if(is_object($attributes))
                             @foreach($attributes as $key => $attribute)
@@ -144,7 +144,7 @@
                                                 </div>
                                             @endif
 
-                                            @if($attributes_fields)
+                                            @if(isset($attributes_fields))
                                                 @foreach($attributes_fields as $attributes)
                                                     @if(is_object($attributes))
                                                         @foreach($attributes as $key => $attribute)

@@ -23,6 +23,7 @@ class CreateCategoriesTable extends Migration {
 			$table->text('fields');
 			$table->timestamp('date');
 			$table->boolean('active')->default(false);
+			$table->integer('priority')->default(0);
 			$table->timestamp('created_at');
 			$table->timestamp('updated_at');
 		});

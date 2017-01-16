@@ -151,7 +151,7 @@
         </div><!--#sidebar-shortcuts-->
 
         <ul class="nav nav-list">
-            <li @if( isset($type) && Request::is('*/'.$type.'')|| Request::is('*/'.$type.'/*')) class="active open" @endif>
+            <li @if( isset($type) && (Request::is('*/'.$type.'') OR Request::is('*/'.$type.'/*'))) class="active open" @endif>
                 <a href="#" class="dropdown-toggle">
                     <i class="icon-desktop"></i>
                     <span class="menu-text"> Категорії </span>
@@ -170,7 +170,7 @@
                     @endforeach
                     @if( (Auth::user()->name) == 'root' )
                         <li>
-                            <a href="elements.html">
+                            <a href="{{ route('admin_categories_create') }}">
                                 <button style="float:left" class="btn btn-small btn-warning">
                                     <i class="icon-plus"></i>
                                     Додати категорию

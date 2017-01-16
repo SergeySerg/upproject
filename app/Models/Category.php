@@ -15,7 +15,11 @@ class Category extends Translate {
         'imgs',
         'fields',
         'date',
-        'active'
+        'active',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
+        'priority'
     ];
 
     /*function for checked fields in article edit file*/
