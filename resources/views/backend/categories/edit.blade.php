@@ -8,9 +8,11 @@
             <i class="icon-angle-right arrow-icon"></i>
         </span>
     </li>
-
-   Додати нову категорию
-
+    @if (isset($admin_category))
+        Редагування категорії
+    @else
+        Додати категорію
+    @endif
 @stop
 
 @section('content')
@@ -18,7 +20,11 @@
     <div class="page-content">
         <div class="page-header position-relative">
             <h1>
-                Додати нову категорію
+                @if (isset($admin_category))
+                    Редагувати категорію
+                @else
+                    Додати категорію
+                @endif
             </h1>
         </div><!--/.page-header-->
         <div class="row-fluid">
@@ -143,12 +149,127 @@
                         <div class="controls">
                             <div class="row-fluid input-append">
                                 <input class="span2 date-picker" name="date" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" @if(isset($admin_category)) value='{{date('d-m-Y',strtotime($admin_category->date))}}' @endif/>
-                                                    <span class="add-on">
-                                                        <i class="icon-calendar"></i>
-                                                   </span>
+                                    <span class="add-on">
+                                        <i class="icon-calendar"></i>
+                                   </span>
                             </div>
                         </div>
                     </div>
+                    <div class="hr hr-18 dotted hr-double"></div>
+                    <h4 class="pink">
+                        <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+                        <a href="#modal-table" role="button" class="green" data-toggle="modal"> Table Inside a Modal Box </a>
+                    </h4>
+                    <div class="hr hr-18 dotted hr-double"></div>
+                    <div id="modal-table" class="modal hide fade" tabindex="-1" aria-hidden="true" style="display: none;">
+                    <div class="modal-header no-padding">
+                        <div class="table-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            Results for "Latest Registered Domains"
+                        </div>
+                    </div>
+
+                    <div class="modal-body no-padding">
+                        <div class="row-fluid">
+                            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                                <thead>
+                                <tr>
+                                    <th>Domain</th>
+                                    <th>Price</th>
+                                    <th>Clicks</th>
+
+                                    <th>
+                                        <i class="icon-time bigger-110"></i>
+                                        Update
+                                    </th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="#">ace.com</a>
+                                    </td>
+                                    <td>$45</td>
+                                    <td>3,330</td>
+                                    <td>Feb 12</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <a href="#">base.com</a>
+                                    </td>
+                                    <td>$35</td>
+                                    <td>2,595</td>
+                                    <td>Feb 18</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <a href="#">max.com</a>
+                                    </td>
+                                    <td>$60</td>
+                                    <td>4,400</td>
+                                    <td>Mar 11</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <a href="#">best.com</a>
+                                    </td>
+                                    <td>$75</td>
+                                    <td>6,500</td>
+                                    <td>Apr 03</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <a href="#">pro.com</a>
+                                    </td>
+                                    <td>$55</td>
+                                    <td>4,250</td>
+                                    <td>Jan 21</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-small btn-danger pull-left" data-dismiss="modal">
+                            <i class="icon-remove"></i>
+                            Close
+                        </button>
+
+                        <div class="pagination pull-right no-margin">
+                            <ul>
+                                <li class="prev disabled">
+                                    <a href="#">
+                                        <i class="icon-double-angle-left"></i>
+                                    </a>
+                                </li>
+
+                                <li class="active">
+                                    <a href="#">1</a>
+                                </li>
+
+                                <li>
+                                    <a href="#">2</a>
+                                </li>
+
+                                <li>
+                                    <a href="#">3</a>
+                                </li>
+
+                                <li class="next">
+                                    <a href="#">
+                                        <i class="icon-double-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                     <div class="form-actions">
                         <button class="btn btn-info resource-save" type="button">
