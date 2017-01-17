@@ -155,121 +155,266 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="hr hr-18 dotted hr-double"></div>
                     <h4 class="pink">
                         <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
-                        <a href="#modal-table" role="button" class="green" data-toggle="modal"> Table Inside a Modal Box </a>
+                        <a href="#modal-table" role="button" class="green" data-toggle="modal"> Базові атрибути даної категорії </a>
                     </h4>
                     <div class="hr hr-18 dotted hr-double"></div>
+
+                    <div class="hr hr-18 dotted hr-double"></div>
+                    <h4 class="pink">
+                        <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+                        <a href="#modal-table-add" role="button" class="green" data-toggle="modal"> Додаткові атрибути даної категорії </a>
+                    </h4>
+                    <div class="hr hr-18 dotted hr-double"></div>
+
+                    {{--Модальное окно для основных аттрибутов--}}
                     <div id="modal-table" class="modal hide fade" tabindex="-1" aria-hidden="true" style="display: none;">
-                    <div class="modal-header no-padding">
-                        <div class="table-header">
-                            <button type="button" class="close" data-dismiss="modal">×</button>
-                            Results for "Latest Registered Domains"
+
+                        <div class="modal-header no-padding">
+                            <div class="table-header">
+                                <button type="button" class="close" data-dismiss="modal">×</button>
+                                Results for "Latest Registered Domains"
+                            </div>
+                        </div>
+
+                        <div class="modal-body no-padding">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="center">
+                                                <label>
+                                                    <input type="checkbox" />
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </th>
+                                            <th>Domain</th>
+                                            <th>Price</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr>
+                                            <td class="center">
+                                                <label>
+                                                    <input type="checkbox" />
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+
+                                            <td>
+                                                <a href="#">ace.com</a>
+                                            </td>
+                                            <td>$45</td>
+                                            <td class="hidden-480">3,330</td>
+
+
+
+
+
+                                        </tr>
+
+                                       
+                                        </tbody>
+                                    </table>
+                                </div><!--/span-->
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-small btn-danger pull-left" data-dismiss="modal">
+                                <i class="icon-remove"></i>
+                                Close
+                            </button>
+
+                            <div class="pagination pull-right no-margin">
+                                <ul>
+                                    <li class="prev disabled">
+                                        <a href="#">
+                                            <i class="icon-double-angle-left"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="active">
+                                        <a href="#">1</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">2</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">3</a>
+                                    </li>
+
+                                    <li class="next">
+                                        <a href="#">
+                                            <i class="icon-double-angle-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+                    <script type="text/javascript">
+                        $(function(){
 
-                    <div class="modal-body no-padding">
-                        <div class="row-fluid">
-                            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
-                                <thead>
-                                <tr>
-                                    <th>Domain</th>
-                                    <th>Price</th>
-                                    <th>Clicks</th>
+                            $('#tree1').ace_tree({
+                                dataSource: treeDataSource ,
+                                multiSelect:true,
+                                loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+                                'open-icon' : 'icon-minus',
+                                'close-icon' : 'icon-plus',
+                                'selectable' : true,
+                                'selected-icon' : 'icon-ok',
+                                'unselected-icon' : 'icon-remove'
+                            });
 
-                                    <th>
-                                        <i class="icon-time bigger-110"></i>
-                                        Update
-                                    </th>
-                                </tr>
-                                </thead>
+                            $('#tree2').ace_tree({
+                                dataSource: treeDataSource2 ,
+                                loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+                                'open-icon' : 'icon-folder-open',
+                                'close-icon' : 'icon-folder-close',
+                                'selectable' : false,
+                                'selected-icon' : null,
+                                'unselected-icon' : null
+                            });
 
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="#">ace.com</a>
-                                    </td>
-                                    <td>$45</td>
-                                    <td>3,330</td>
-                                    <td>Feb 12</td>
-                                </tr>
 
-                                <tr>
-                                    <td>
-                                        <a href="#">base.com</a>
-                                    </td>
-                                    <td>$35</td>
-                                    <td>2,595</td>
-                                    <td>Feb 18</td>
-                                </tr>
 
-                                <tr>
-                                    <td>
-                                        <a href="#">max.com</a>
-                                    </td>
-                                    <td>$60</td>
-                                    <td>4,400</td>
-                                    <td>Mar 11</td>
-                                </tr>
+                            /**
+                             $('#tree1').on('loaded', function (evt, data) {
+            });
 
-                                <tr>
-                                    <td>
-                                        <a href="#">best.com</a>
-                                    </td>
-                                    <td>$75</td>
-                                    <td>6,500</td>
-                                    <td>Apr 03</td>
-                                </tr>
+                             $('#tree1').on('opened', function (evt, data) {
+            });
 
-                                <tr>
-                                    <td>
-                                        <a href="#">pro.com</a>
-                                    </td>
-                                    <td>$55</td>
-                                    <td>4,250</td>
-                                    <td>Jan 21</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                             $('#tree1').on('closed', function (evt, data) {
+            });
+
+                             $('#tree1').on('selected', function (evt, data) {
+            });
+                             */
+                        });
+                    </script>
+                    {{--Модальное окно для основных аттрибутов--}}
+
+                    {{--Модальное окно для дополнительных аттрибутов--}}
+                    <div id="modal-table-add" class="modal hide fade" tabindex="-1" aria-hidden="true" style="display: none;">
+                        <div class="modal-header no-padding">
+                            <div class="table-header">
+                                <button type="button" class="close" data-dismiss="modal">×</button>
+                                Results for "Latest Registered Domains"
+                            </div>
+                        </div>
+
+                        <div class="modal-body no-padding">
+                            <div class="row-fluid">
+                                <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                                    <thead>
+                                    <tr>
+                                        <th>Domain</th>
+                                        <th>Price</th>
+                                        <th>Clicks</th>
+
+                                        <th>
+                                            <i class="icon-time bigger-110"></i>
+                                            Update
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="#">ace.com</a>
+                                        </td>
+                                        <td>$45</td>
+                                        <td>3,330</td>
+                                        <td>Feb 12</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <a href="#">base.com</a>
+                                        </td>
+                                        <td>$35</td>
+                                        <td>2,595</td>
+                                        <td>Feb 18</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <a href="#">max.com</a>
+                                        </td>
+                                        <td>$60</td>
+                                        <td>4,400</td>
+                                        <td>Mar 11</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <a href="#">best.com</a>
+                                        </td>
+                                        <td>$75</td>
+                                        <td>6,500</td>
+                                        <td>Apr 03</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <a href="#">pro.com</a>
+                                        </td>
+                                        <td>$55</td>
+                                        <td>4,250</td>
+                                        <td>Jan 21</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-small btn-danger pull-left" data-dismiss="modal">
+                                <i class="icon-remove"></i>
+                                Close
+                            </button>
+
+                            <div class="pagination pull-right no-margin">
+                                <ul>
+                                    <li class="prev disabled">
+                                        <a href="#">
+                                            <i class="icon-double-angle-left"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="active">
+                                        <a href="#">1</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">2</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">3</a>
+                                    </li>
+
+                                    <li class="next">
+                                        <a href="#">
+                                            <i class="icon-double-angle-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="modal-footer">
-                        <button class="btn btn-small btn-danger pull-left" data-dismiss="modal">
-                            <i class="icon-remove"></i>
-                            Close
-                        </button>
-
-                        <div class="pagination pull-right no-margin">
-                            <ul>
-                                <li class="prev disabled">
-                                    <a href="#">
-                                        <i class="icon-double-angle-left"></i>
-                                    </a>
-                                </li>
-
-                                <li class="active">
-                                    <a href="#">1</a>
-                                </li>
-
-                                <li>
-                                    <a href="#">2</a>
-                                </li>
-
-                                <li>
-                                    <a href="#">3</a>
-                                </li>
-
-                                <li class="next">
-                                    <a href="#">
-                                        <i class="icon-double-angle-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                    {{--Модальное окно для дополнительных аттрибутов--}}
                     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                     <div class="form-actions">
                         <button class="btn btn-info resource-save" type="button">

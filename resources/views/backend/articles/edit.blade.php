@@ -134,15 +134,6 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                            @if($admin_category->hasField('specification'))
-                                                <div class="control-group">
-                                                    <label class="control-label" for="form-field-10">Тип</label>
-
-                                                    <div class="controls">
-                                                        <input type="text" name="specification_{{$lang->lang}}" value='@if(isset($admin_article)){{ $admin_article->getTranslate('specification', $lang->lang) }}@endif' id="form-field-10" placeholder="Тип" />
-                                                    </div>
-                                                </div>
-                                            @endif
 
                                             @if(isset($attributes_fields))
                                                 @foreach($attributes_fields as $attributes)
