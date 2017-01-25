@@ -30,403 +30,572 @@
         <div class="row-fluid">
             <div class="span12">
                 <!--PAGE CONTENT BEGINS-->
-                <form class="form-horizontal" id="resource-form" method="POST" action="" />
-                    <div class="control-group">
-                        <label class="control-label" for="form-field-1">Link</label>
-                        <div class="controls">
-                            <input type="text" id="form-field-1" name="link" @if(isset($admin_category)) value='{{$admin_category->link}}'@endif  />
-                        </div>
+                <form class="form-horizontal" id="resource-form-category" method="POST" action="" />
+                <div class="control-group">
+                    <label class="control-label" for="form-field-1">Link</label>
+                    <div class="controls">
+                        <input type="text" id="form-field-1" name="link" @if(isset($admin_category)) value='{{$admin_category->link}}'@endif  />
                     </div>
-                    <div class="space-12"></div>
-                    <div class="row-fluid">
-                        <div class="span12">
-                            <div class="tabbable">
-                                <ul class="nav nav-tabs" id="myTab2">
-                                    @foreach($langs as $lang)
-                                        <li @if(($lang->lang) == 'ua') class="active" @endif >
-                                            <a data-toggle="tab" href="#{{$lang->lang}}">{{$lang->lang}}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                </div>
 
-                            <div class="tab-content">
+                <div class="space-12"></div>
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs" id="myTab2">
                                 @foreach($langs as $lang)
-                                    <div id="{{$lang->lang}}" @if(($lang->lang) == 'ua') class="tab-pane in active" @else class="tab-pane" @endif>
-
-                                        <div class="control-group">
-                                            <label class="control-label" for="form-field-3">Назва категорії</label>
-                                            <div class="controls">
-                                                <input type="text" name="title_{{$lang->lang}}" value='@if(isset($admin_category)){{ $admin_category->getTranslate('name', $lang->lang) }}@endif' id="form-field-3" placeholder="Назва категорії" />
-                                            </div>
-                                        </div>
-
-                                        <h4 class="header blue clearfix">Короткий опис</h4>
-                                        <div class="control-group">
-                                            <textarea name="short_description_{{$lang->lang}}"class="span12" id="form-field-8" placeholder="Короткий опис категорії">@if(isset($admin_category)){{ $admin_category->getTranslate('short_description',$lang->lang) }}@endif</textarea>
-                                        </div>
-
-                                        <h4 class="header blue clearfix">Опис</h4>
-                                        <div class="control-group">
-                                            <textarea name="description_{{$lang->lang}}"class="span12" id="form-field-8" placeholder="Повний опис категорії">@if(isset($admin_category)){{ $admin_category->getTranslate('description',$lang->lang) }}@endif</textarea>
-                                        </div>
-
-                                        <h4 class="header blue clearfix">SEO</h4>
-
-                                        <div class="control-group">
-                                            <label class="control-label" for="form-field-4">META Title</label>
-                                            <div class="controls">
-                                                <input type="text" id="form-field-4" name="meta_title_{{$lang->lang}}" value="@if(isset($admin_category)){{ $admin_category->getTranslate('meta_title',$lang->lang) }}@endif"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="control-group">
-                                            <label class="control-label" for="form-field-5">META Description</label>
-                                            <div class="controls">
-                                                <input type="text" id="form-field-5" name="meta_description_{{$lang->lang}}" value="@if(isset($admin_category)){{ $admin_category->getTranslate('meta_description',$lang->lang)}}@endif"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="control-group">
-                                            <label class="control-label" for="form-field-tags">META Keywords</label>
-
-                                            <div class="controls">
-                                                <input type="text" name="meta_keywords_{{$lang->lang}}" class="form-field-tags" value="@if(isset($admin_category)){{ $admin_category->getTranslate('meta_keywords',$lang->lang)}}@endif" placeholder="Введіть ключові слова ..." />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <li @if(($lang->lang) == 'ua') class="active" @endif >
+                                        <a data-toggle="tab" href="#{{$lang->lang}}">{{$lang->lang}}</a>
+                                    </li>
                                 @endforeach
+                            </ul>
+                        </div>
 
-                                @if(isset($admin_category))
-                                    <h4 class="header green clearfix">
-                                        Gallery
-                                    </h4>
-                                    <iframe
-                                            frameborder="0"
-                                            src="/js/backend/kcfinder/browse.php?type=images&langCode=ru&homedir=/{{$admin_category->id}}/&config=categories"
-                                            style="width: 100%; height: 400px"
-                                            title="Визуальный файловый браузер"
-                                            tabindex="0"
-                                            allowtransparency="true">
-                                    </iframe>
-                                @else
-                                    <div class="alert alert-warning">
-                                        <button type="button" class="close" data-dismiss="alert">
-                                            <i class="icon-remove"></i>
-                                        </button>
-                                        <strong>Увага!</strong>
-                                        Форма завантаження файлів до галереї буде доступною після створення даного запису (при наступному редагуванні)
-                                        <br>
+                        <div class="tab-content">
+
+                            @foreach($langs as $lang)
+
+                                <div id="{{$lang->lang}}" @if(($lang->lang) == 'ua') class="tab-pane in active" @else class="tab-pane" @endif>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="form-field-3">Назва категорії</label>
+                                        <div class="controls">
+                                            <input type="text" name="title_{{$lang->lang}}" value='@if(isset($admin_category)){{ $admin_category->getTranslate('name', $lang->lang) }}@endif' id="form-field-3" placeholder="Назва категорії" />
+                                        </div>
                                     </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="space-4"></div>
-                    <div class="control-group">
-                        <label class="control-label">Статус</label>
-                        <div class="controls">
-                            <div class="row-fluid">
-                                <div class="span3">
-                                    <label>
-                                        <input name='active' type='hidden' value='0'>
-                                        <input name='active' class="ace-switch ace-switch-6" type="checkbox" value=1 @if(isset($admin_category) AND $admin_category->active) checked="checked" @endif />
-                                        <span class="lbl"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="form-field-2">Пріоритет</label>
 
-                        <div class="controls">
-                            <input type="number" id="form-field-2" name="priority" @if(isset($admin_category)) value='{{$admin_category->priority}}' @endif  />
+                                    <h4 class="header blue clearfix">Короткий опис</h4>
+                                    <div class="control-group">
+                                        <textarea name="short_description_{{$lang->lang}}"class="span12" id="form-field-8" placeholder="Короткий опис категорії">@if(isset($admin_category)){{ $admin_category->getTranslate('short_description',$lang->lang) }}@endif</textarea>
+                                    </div>
+
+                                    <h4 class="header blue clearfix">Опис</h4>
+                                    <div class="control-group">
+                                        <textarea name="description_{{$lang->lang}}"class="span12" id="form-field-8" placeholder="Повний опис категорії">@if(isset($admin_category)){{ $admin_category->getTranslate('description',$lang->lang) }}@endif</textarea>
+                                    </div>
+
+                                    <h4 class="header blue clearfix">SEO</h4>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="form-field-4">META Title</label>
+                                        <div class="controls">
+                                            <input type="text" id="form-field-4" name="meta_title_{{$lang->lang}}" value="@if(isset($admin_category)){{ $admin_category->getTranslate('meta_title',$lang->lang) }}@endif"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="form-field-5">META Description</label>
+                                        <div class="controls">
+                                            <input type="text" id="form-field-5" name="meta_description_{{$lang->lang}}" value="@if(isset($admin_category)){{ $admin_category->getTranslate('meta_description',$lang->lang)}}@endif"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="form-field-tags">META Keywords</label>
+
+                                        <div class="controls">
+                                            <input type="text" name="meta_keywords_{{$lang->lang}}" class="form-field-tags" value="@if(isset($admin_category)){{ $admin_category->getTranslate('meta_keywords',$lang->lang)}}@endif" placeholder="Введіть ключові слова ..." />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            @endforeach
+
+                            @if(isset($admin_category))
+                                <h4 class="header green clearfix">
+                                    Gallery
+                                </h4>
+                                <iframe
+                                        frameborder="0"
+                                        src="/js/backend/kcfinder/browse.php?type=images&langCode=ru&homedir=/{{$admin_category->id}}/&config=categories"
+                                        style="width: 100%; height: 400px"
+                                        title="Визуальный файловый браузер"
+                                        tabindex="0"
+                                        allowtransparency="true">
+                                </iframe>
+                            @else
+                                <div class="alert alert-warning">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <i class="icon-remove"></i>
+                                    </button>
+                                    <strong>Увага!</strong>
+                                    Форма завантаження файлів до галереї буде доступною після створення даного запису (при наступному редагуванні)
+                                    <br>
+                                </div>
+                            @endif
+
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label" for="id-date-picker-1">Дата</label>
-                        <div class="controls">
-                            <div class="row-fluid input-append">
-                                <input class="span2 date-picker" name="date" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" @if(isset($admin_category)) value='{{date('d-m-Y',strtotime($admin_category->date))}}' @endif/>
+                </div>
+                <div class="space-4"></div>
+                <div class="control-group">
+                    <label class="control-label">Статус</label>
+                    <div class="controls">
+                        <div class="row-fluid">
+                            <div class="span3">
+                                <label>
+                                    <input name='active' type='hidden' value='0'>
+                                    <input name='active' class="ace-switch ace-switch-6" type="checkbox" value=1 @if(isset($admin_category) AND $admin_category->active) checked="checked" @endif />
+                                    <span class="lbl"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="form-field-2">Пріоритет</label>
+
+                    <div class="controls">
+                        <input type="number" id="form-field-2" name="priority" @if(isset($admin_category)) value='{{$admin_category->priority}}' @endif  />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="id-date-picker-1">Дата</label>
+                    <div class="controls">
+                        <div class="row-fluid input-append">
+                            <input class="span2 date-picker" name="date" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" @if(isset($admin_category)) value='{{date('d-m-Y',strtotime($admin_category->date))}}' @endif/>
                                     <span class="add-on">
                                         <i class="icon-calendar"></i>
                                    </span>
-                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hr hr-18 dotted hr-double"></div>
+                <h4 class="pink">
+                    <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+                    <a href="#modal-table" role="button" id="base" class="green" data-toggle="modal"> Базові атрибути даної категорії </a>
+                </h4>
+                <div class="hr hr-18 dotted hr-double"></div>
+
+                <div class="hr hr-18 dotted hr-double"></div>
+                <h4 class="pink">
+                    <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+                    <a href="#modal-table-attributes" role="button" class="green" data-toggle="modal"> Додаткові атрибути даної категорії </a>
+                </h4>
+                <div class="hr hr-18 dotted hr-double"></div>
+                <input type="hidden" id="fields" name="fields" @if(isset($admin_category->fields)) value='{{ $admin_category->fields }}'@else value="" @endif/>
+                <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+                <div class="form-actions">
+                    <button class="btn btn-info resource-save-category" type="button">
+                        <i class="icon-ok bigger-110"></i>
+                        Сохранить
+                    </button>
+                </div>
+                </form>
+                {{--Модальное окно для основных аттрибутов--}}
+                <div id="modal-table" class="modal hide fade" tabindex="-1" aria-hidden="true" style="display: none;">
+
+                    <div class="modal-header no-padding">
+                        <div class="table-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            Базові атрибути
                         </div>
                     </div>
 
-                    <div class="hr hr-18 dotted hr-double"></div>
-                    <h4 class="pink">
-                        <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
-                        <a href="#modal-table" role="button" class="green" data-toggle="modal"> Базові атрибути даної категорії </a>
-                    </h4>
-                    <div class="hr hr-18 dotted hr-double"></div>
-
-                    <div class="hr hr-18 dotted hr-double"></div>
-                    <h4 class="pink">
-                        <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
-                        <a href="#modal-table-add" role="button" class="green" data-toggle="modal"> Додаткові атрибути даної категорії </a>
-                    </h4>
-                    <div class="hr hr-18 dotted hr-double"></div>
-
-                    {{--Модальное окно для основных аттрибутов--}}
-                    <div id="modal-table" class="modal hide fade" tabindex="-1" aria-hidden="true" style="display: none;">
-
-                        <div class="modal-header no-padding">
-                            <div class="table-header">
-                                <button type="button" class="close" data-dismiss="modal">×</button>
-                                Results for "Latest Registered Domains"
-                            </div>
-                        </div>
-
-                        <div class="modal-body no-padding">
-                            <div class="row-fluid">
-                                <div class="span12">
-                                    <table id="sample-table-1" class="table table-striped table-bordered table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th class="center">
-                                                <label>
-                                                    <input type="checkbox" />
-                                                    <span class="lbl"></span>
-                                                </label>
-                                            </th>
-                                            <th>Domain</th>
-                                            <th>Price</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-
-                                        <tbody>
-                                        <tr>
-                                            <td class="center">
-                                                <label>
-                                                    <input type="checkbox" />
-                                                    <span class="lbl"></span>
-                                                </label>
-                                            </td>
-
-                                            <td>
-                                                <a href="#">ace.com</a>
-                                            </td>
-                                            <td>$45</td>
-                                            <td class="hidden-480">3,330</td>
-
-
-
-
-
-                                        </tr>
-
-                                       
-                                        </tbody>
-                                    </table>
-                                </div><!--/span-->
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button class="btn btn-small btn-danger pull-left" data-dismiss="modal">
-                                <i class="icon-remove"></i>
-                                Close
-                            </button>
-
-                            <div class="pagination pull-right no-margin">
-                                <ul>
-                                    <li class="prev disabled">
-                                        <a href="#">
-                                            <i class="icon-double-angle-left"></i>
-                                        </a>
-                                    </li>
-
-                                    <li class="active">
-                                        <a href="#">1</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#">2</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#">3</a>
-                                    </li>
-
-                                    <li class="next">
-                                        <a href="#">
-                                            <i class="icon-double-angle-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <script type="text/javascript">
-                        $(function(){
-
-                            $('#tree1').ace_tree({
-                                dataSource: treeDataSource ,
-                                multiSelect:true,
-                                loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
-                                'open-icon' : 'icon-minus',
-                                'close-icon' : 'icon-plus',
-                                'selectable' : true,
-                                'selected-icon' : 'icon-ok',
-                                'unselected-icon' : 'icon-remove'
-                            });
-
-                            $('#tree2').ace_tree({
-                                dataSource: treeDataSource2 ,
-                                loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
-                                'open-icon' : 'icon-folder-open',
-                                'close-icon' : 'icon-folder-close',
-                                'selectable' : false,
-                                'selected-icon' : null,
-                                'unselected-icon' : null
-                            });
-
-
-
-                            /**
-                             $('#tree1').on('loaded', function (evt, data) {
-            });
-
-                             $('#tree1').on('opened', function (evt, data) {
-            });
-
-                             $('#tree1').on('closed', function (evt, data) {
-            });
-
-                             $('#tree1').on('selected', function (evt, data) {
-            });
-                             */
-                        });
-                    </script>
-                    {{--Модальное окно для основных аттрибутов--}}
-
-                    {{--Модальное окно для дополнительных аттрибутов--}}
-                    <div id="modal-table-add" class="modal hide fade" tabindex="-1" aria-hidden="true" style="display: none;">
-                        <div class="modal-header no-padding">
-                            <div class="table-header">
-                                <button type="button" class="close" data-dismiss="modal">×</button>
-                                Results for "Latest Registered Domains"
-                            </div>
-                        </div>
-
-                        <div class="modal-body no-padding">
-                            <div class="row-fluid">
-                                <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                    <div class="modal-body no-padding">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <table id="sample-table-1" class="table table-striped table-bordered table-hover">
                                     <thead>
                                     <tr>
-                                        <th>Domain</th>
-                                        <th>Price</th>
-                                        <th>Clicks</th>
-
-                                        <th>
-                                            <i class="icon-time bigger-110"></i>
-                                            Update
-                                        </th>
+                                        <th class="center">Статус</th>
+                                        <th class="center">Назва поля</th>
+                                        <th class="center">Назва поля в БД</th>
                                     </tr>
                                     </thead>
-
                                     <tbody>
                                     <tr>
-                                        <td>
-                                            <a href="#">ace.com</a>
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" name="title" />
+                                                <span class="lbl"></span>
+                                            </label>
                                         </td>
-                                        <td>$45</td>
-                                        <td>3,330</td>
-                                        <td>Feb 12</td>
-                                    </tr>
 
-                                    <tr>
                                         <td>
-                                            <a href="#">base.com</a>
+                                            Назва
                                         </td>
-                                        <td>$35</td>
-                                        <td>2,595</td>
-                                        <td>Feb 18</td>
+                                        <td>title</td>
                                     </tr>
-
                                     <tr>
-                                        <td>
-                                            <a href="#">max.com</a>
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" name="short_description" />
+                                                <span class="lbl"></span>
+                                            </label>
                                         </td>
-                                        <td>$60</td>
-                                        <td>4,400</td>
-                                        <td>Mar 11</td>
+
+                                        <td>
+                                            Короткий опис
+                                        </td>
+                                        <td>short_description</td>
                                     </tr>
-
                                     <tr>
-                                        <td>
-                                            <a href="#">best.com</a>
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" name="description" />
+                                                <span class="lbl"></span>
+                                            </label>
                                         </td>
-                                        <td>$75</td>
-                                        <td>6,500</td>
-                                        <td>Apr 03</td>
+
+                                        <td>
+                                            Опис
+                                        </td>
+                                        <td>description</td>
                                     </tr>
-
                                     <tr>
-                                        <td>
-                                            <a href="#">pro.com</a>
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" name="gallery" />
+                                                <span class="lbl"></span>
+                                            </label>
                                         </td>
-                                        <td>$55</td>
-                                        <td>4,250</td>
-                                        <td>Jan 21</td>
+
+                                        <td>
+                                            Галерея
+                                        </td>
+                                        <td>imgs</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" name="date" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            Дата
+                                        </td>
+                                        <td>date</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" name="priority" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            Пріоритет
+                                        </td>
+                                        <td>priority</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" name="active" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            Статус
+                                        </td>
+                                        <td>active</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" name="meta_title" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            Meta title
+                                        </td>
+                                        <td>meta_title</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" name="meta_description" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            Meta description
+                                        </td>
+                                        <td>meta_description</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" name="meta_keywords" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            Meta keywords
+                                        </td>
+                                        <td>meta_keywords</td>
                                     </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button class="btn btn-small btn-danger pull-left" data-dismiss="modal">
-                                <i class="icon-remove"></i>
-                                Close
-                            </button>
-
-                            <div class="pagination pull-right no-margin">
-                                <ul>
-                                    <li class="prev disabled">
-                                        <a href="#">
-                                            <i class="icon-double-angle-left"></i>
-                                        </a>
-                                    </li>
-
-                                    <li class="active">
-                                        <a href="#">1</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#">2</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#">3</a>
-                                    </li>
-
-                                    <li class="next">
-                                        <a href="#">
-                                            <i class="icon-double-angle-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            </div><!--/span-->
                         </div>
                     </div>
-                    {{--Модальное окно для дополнительных аттрибутов--}}
-                    <input type="hidden" name="_token" value="{{csrf_token()}}"/>
-                    <div class="form-actions">
-                        <button class="btn btn-info resource-save" type="button">
-                            <i class="icon-ok bigger-110"></i>
-                            Сохранить
+
+                    <div class="modal-footer">
+                        <button class="btn btn-small btn-danger pull-left" data-dismiss="modal">
+                            <i class="icon-remove"></i>
+                            Close
                         </button>
                     </div>
-                </form>
-             <!--PAGE CONTENT ENDS-->
+                </div>
+                {{--/Модальное окно для основных аттрибутов--}}
+                {{--Модальное окно для дополнительных аттрибутов--}}
+                <div id="modal-table-attributes" class="modal hide fade" tabindex="-1" aria-hidden="true" style="display: none;">
+                    <div class="modal-header no-padding">
+                        <div class="table-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            Додаткові атрибути
+                        </div>
+                    </div>
+
+                    <div class="modal-body no-padding">
+                        <div class="row-fluid">
+                            <table id="attributes-list" class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                                <thead>
+                                <tr>
+                                    <th class="center">Назва</th>
+                                    <th class="center">Тип поля</th>
+                                    <th class="center">Багатомовність</th>
+                                    <th class="center">Статус</th>
+                                    <th class="center"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                   {{-- @if(isset($attributes_fields))
+                                        @foreach($attributes_fields as $attributes)
+                                            @if(is_object($attributes))
+                                                @foreach($attributes as $key => $attribute)
+                                                    <tr id="col-{{ $key }}">
+                                                        <td class="center">{{ $key }}</td>
+                                                        <td class="center">{{ $attribute->type }}</td>
+                                                        <td class="center">
+                                                            @if($attribute->lang_active)
+                                                                <span class="badge badge-success"><i class="icon-ok bigger-120"></i></span>
+                                                            @else
+                                                                <span class="badge badge-important"><i class="icon-remove"></i></span>
+                                                            @endif
+                                                        </td>
+                                                        <td class="center">
+                                                            @if($attribute->active)
+                                                                <span class="badge badge-success"><i class="icon-ok bigger-120"></i></span>
+                                                            @else
+                                                                <span class="badge badge-important"><i class="icon-remove"></i></span>
+                                                            @endif
+                                                        </td>
+                                                        <td class="center">
+                                                            <div class="hidden-phone visible-desktop action-buttons">
+                                                                <a href="#collapseTwo-{{ $key }}" data-parent="#accordion2" data-toggle="collapse" class="green accordion-toggle collapsed">
+                                                                    <i class="icon-pencil bigger-130"></i>
+                                                                </a>
+
+                                                                <a class="red" href="#">
+                                                                    <i class="icon-trash bigger-130"></i>
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="hidden-desktop visible-phone">
+                                                                <div class="inline position-relative">
+                                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                                        <i class="icon-caret-down icon-only bigger-120"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                                        <li>
+                                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
+                                                                        <span class="green">
+                                                                            <i class="icon-edit bigger-120"></i>
+                                                                        </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
+                                                                        <span class="red">
+                                                                            <i class="icon-trash bigger-120"></i>
+                                                                        </span>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                        <div class="accordion-body collapse" id="collapseTwo-{{ $key }}">
+                                                            <div class="accordion-inner">
+                                                                <form class="form-horizontal-edit" id="resource-form-attributes-edit" method="POST" action="">
+
+                                                                    <div class="control-group">
+                                                                        <label class="control-label" for="title">Назва атрибута</label>
+
+                                                                        <div class="controls">
+                                                                            <input type="text" name="title" value="{{ $key }}" placeholder="Назва атрибута">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="control-group">
+                                                                        <label class="control-label" for="type">Тип поля атрибута</label>
+
+                                                                        <div class="controls">
+                                                                            <select name="type">
+                                                                                <option>
+                                                                                </option><option value="input" selected="selected">Звичайне поле
+                                                                                </option><option value="textarea">Текстве поле
+                                                                                </option><option value="textarea-no-wysiwyg">Текстве поле(без редактора)
+                                                                                </option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="control-group">
+                                                                        <label class="control-label">Багатомовність</label>
+                                                                        <div class="controls">
+                                                                            <div class="row-fluid">
+                                                                                <div class="span3">
+                                                                                    <label>
+
+                                                                                        <input name="lang_active" type="hidden" value="0">
+                                                                                        <input name="lang_active" class="ace-switch ace-switch-6" type="checkbox" @if($attribute->lang_active) value="1" checked="checked" @endif>
+                                                                                        <span class="lbl"></span>
+
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="control-group">
+                                                                        <label class="control-label">Статус</label>
+                                                                        <div class="controls">
+                                                                            <div class="row-fluid">
+                                                                                <div class="span3">
+                                                                                    <label>
+                                                                                        <input name="active" type="hidden" value="0">
+                                                                                        <input name="active" class="ace-switch ace-switch-6" type="checkbox" @if($attribute->active) value="1" checked="checked" @endif>
+                                                                                        <span class="lbl"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="space-12"></div>
+
+
+                                                                    <input type="hidden" name="_token" value="ViML5B4U3aB4yoZMrSajRtU36s9eRcR6KAppq9BD">
+                                                                    <div class="form-actions">
+                                                                        <button class="btn btn-info resource-save1" type="button">
+                                                                            <i class="icon-ok bigger-110"></i>
+                                                                            Сохранить
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    @endif--}}
+                                </tbody>
+                            </table>
+
+                            <div id="accordion2" class="accordion">
+                                <div class="accordion-group" style="margin-top: 15px">
+                                    <div class="accordion-heading">
+                                        <a href="#collapseOne" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed">
+                                            <span class="badge badge-warning"><i class="icon-plus"></i></span>&nbsp;&nbsp;Додати новий атрибут
+                                        </a>
+                                    </div>
+
+                                    <div class="accordion-body collapse" id="collapseOne">
+                                        <div class="accordion-inner">
+                                            <form class="form-horizontal" id="resource-form-attributes" method="POST" action="" />
+
+                                                <div class="control-group">
+                                                    <label class="control-label" for="title">Назва атрибута</label>
+
+                                                    <div class="controls">
+                                                        <input type="text" required="" name="title" value='' placeholder="Назва атрибута" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="control-group">
+                                                    <label class="control-label" for="type">Тип поля атрибута</label>
+
+                                                    <div class="controls">
+                                                        <select name="type">
+                                                            <option>
+                                                            </option><option value="input" selected="selected">Звичайне поле
+                                                            </option><option value="textarea">Текстве поле
+                                                            </option><option value="textarea-no-wysiwyg">Текстве поле(без редактора)
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="control-group">
+                                                    <label class="control-label">Багатомовність</label>
+                                                    <div class="controls">
+                                                        <div class="row-fluid">
+                                                            <div class="span3">
+                                                                <label>
+                                                                    <input name='lang_active' type='hidden' value='0'>
+                                                                    <input name='lang_active' class="ace-switch ace-switch-6" type="checkbox" value=1/>
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="control-group">
+                                                    <label class="control-label">Статус</label>
+                                                    <div class="controls">
+                                                        <div class="row-fluid">
+                                                            <div class="span3">
+                                                                <label>
+                                                                    <input name='active' type='hidden' value='0'>
+                                                                    <input name='active' class="ace-switch ace-switch-6" type="checkbox" value=1/>
+                                                                    <span class="lbl"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-actions">
+                                                    <button class="btn btn-info resource-add-attribute" type="button">
+                                                        <i class="icon-ok bigger-110"></i>
+                                                        Сохранить
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-small btn-danger pull-left" data-dismiss="modal">
+                            <i class="icon-remove"></i>
+                            Close
+                        </button>
+
+                    </div>
+                </div>
+                {{--Модальное окно для дополнительных аттрибутов--}}
+                <!--PAGE CONTENT ENDS-->
             </div><!--/.span-->
         </div><!--/.row-fluid-->
     </div><!--/.page-content-->
-    <div id="token" style="display: none">{{csrf_token()}}</div>
 @stop
-

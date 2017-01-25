@@ -25,12 +25,9 @@ class AdminCategoriesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($type)
+	public function index()
 	{
-		$admin_categories = Category::all();
-		return view('backend.article.list', [
-			'admin_categories' => $admin_categories
-		]);
+		//
 	}
 
 	/**
@@ -54,7 +51,7 @@ class AdminCategoriesController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		dd('store');
 	}
 
 	/**
@@ -65,7 +62,7 @@ class AdminCategoriesController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		dd('store');
 	}
 
 	/**
@@ -78,10 +75,14 @@ class AdminCategoriesController extends Controller {
 	{
 		$langs = Lang::all();
 		$admin_category = Category::where("link","=","$type")->first();
+		$fields = json_decode($admin_category->fields);
+		$attributes_fields = $fields->attributes;
+		//dd($attributes_fields);
 		return view('backend.categories.edit', [
 			'admin_category' => $admin_category,
 			'langs' => $langs,
-			'type' => $type
+			'type' => $type,
+			'attributes_fields' => $attributes_fields
 		]);
 	}
 
@@ -91,9 +92,9 @@ class AdminCategoriesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($type)
 	{
-		//
+		dd('update');
 	}
 
 	/**

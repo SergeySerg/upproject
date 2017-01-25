@@ -1,5 +1,196 @@
 
 $(function(){
+    var fieldsString = $('input[name="fields"]').val();
+    if(!fieldsString || fieldsString == ''){
+        var fields = {
+            base: [],
+            attributes:{}
+        };
+    }
+    else{
+        var fields = JSON.parse(fieldsString);
+    }
+    console.log('var fields == ', fields);
+    //Функция формирования таблицы
+    function addAttributesRow(title, data){
+        console.info('FUNC addAttributesRow(title, data)', arguments);
+
+        //Определение состояния checkbox активности
+        var checkBoxActive = '';
+        if(data.active){
+            checkBoxActive = '<span class="badge badge-success"><i class="icon-ok bigger-120"></i></span>';
+        }else{
+            checkBoxActive = '<span class="badge badge-important"><i class="icon-remove"></i></span>';
+        }
+
+        //Определение состояния checkbox мультиязычности
+        var checkBoxLangActive = '';
+        if(data.lang_active){
+            checkBoxLangActive = '<span class="badge badge-success"><i class="icon-ok bigger-120"></i></span>';
+        }else{
+            checkBoxLangActive = '<span class="badge badge-important"><i class="icon-remove"></i></span>';
+        }
+
+        //добавление строки с параметрами в таблицу Аттрибутов
+        $('#attributes-list tbody').append('' +
+            '<tr>' +
+                '<td class="center">' + title + '</td>' +
+                '<td class="center">' + data['type'] + '</td>' +
+                '<td class="center">' + checkBoxLangActive + '</td>' +
+                '<td class="center">' + checkBoxActive + '</td>' +
+                '<td class="center">' +
+                    '<div class="hidden-phone visible-desktop action-buttons">' +
+                        '<a href="#collapseTwo-'+title+'" data-parent="#accordion2" data-toggle="collapse" class="green accordion-toggle collapsed"><i class="icon-pencil bigger-130"></i></a>' +
+                        '<a class="red" href="#"><i class="icon-trash bigger-130"></i></a>' +
+                    '</div>' +
+                    '<div class="hidden-desktop visible-phone">' +
+                        '<div class="inline position-relative">' +
+                            '<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">' +
+                            '<i class="icon-caret-down icon-only bigger-120"></i>' +
+                            '</button>' +
+                            '<ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">' +
+                                '<li>' +
+                                    '<a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit"><span class="green"><i class="icon-edit bigger-120"></i></span></a>' +
+                                '</li>' +
+                                '<li>' +
+                                    '<a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete"><span class="red"><i class="icon-trash bigger-120"></i></span></a>' +
+                                '</li>' +
+                            '</ul>' +
+                        '</div>' +
+                    '</div>' +
+                '</td> ' +
+            '</tr>');
+    };
+    //Функция отрисовки таблицы
+    function renderAttributesTable(){
+        console.info('FUNC renderAttributesTable()', arguments);
+        $('#attributes-list tbody').html('');
+
+        for(var title in fields.attributes){
+            var data = fields.attributes[title];
+            addAttributesRow(title, data);
+        }
+
+        $('input[name="fields"]').val(JSON.stringify(fields));//запись в поле fields значений attributes
+
+    };
+
+    renderAttributesTable();//Отрисовка таблицы
+/*Open modal base attributes*/
+    $('#base').on('click', function(){
+        var base = fields.base.length;
+        if(base != 0) {
+           for(var key in fields.base){
+               var item = fields.base[key];
+               var check = $('#sample-table-1 input[name='+item+']').prop('checked',true);
+               console.log('Список полей=>', check);
+           }
+          // var check_fields = $('input[name="fields"]').val(JSON.stringify(fields));
+          // console.log('Записані основні поля=>', check_fields);
+        }
+
+    });
+/*/Open modal base attributes*/
+/*Add new attributes*/
+    $('.resource-add-attribute').on('click', function(event){
+        event.preventDefault();
+        var serializedData = $('form#resource-form-attributes').serializeArray();
+        var data = {};
+        console.log("Масив серіалізе", serializedData);
+        for(var key in serializedData){
+            var item = serializedData[key];
+            data[item['name']] = item['value'];
+        }
+        // delete fields.attributes[data['title']];
+        if(data['title'] == ''){
+            swal('Поле: Назва атрибута обов\'язкове для заповнення');
+        }
+        else{
+            fields.attributes[data['title']] = {
+                type: data['type'],
+                lang_active: parseInt(data['lang_active']) ? true : false,
+                active: parseInt(data['active']) ? true : false
+            };
+            //сброс данніх в форме добавления аттрибутов
+            $("#resource-form-attributes").trigger("reset");
+            //сворачивание формы добавления аттрибутов после успешного добавления
+            $('div#collapseOne').removeClass("in").css("height",'0px');
+            renderAttributesTable();//Отрисовка таблицы
+        }
+
+        console.log('serializedData:', serializedData);
+        console.log('data:', data);
+        console.log('fields:', fields);
+
+    });
+/*/Add new attributes*/
+/*Save Category*/
+    $('.resource-save-category').on('click', function(event){
+        get_wysiwyg();
+console.log('Базові поля до циклу ==>', fields.base)
+        fields.base = [];
+        // create arr[] checked chockbox elements
+       $('#sample-table-1 input:checked').each(function(){
+            fields.base.push($(this).attr('name'));
+console.log('Базові поля після циклу ==>', fields.base)
+       });
+        //var attr_list = $('#attributes-list td.center').val();
+        //var e = '{"base: [' + base + ']"}';
+        //console.log(attr_list);
+        $('#fields').val(JSON.stringify(fields));
+        /*  $("tr[id^='col']").each(function(){
+         $("td",this).each(function(){
+         console.log($(this).text());
+         });
+         }); */
+        //  alert(fields.attributes);
+        var attr_list = $('#attr-list').serializeArray();
+        console.log(attr_list);
+
+        var data = $('form#resource-form-category').serialize();
+
+        console.log(data);
+        // var $thisEl = $(this);
+        $.ajax({
+            url: '',
+            method: "POST",
+            data: data,
+            dataType : "json",
+            success: function(data){
+                console.info('Server response: ', data);
+                if(data.status == 'success'){
+                    alert(data.message);
+                }else{
+                    alert('Помилка: ' + data.message)
+                }
+
+                if(data.redirect){
+                    document.location = data.redirect;
+                }
+                if(data.status == 'fail'){
+                    alert(data.message);
+                }
+            },
+            error: function(data, type, details){
+                console.info('Server error: ', arguments);
+
+                var message = 'Помилка збереження:\n';
+                if(data.responseJSON){
+                    for(var key in data.responseJSON){
+                        message += data.responseJSON[key] + '\n';
+                    }
+                }else{
+                    message += details;
+                }
+
+                alert(message);
+            }
+        },"json");
+        event.preventDefault();
+
+    });
+/*/Save Category*/
+/*Delete Article*/
     $('.resource-delete').on('click', function(event){
         if(confirm('Ви впевнені?')){
             var $thisEl = $(this);
@@ -22,6 +213,8 @@ $(function(){
         event.preventDefault();
 
     });
+/*/Delete Article*/
+/*Save Article*/
     $('.resource-save').on('click', function(event){
         //alert('tut');
         get_wysiwyg();
@@ -64,6 +257,7 @@ $(function(){
         event.preventDefault();
 
     });
+/*/Save Article*/
 
     init_wysiwyg();
 });

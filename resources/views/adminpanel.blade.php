@@ -17,20 +17,12 @@
     <link href="{{ asset('/css/backend/bootstrap-responsive.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/backend/font-awesome.min.css') }}" rel="stylesheet">
     <!--Тестовый css-->
-    <link href="{{ asset('/css/backend/backend.css') }}?ver={{ $version }}" rel="stylesheet">
-
+    <link href="{{ asset('/css/backend/backend.css') }}" rel="stylesheet">
+    <!--Sweetalert css-->
+    <link href="{{ asset('/css/plugins/sweetalert.css') }}" rel="stylesheet">
     <!--[if IE 7]>
     <link href="{{ asset('/css/backend/font-awesome-ie7.min.css') }}" rel="stylesheet">
     <![endif]-->
-    <!--js-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript" ></script>
-    <script src="{{ asset('/js/backend/jquery.ui.touch-punch.min.js') }}"type="text/javascript"></script>
-    <script src="{{ asset('/js/backend/jquery-ui-1.10.3.custom.min.js') }}"type="text/javascript"></script>
-    <script src="{{ asset('/js/backend/global.js') }}?ver={{ $version }}"type="text/javascript"></script>
-    <script src="{{ asset('/js/backend/jquery.slimscroll.min.js') }}"type="text/javascript"></script>
-
-    <script src="{{ asset('/js/backend/ckeditor/ckeditor.js') }}"></script>
-
 
     <!--page specific plugin styles-->
 
@@ -261,8 +253,16 @@
 </a>
 
 <!--basic scripts-->
+<!--js-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript" ></script>
+<script src="{{ asset('/js/backend/jquery.ui.touch-punch.min.js') }}"type="text/javascript"></script>
+<script src="{{ asset('/js/backend/jquery-ui-1.10.3.custom.min.js') }}"type="text/javascript"></script>
+<script src="{{ asset('/js/backend/global.js') }}"type="text/javascript"></script>
+<script src="{{ asset('/js/backend/jquery.slimscroll.min.js') }}"type="text/javascript"></script>
+<script src="{{ asset('/js/backend/ckeditor/ckeditor.js') }}"></script>
 
 
+<!--Bootstrap js-->
 <script src="{{ asset('/js/backend/bootstrap.min.js') }}"></script>
 
 <!--page specific plugin scripts-->
@@ -284,10 +284,14 @@
 <script src="{{ asset('/js/backend/jquery.inputlimiter.1.3.1.min.js') }}"type="text/javascript"></script>
 <script src="{{ asset('/js/backend/jquery.maskedinput.min.js') }}"type="text/javascript"></script>
 <script src="{{ asset('/js/backend/bootstrap-tag.min.js') }}"type="text/javascript"></script>
+
 <!--ace scripts-->
 
 <script src="{{ asset('/js/backend/ace-elements.min.js') }}"></script>
 <script src="{{ asset('/js/backend/ace.min.js') }}"></script>
+
+<!--Sweetalert scripts-->
+<script src="{{ asset('/js/plugins/sweetalert.min.js') }}"></script>
 
 <!--inline scripts related to this page-->
 

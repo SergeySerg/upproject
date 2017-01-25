@@ -23,7 +23,9 @@ Route::get('/', 'Frontend\HomeController@index');
 Route::post('/contact', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
 Route::post('/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'contact']);//Обработчик Обратной связи
 Route::group(['prefix'=>'adminSha4', 'middleware' => ['auth', 'backend.init']], function(){
+
 	Route::get('/','Backend\AdminDashboardController@index');
+//Routes for Articles (Backend)
 
 	Route::get('/articles/fileoptimize/{id?}','Backend\AdminArticlesController@fileoptimize');
 	Route::get('/articles/{type}',['uses' => 'Backend\AdminArticlesController@index','as' => 'admin_index']);//Вывод списка элементов
@@ -33,6 +35,7 @@ Route::group(['prefix'=>'adminSha4', 'middleware' => ['auth', 'backend.init']], 
 	Route::put('/articles/{type}/{id}',['uses' =>'Backend\AdminArticlesController@update','as' => 'admin_update']);//Сохранение элемента после редактирования
 	Route::delete('/articles/{type}/{id}',['uses' => 'Backend\AdminArticlesController@destroy','as' => 'admin_delete']);//Удаление элемента
 
+//Routes for Texts (Backend)
 	Route::get('/texts',['uses' => 'Backend\AdminTextsController@index','as' => 'text_index']);//Вывод списка
 	Route::get('/texts/create',['uses' => 'Backend\AdminTextsController@create','as' => 'text_create']);//Вывод формы создания элемента
 	Route::post('/texts/create',['uses' =>'Backend\AdminTextsController@store','as' => 'text_store']);//Сохранение элемента
@@ -42,12 +45,18 @@ Route::group(['prefix'=>'adminSha4', 'middleware' => ['auth', 'backend.init']], 
 	Route::get('/texts_recovery',['uses' => 'Backend\AdminTextsController@recovery','as' => 'text_recovery']);//Востановление записей после удаления
 	Route::get('/texts_delete',['uses' => 'Backend\AdminTextsController@delete','as' => 'texts_delete']);
 
+//Routes for Categories (Backend)
 	Route::get('/categories/create',['uses' => 'Backend\AdminCategoriesController@create','as' => 'admin_categories_create']);//Вывод формы создания категории
-	Route::get('/categories/{type}',['uses' => 'Backend\AdminCategoriesController@edit','as' => 'admin_categories_edit']);//Вывод формы средактирования категории
+	Route::post('/categories/create',['uses' =>'Backend\AdminCategoriesController@store','as' => 'admin_categories_store']);//Сохранение элемента
+	Route::get('/categories/{type}',['uses' => 'Backend\AdminCategoriesController@edit','as' => 'admin_categories_edit']);//Вывод формы редактирования категории
+	Route::put('/categories/{type}',['uses' =>'Backend\AdminCategoriesController@update','as' => 'admin_categories_update']);//Сохранение после редактирования
+	Route::delete('/categories/{type}',['uses' =>'Backend\AdminCategoriesController@destroy','as' => 'admin_categories_delete']);//Удаление категории
 
+//Routes for Orders (Backend)
 	Route::get('/orders', ['uses' => 'Backend\AdminOrdersController@index', 'as' => 'orders_index']);//Вывод списка заказов
 	Route::delete('/orders/{id}', ['uses' => 'Backend\AdminOrdersController@destroy', 'as' => 'orders_delete']);//Вывод списка заказов
 
+//Routes for Resume (Backend)
 	Route::get('/resume',['uses' => 'Backend\AdminResumeController@index','as' => 'resume_index']);//Вывод списка..
 	//Route::get('/comments/{article_id}/create','Backend\AdminResumeController@create');//Вывод формы создания элемента..
 	//Route::post('/comments/{article_id}/create','Backend\AdminResumeController@store');//Сохранение элемента

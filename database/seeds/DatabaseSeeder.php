@@ -51,7 +51,8 @@ class CategoriesSeeder extends Seeder {
             'id' => "1",
             'name' => 'Головна',
             'link' => 'main',
-            'fields' => '{"base": ["title", "description"],"attributes": [{"price": {"type": "input","lang_active": false}},{"specification": {"type": "textearea","lang_active": true}},{"quantity": {"type": "input","lang_active": false}}]}',
+            'fields' => '{"base": ["title", "description"],"attributes": {"Ціна": {"type": "input","lang_active": false,"active": true}},
+            {"Специфікація": {"type": "textarea","lang_active": true,"active": true},"Кількість": {"type": "input","lang_active": false,"active": true}}}',
         ]);
         Category::create([
             'id' => "2",
@@ -60,17 +61,16 @@ class CategoriesSeeder extends Seeder {
             'fields' => '
             {
                 "base": ["title", "description"],
-                "attributes": [{
+                "attributes": {
                     "price": {
                         "type": "input",
                         "lang_active": false
-                    }
-                }, {
+                    },
                     "specification": {
-                        "type": "textearea",
+                        "type": "textarea",
                         "lang_active": true
                     }
-                }]
+                }
             }',
         ]);
 
