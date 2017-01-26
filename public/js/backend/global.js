@@ -33,7 +33,7 @@ $(function(){
 
         //добавление строки с параметрами в таблицу Аттрибутов
         $('#attributes-list tbody').append('' +
-            '<tr>' +
+            '<tr data-id-row='+title+'>' +
                 '<td class="center">' + title + '</td>' +
                 '<td class="center">' + data['type'] + '</td>' +
                 '<td class="center">' + checkBoxLangActive + '</td>' +
@@ -41,7 +41,7 @@ $(function(){
                 '<td class="center">' +
                     '<div class="hidden-phone visible-desktop action-buttons">' +
                         '<a href="#collapseTwo-'+title+'" data-parent="#accordion2" data-toggle="collapse" class="green accordion-toggle collapsed"><i class="icon-pencil bigger-130"></i></a>' +
-                        '<a class="red" href="#"><i class="icon-trash bigger-130"></i></a>' +
+                        '<a class="red" href="#" id="delete" data-id='+title+'><i class="icon-trash bigger-130"></i></a>' +
                     '</div>' +
                     '<div class="hidden-desktop visible-phone">' +
                         '<div class="inline position-relative">' +
@@ -53,7 +53,7 @@ $(function(){
                                     '<a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit"><span class="green"><i class="icon-edit bigger-120"></i></span></a>' +
                                 '</li>' +
                                 '<li>' +
-                                    '<a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete"><span class="red"><i class="icon-trash bigger-120"></i></span></a>' +
+                                    '<a href="#" class="tooltip-error" data-rel="tooltip" data-id=\'+title+\' title="" data-original-title="Delete"><span class="red"><i class="icon-trash bigger-120"></i></span></a>' +
                                 '</li>' +
                             '</ul>' +
                         '</div>' +
@@ -70,12 +70,22 @@ $(function(){
             var data = fields.attributes[title];
             addAttributesRow(title, data);
         }
-
         $('input[name="fields"]').val(JSON.stringify(fields));//запись в поле fields значений attributes
 
-    };
+/*Delete attributes*/
+        $('a#delete').on('click',function(event){
+            event.preventDefault();
+            var val_delete = $(this).attr('data-id');
+            delete fields.attributes[val_delete];
+            $('tr[data-id-row = '+val_delete+']').fadeOut(3000);
+            $('input[name="fields"]').val(JSON.stringify(fields));//запись в поле fields значений attributes
+            console.log('Після видалення ==>', fields.attributes);
+        })
+/*/Delete attributes*/
 
+    };
     renderAttributesTable();//Отрисовка таблицы
+
 /*Open modal base attributes*/
     $('#base').on('click', function(){
         var base = fields.base.length;
@@ -88,9 +98,9 @@ $(function(){
           // var check_fields = $('input[name="fields"]').val(JSON.stringify(fields));
           // console.log('Записані основні поля=>', check_fields);
         }
-
     });
 /*/Open modal base attributes*/
+
 /*Add new attributes*/
     $('.resource-add-attribute').on('click', function(event){
         event.preventDefault();
@@ -124,31 +134,19 @@ $(function(){
 
     });
 /*/Add new attributes*/
+
 /*Save Category*/
     $('.resource-save-category').on('click', function(event){
         get_wysiwyg();
-console.log('Базові поля до циклу ==>', fields.base)
         fields.base = [];
         // create arr[] checked chockbox elements
        $('#sample-table-1 input:checked').each(function(){
             fields.base.push($(this).attr('name'));
-console.log('Базові поля після циклу ==>', fields.base)
        });
-        //var attr_list = $('#attributes-list td.center').val();
-        //var e = '{"base: [' + base + ']"}';
-        //console.log(attr_list);
         $('#fields').val(JSON.stringify(fields));
-        /*  $("tr[id^='col']").each(function(){
-         $("td",this).each(function(){
-         console.log($(this).text());
-         });
-         }); */
-        //  alert(fields.attributes);
         var attr_list = $('#attr-list').serializeArray();
         console.log(attr_list);
-
         var data = $('form#resource-form-category').serialize();
-
         console.log(data);
         // var $thisEl = $(this);
         $.ajax({
@@ -190,6 +188,7 @@ console.log('Базові поля після циклу ==>', fields.base)
 
     });
 /*/Save Category*/
+
 /*Delete Article*/
     $('.resource-delete').on('click', function(event){
         if(confirm('Ви впевнені?')){
@@ -214,6 +213,7 @@ console.log('Базові поля після циклу ==>', fields.base)
 
     });
 /*/Delete Article*/
+
 /*Save Article*/
     $('.resource-save').on('click', function(event){
         //alert('tut');
