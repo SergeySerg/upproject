@@ -40,8 +40,8 @@ $(function(){
                 '<td class="center">' + checkBoxActive + '</td>' +
                 '<td class="center">' +
                     '<div class="hidden-phone visible-desktop action-buttons">' +
-                        '<a href="#collapseTwo-'+title+'" data-parent="#accordion2" data-toggle="collapse" class="green accordion-toggle collapsed"><i class="icon-pencil bigger-130"></i></a>' +
-                        '<a class="red" href="#" id="delete" data-id='+title+'><i class="icon-trash bigger-130"></i></a>' +
+                        '<a href="#collapseOne" data-id='+title+' data-parent="#accordion2" data-toggle="collapse" class="edit-attribute green accordion-toggle collapsed"><i class="icon-pencil bigger-130"></i></a>' +
+                        '<a class="red delete-attribute" href="#" data-id='+title+'><i class="icon-trash bigger-130"></i></a>' +
                     '</div>' +
                     '<div class="hidden-desktop visible-phone">' +
                         '<div class="inline position-relative">' +
@@ -53,7 +53,7 @@ $(function(){
                                     '<a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit"><span class="green"><i class="icon-edit bigger-120"></i></span></a>' +
                                 '</li>' +
                                 '<li>' +
-                                    '<a href="#" class="tooltip-error" data-rel="tooltip" data-id=\'+title+\' title="" data-original-title="Delete"><span class="red"><i class="icon-trash bigger-120"></i></span></a>' +
+                                    '<a href="#" class="tooltip-error" data-rel="tooltip" id="delete" data-id='+title+' title="" data-original-title="Delete"><span class="red"><i class="icon-trash bigger-120"></i></span></a>' +
                                 '</li>' +
                             '</ul>' +
                         '</div>' +
@@ -61,8 +61,20 @@ $(function(){
                 '</td> ' +
             '</tr>');
     };
+    //Функция инициализации базовых аттрибутов
+    function renderBaseAttributes(){
+        var base = fields.base.length;
+        if(base != 0) {
+            for(var key in fields.base){
+                var item = fields.base[key];
+                var check_fields_base = $('#sample-table-1 input[name='+item+']').prop('checked',true);
+                console.log('Список чекнутых полей=>', check_fields_base);
+            }
+        }
+    }
     //Функция отрисовки таблицы
     function renderAttributesTable(){
+        renderBaseAttributes();
         console.info('FUNC renderAttributesTable()', arguments);
         $('#attributes-list tbody').html('');
 
@@ -73,33 +85,35 @@ $(function(){
         $('input[name="fields"]').val(JSON.stringify(fields));//запись в поле fields значений attributes
 
 /*Delete attributes*/
-        $('a#delete').on('click',function(event){
+        $('.delete-attribute').on('click',function(event){
             event.preventDefault();
-            var val_delete = $(this).attr('data-id');
-            delete fields.attributes[val_delete];
-            $('tr[data-id-row = '+val_delete+']').fadeOut(3000);
+            var title_delete = $(this).attr('data-id');
+            delete fields.attributes[title_delete];
+            $('tr[data-id-row = '+title_delete+']').fadeOut(300);
             $('input[name="fields"]').val(JSON.stringify(fields));//запись в поле fields значений attributes
             console.log('Після видалення ==>', fields.attributes);
         })
 /*/Delete attributes*/
+/*Edit attributes*/
+        $('.edit-attribute').on('click',function(event){
+            event.preventDefault();
+            var title = $(this).attr('data-id');
+            var data = fields.attributes[title];
+            $('#modal-table-attributes input[name=title]').val(title);
+            $('#modal-table-attributes select option[value='+data.type+']').prop('selected', true);
+            $('#modal-table-attributes input[name=lang_active]').prop('checked',data.lang_active);
+            $('#modal-table-attributes input[name=active]').prop('checked',data.active);
+            console.log('Ключ ==>', title);
+            console.log('PЗначення по ключу', data);
+            //сворачивание формы добавления аттрибутов после успешного добавления
+            $('div#collapseOne').removeClass("in").css("height",'0px');
+
+        })
+/*/Edit attributes*/
+
 
     };
     renderAttributesTable();//Отрисовка таблицы
-
-/*Open modal base attributes*/
-    $('#base').on('click', function(){
-        var base = fields.base.length;
-        if(base != 0) {
-           for(var key in fields.base){
-               var item = fields.base[key];
-               var check = $('#sample-table-1 input[name='+item+']').prop('checked',true);
-               console.log('Список полей=>', check);
-           }
-          // var check_fields = $('input[name="fields"]').val(JSON.stringify(fields));
-          // console.log('Записані основні поля=>', check_fields);
-        }
-    });
-/*/Open modal base attributes*/
 
 /*Add new attributes*/
     $('.resource-add-attribute').on('click', function(event){
@@ -139,7 +153,7 @@ $(function(){
     $('.resource-save-category').on('click', function(event){
         get_wysiwyg();
         fields.base = [];
-        // create arr[] checked chockbox elements
+        // create arr[] checked checkbox elements
        $('#sample-table-1 input:checked').each(function(){
             fields.base.push($(this).attr('name'));
        });
@@ -148,7 +162,6 @@ $(function(){
         console.log(attr_list);
         var data = $('form#resource-form-category').serialize();
         console.log(data);
-        // var $thisEl = $(this);
         $.ajax({
             url: '',
             method: "POST",

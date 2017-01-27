@@ -547,7 +547,7 @@
                                                             <div class="span3">
                                                                 <label>
                                                                     <input name='lang_active' type='hidden' value='0'>
-                                                                    <input name='lang_active' class="ace-switch ace-switch-6" type="checkbox" value=1/>
+                                                                    <input name='lang_active' class="ace-switch ace-switch-6" type="checkbox" value='1'/>
                                                                     <span class="lbl"></span>
                                                                 </label>
                                                             </div>
@@ -562,7 +562,7 @@
                                                             <div class="span3">
                                                                 <label>
                                                                     <input name='active' type='hidden' value='0'>
-                                                                    <input name='active' class="ace-switch ace-switch-6" type="checkbox" value=1/>
+                                                                    <input name='active' class="ace-switch ace-switch-6" type="checkbox" value='1'/>
                                                                     <span class="lbl"></span>
                                                                 </label>
                                                             </div>
