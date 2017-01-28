@@ -61,7 +61,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="form-field-3">Назва категорії</label>
                                         <div class="controls">
-                                            <input type="text" name="title_{{$lang->lang}}" value='@if(isset($admin_category)){{ $admin_category->getTranslate('name', $lang->lang) }}@endif' id="form-field-3" placeholder="Назва категорії" />
+                                            <input type="text" name="title_{{$lang->lang}}" value='@if(isset($admin_category)){{ $admin_category->getTranslate('title', $lang->lang) }}@endif' id="form-field-3" placeholder="Назва категорії" />
                                         </div>
                                     </div>
 
@@ -176,6 +176,7 @@
                 <div class="hr hr-18 dotted hr-double"></div>
                 <input type="hidden" id="fields" name="fields" @if(isset($admin_category->fields)) value='{{ $admin_category->fields }}'@else value="" @endif/>
                 <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+                <input type="hidden" name="_method" value='{{$action_method}}'/>
                 <div class="form-actions">
                     <button class="btn btn-info resource-save-category" type="button">
                         <i class="icon-ok bigger-110"></i>
@@ -371,138 +372,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                   {{-- @if(isset($attributes_fields))
-                                        @foreach($attributes_fields as $attributes)
-                                            @if(is_object($attributes))
-                                                @foreach($attributes as $key => $attribute)
-                                                    <tr id="col-{{ $key }}">
-                                                        <td class="center">{{ $key }}</td>
-                                                        <td class="center">{{ $attribute->type }}</td>
-                                                        <td class="center">
-                                                            @if($attribute->lang_active)
-                                                                <span class="badge badge-success"><i class="icon-ok bigger-120"></i></span>
-                                                            @else
-                                                                <span class="badge badge-important"><i class="icon-remove"></i></span>
-                                                            @endif
-                                                        </td>
-                                                        <td class="center">
-                                                            @if($attribute->active)
-                                                                <span class="badge badge-success"><i class="icon-ok bigger-120"></i></span>
-                                                            @else
-                                                                <span class="badge badge-important"><i class="icon-remove"></i></span>
-                                                            @endif
-                                                        </td>
-                                                        <td class="center">
-                                                            <div class="hidden-phone visible-desktop action-buttons">
-                                                                <a href="#collapseTwo-{{ $key }}" data-parent="#accordion2" data-toggle="collapse" class="green accordion-toggle collapsed">
-                                                                    <i class="icon-pencil bigger-130"></i>
-                                                                </a>
-
-                                                                <a class="red" href="#">
-                                                                    <i class="icon-trash bigger-130"></i>
-                                                                </a>
-                                                            </div>
-
-                                                            <div class="hidden-desktop visible-phone">
-                                                                <div class="inline position-relative">
-                                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                                        <i class="icon-caret-down icon-only bigger-120"></i>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                        <li>
-                                                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="" data-original-title="Edit">
-                                                                        <span class="green">
-                                                                            <i class="icon-edit bigger-120"></i>
-                                                                        </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="" data-original-title="Delete">
-                                                                        <span class="red">
-                                                                            <i class="icon-trash bigger-120"></i>
-                                                                        </span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                        <div class="accordion-body collapse" id="collapseTwo-{{ $key }}">
-                                                            <div class="accordion-inner">
-                                                                <form class="form-horizontal-edit" id="resource-form-attributes-edit" method="POST" action="">
-
-                                                                    <div class="control-group">
-                                                                        <label class="control-label" for="title">Назва атрибута</label>
-
-                                                                        <div class="controls">
-                                                                            <input type="text" name="title" value="{{ $key }}" placeholder="Назва атрибута">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="control-group">
-                                                                        <label class="control-label" for="type">Тип поля атрибута</label>
-
-                                                                        <div class="controls">
-                                                                            <select name="type">
-                                                                                <option>
-                                                                                </option><option value="input" selected="selected">Звичайне поле
-                                                                                </option><option value="textarea">Текстве поле
-                                                                                </option><option value="textarea-no-wysiwyg">Текстве поле(без редактора)
-                                                                                </option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="control-group">
-                                                                        <label class="control-label">Багатомовність</label>
-                                                                        <div class="controls">
-                                                                            <div class="row-fluid">
-                                                                                <div class="span3">
-                                                                                    <label>
-
-                                                                                        <input name="lang_active" type="hidden" value="0">
-                                                                                        <input name="lang_active" class="ace-switch ace-switch-6" type="checkbox" @if($attribute->lang_active) value="1" checked="checked" @endif>
-                                                                                        <span class="lbl"></span>
-
-                                                                                    </label>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="control-group">
-                                                                        <label class="control-label">Статус</label>
-                                                                        <div class="controls">
-                                                                            <div class="row-fluid">
-                                                                                <div class="span3">
-                                                                                    <label>
-                                                                                        <input name="active" type="hidden" value="0">
-                                                                                        <input name="active" class="ace-switch ace-switch-6" type="checkbox" @if($attribute->active) value="1" checked="checked" @endif>
-                                                                                        <span class="lbl"></span>
-                                                                                    </label>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="space-12"></div>
-
-
-                                                                    <input type="hidden" name="_token" value="ViML5B4U3aB4yoZMrSajRtU36s9eRcR6KAppq9BD">
-                                                                    <div class="form-actions">
-                                                                        <button class="btn btn-info resource-save1" type="button">
-                                                                            <i class="icon-ok bigger-110"></i>
-                                                                            Сохранить
-                                                                        </button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                @endforeach
-                                            @endif
-                                        @endforeach
-                                    @endif--}}
+                                   {{--renderAttributesTable() in global.js--}}
                                 </tbody>
                             </table>
 

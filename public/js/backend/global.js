@@ -77,7 +77,6 @@ $(function(){
         renderBaseAttributes();
         console.info('FUNC renderAttributesTable()', arguments);
         $('#attributes-list tbody').html('');
-
         for(var title in fields.attributes){
             var data = fields.attributes[title];
             addAttributesRow(title, data);
@@ -94,6 +93,7 @@ $(function(){
             console.log('Після видалення ==>', fields.attributes);
         })
 /*/Delete attributes*/
+
 /*Edit attributes*/
         $('.edit-attribute').on('click',function(event){
             event.preventDefault();
@@ -107,11 +107,8 @@ $(function(){
             console.log('PЗначення по ключу', data);
             //сворачивание формы добавления аттрибутов после успешного добавления
             $('div#collapseOne').removeClass("in").css("height",'0px');
-
         })
 /*/Edit attributes*/
-
-
     };
     renderAttributesTable();//Отрисовка таблицы
 

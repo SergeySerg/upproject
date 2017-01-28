@@ -33,6 +33,10 @@
     <link href="{{ asset('/css/backend/daterangepicker.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/backend/colorpicker.css') }}" rel="stylesheet">
 
+    <!--basic scripts-->
+    <!--js-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript" ></script>
+
 
     <!--fonts-->
 
@@ -156,7 +160,7 @@
                         <li @if(Request::is('*/'.$admin_category->link.'') || Request::is('*/'.$admin_category->link.'/*')) class="active" @endif>
                             <a href="{{ $url }}/articles/{{ $admin_category->link }}">
                                 <i class="icon-double-angle-right"></i>
-                                {{ $admin_category->name }}
+                                {{ $admin_category->getTranslate('title') }}
                             </a>
                         </li>
                     @endforeach
@@ -254,13 +258,11 @@
 
 <!--basic scripts-->
 <!--js-->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript" ></script>
 <script src="{{ asset('/js/backend/jquery.ui.touch-punch.min.js') }}"type="text/javascript"></script>
 <script src="{{ asset('/js/backend/jquery-ui-1.10.3.custom.min.js') }}"type="text/javascript"></script>
 <script src="{{ asset('/js/backend/global.js') }}"type="text/javascript"></script>
 <script src="{{ asset('/js/backend/jquery.slimscroll.min.js') }}"type="text/javascript"></script>
 <script src="{{ asset('/js/backend/ckeditor/ckeditor.js') }}"></script>
-
 
 <!--Bootstrap js-->
 <script src="{{ asset('/js/backend/bootstrap.min.js') }}"></script>

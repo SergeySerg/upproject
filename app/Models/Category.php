@@ -8,7 +8,7 @@ class Category extends Translate {
         return $this->hasMany('App\Models\Article');
     }
     protected $fillable = [
-        'name',
+        'title',
         'link',
         'description',
         'short_description',

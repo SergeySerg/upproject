@@ -43,31 +43,27 @@
 
                 <form class="form-horizontal" id="resource-form" method="POST" action="" />
                 @if(isset($attributes_fields))
-                    @foreach($attributes_fields as $attributes)
-                        @if(is_object($attributes))
-                            @foreach($attributes as $key => $attribute)
-                                @if(!$attribute->lang_active)
-                                    @if($attribute->type == 'input' )
-                                        <div class="control-group">
-                                            <label class="control-label" for="form-field-2">{{ $key }}</label>
+                    @foreach($attributes_fields as $key => $attribute)
+                        @if(!$attribute->lang_active)
+                            @if($attribute->type == 'input' )
+                                <div class="control-group">
+                                    <label class="control-label" for="form-field-2">{{ $key }}</label>
 
-                                            <div class="controls">
-                                                <input type="text" id="form-field-2" name="{{ $key }}" @if(isset($admin_article)) value='{{$admin_article->quantity}}' @endif  />
-                                            </div>
-                                        </div>
-                                    @elseif ($attribute->type == 'textarea' )
-                                        <h4 class="header blue clearfix">{{ $key }}</h4>
-                                        <div class="control-group">
-                                            <textarea name="{{ $key }}" class="span12" id="{{ $key }}" placeholder="Опис">{{ $key }}</textarea>
-                                        </div>
-                                    @elseif ($attribute->type == 'textarea-no-wysiwyg' )
-                                        <h4 class="header blue clearfix">{{ $key }}</h4>
-                                        <div class="control-group">
-                                            <textarea name="{{ $key }}" class="span12 no-wysiwyg" id="{{ $key }}" placeholder="Опис">{{ $key }}</textarea>
-                                        </div>
-                                    @endif
-                                @endif
-                            @endforeach
+                                    <div class="controls">
+                                        <input type="text" id="form-field-2" name="{{ $key }}" @if(isset($admin_article)) value='{{$admin_article->quantity}}' @endif  />
+                                    </div>
+                                </div>
+                            @elseif ($attribute->type == 'textarea' )
+                                <h4 class="header blue clearfix">{{ $key }}</h4>
+                                <div class="control-group">
+                                    <textarea name="{{ $key }}" class="span12" id="{{ $key }}" placeholder="Опис">{{ $key }}</textarea>
+                                </div>
+                            @elseif ($attribute->type == 'textarea-no-wysiwyg' )
+                                <h4 class="header blue clearfix">{{ $key }}</h4>
+                                <div class="control-group">
+                                    <textarea name="{{ $key }}" class="span12 no-wysiwyg" id="{{ $key }}" placeholder="Опис">{{ $key }}</textarea>
+                                </div>
+                            @endif
                         @endif
                     @endforeach
                 @endif
@@ -136,31 +132,27 @@
                                             @endif
 
                                             @if(isset($attributes_fields))
-                                                @foreach($attributes_fields as $attributes)
-                                                    @if(is_object($attributes))
-                                                        @foreach($attributes as $key => $attribute)
-                                                            @if($attribute->lang_active)
-                                                                @if($attribute->type == 'input' )
-                                                                    <div class="control-group">
-                                                                        <label class="control-label" for="form-field-2">{{ $key }}</label>
+                                                @foreach($attributes_fields as $key => $attribute)
+                                                   @if($attribute->lang_active)
+                                                        @if($attribute->type == 'input' )
+                                                            <div class="control-group">
+                                                                <label class="control-label" for="form-field-2">{{ $key }}</label>
 
-                                                                        <div class="controls">
-                                                                            <input type="text" name="{{ $key }}_{{$lang->lang}}" value='@if(isset($admin_article)){{ $admin_article->getTranslate('title', $lang->lang) }}@endif' id="form-field-{{ $key }}" placeholder="Назва" />
-                                                                        </div>
-                                                                    </div>
-                                                                @elseif ($attribute->type == 'textarea' )
-                                                                    <h4 class="header blue clearfix">{{ $key }}</h4>
-                                                                    <div class="control-group">
-                                                                        <textarea name="{{ $key }}_{{$lang->lang}}"class="span12" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getTranslate('short_description',$lang->lang) }}@endif</textarea>
-                                                                    </div>
-                                                                @elseif ($attribute->type == 'textarea-no-wysiwyg' )
-                                                                    <h4 class="header blue clearfix">{{ $key }}</h4>
-                                                                    <div class="control-group">
-                                                                        <textarea name="{{ $key }}_{{$lang->lang}}"class="span12 no-wysiwyg" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getTranslate('short_description',$lang->lang) }}@endif</textarea>
-                                                                    </div>
-                                                                @endif
-                                                            @endif
-                                                        @endforeach
+                                                                <div class="controls">
+                                                                    <input type="text" name="{{ $key }}_{{$lang->lang}}" value='@if(isset($admin_article)){{ $admin_article->getTranslate('title', $lang->lang) }}@endif' id="form-field-{{ $key }}" placeholder="Назва" />
+                                                                </div>
+                                                            </div>
+                                                        @elseif ($attribute->type == 'textarea' )
+                                                            <h4 class="header blue clearfix">{{ $key }}</h4>
+                                                            <div class="control-group">
+                                                                <textarea name="{{ $key }}_{{$lang->lang}}"class="span12" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getTranslate('short_description',$lang->lang) }}@endif</textarea>
+                                                            </div>
+                                                        @elseif ($attribute->type == 'textarea-no-wysiwyg' )
+                                                            <h4 class="header blue clearfix">{{ $key }}</h4>
+                                                            <div class="control-group">
+                                                                <textarea name="{{ $key }}_{{$lang->lang}}"class="span12 no-wysiwyg" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getTranslate('short_description',$lang->lang) }}@endif</textarea>
+                                                            </div>
+                                                        @endif
                                                     @endif
                                                 @endforeach
                                             @endif
@@ -260,55 +252,4 @@
         </div><!--/.page-content-->
         <div id="token" style="display: none">{{csrf_token()}}</div>
 @stop
-{{--<h2>Редагування</h2>
-<div class="edit">
-        <form id="article-form" method="POST" action="">
-            <div class="list-items"> Ціна
-                <input type="number" name="price" @if(isset($admin_article)) value='{{$admin_article->price}}'@endif/>
-            </div><br>
-            <div class="list-items"> Кількість
-                <input type="number" name="quantity" @if(isset($admin_article)) value='{{$admin_article->quantity}}' @endif/>
-            </div><br>
 
-            <div class="list-items"> Виберіть зображення
-                <input type="file" name="img" @if(isset($admin_article)) value='{{$admin_article->img}}' @endif/>
-            </div><br>
-            @foreach($langs as $lang)
-                <h3>Мова {{$lang->lang}}</h3>
-                <div class="list-items">Назва
-                    <input type="text" name="title_{{$lang->lang}}" value='@if(isset($admin_article)) {{ $admin_article->getTranslate('title', $lang->lang) }} @endif'/>
-                </div><br>
-                <div class="list-items">Опис
-                    <textarea name="description_{{$lang->lang}}" rows='5' cols='40'>@if(isset($admin_article)){{ $admin_article->getTranslate('description',$lang->lang) }}@endif</textarea>
-                </div><br>
-
-                <div class="list-items">Мета-заголовок
-                    <input type="text" name="meta_title_{{$lang->lang}}" value="@if(isset($admin_article)){{ $admin_article->getTranslate('meta_title',$lang->lang) }} @endif"/>
-                </div><br>
-                <div class="list-items">Мета-опис
-                    <input type="text" name="meta_description_{{$lang->lang}}" value="@if(isset($admin_article)){{ $admin_article->getTranslate('meta_description',$lang->lang)}} @endif"/>
-                </div><br>
-                <div class="list-items">Мета ключові слова
-                    <input type="text" name="meta_keywords_{{$lang->lang}}" value="@if(isset($admin_article)){{ $admin_article->getTranslate('meta_keywords',$lang->lang)}} @endif"/>
-                </div><br>
-            @endforeach
-            <div class="list-items">Активувати?
-                <input name='active' type='hidden' value='0'>
-                <input name='active'type='checkbox' value=1 @if(isset($admin_article) AND $admin_article->active) checked="checked" @endif  />
-
-            </div><br>
-            <input type="hidden" name="_method" value='{{$action_method}}'/>
-            <input type="hidden" name="_token" value="{{csrf_token()}}"/>
-            <input type="button" class='article-save' value="Сохранить">
-        </form>
-        @if($fields->base)
-                                        @foreach($fields->base as $key => $required_field)
-                                            <div class="control-group">
-                                                <label class="control-label" for="form-field-{{ $key }}">Назва</label>
-                                                <div class="controls">
-                                                    <input type="text" name="{{ $required_field }}_{{$lang->lang}}" value='@if(isset($admin_article)){{ $admin_article->getTranslate($required_field, $lang->lang) }}@endif' id="form-field-{{ $key }}" placeholder="{{ $required_field }}" />
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
-</div>--}}

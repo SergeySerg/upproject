@@ -20,7 +20,7 @@
             <div class="row-fluid">
 
                 <h3 class="header smaller lighter blue">
-                    {{$admin_category->name}}&nbsp;&nbsp;&nbsp;&nbsp;
+                    {{$admin_category->getTranslate('title')}}&nbsp;&nbsp;&nbsp;&nbsp;
                     @if( (Auth::user()->name) == 'root' )
                         <a href='{{ $url }}/categories/{{$type}}'>
                             <button class="btn btn-mini btn-success">
@@ -34,11 +34,11 @@
                 </h3>
 
                 <div class="table-header">
-                    Список в категорії {{$admin_category->name}}
+                    Список в категорії {{$admin_category->getTranslate('title')}}
                     <a href="{{ $url }}/articles/{{$type}}/create">
                         <button class="btn btn-warning">
                             <i class="icon-plus"></i>
-                                Додати елемент в категорію {{$admin_category->name}}
+                                Додати елемент в категорію {{$admin_category->getTranslate('title')}}
                         </button>
                     </a>
                 </div>
