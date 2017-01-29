@@ -42,7 +42,8 @@ class AdminCategoriesController extends Controller {
 		$langs = Lang::all();
 
 		return view('backend.categories.edit',[
-			'langs'=>$langs
+			'langs'=>$langs,
+			'action_method' => 'post'
 		]);
 	}
 
@@ -57,7 +58,7 @@ class AdminCategoriesController extends Controller {
 		foreach($langs as $lang){
 			$this->validate($request, [
 				'title_'.$lang['lang'] => 'required|max:255',
-				'link' => "required|max:15"
+				'link' => "required|max:15|unique:categories"
 			]);
 		}
 		$all = $request->all();
@@ -138,9 +139,28 @@ class AdminCategoriesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy(Request $request, $type)
 	{
-		//
+		$all = $request->all();
+		$id = $all['id'];
+		$category = Category::where('id',$id)->first();
+		$articles = $category->articles;
+		if($category AND $category->delete()){
+			Storage::deleteDirectory('upload/articles/' . $id);
+
+			return response()->json([
+				"status" => 'success',
+				"message" => 'Успішно видалено',
+				"redirect" => URL::to('/adminSha4')
+			]);
+		}
+		else{
+			return response()->json([
+				"status" => 'error',
+				"message" => 'Виникла помилка при видаленні'
+			]);
+		}
+
 	}
 	//Функция формирования массива типа (ua|ru|en)
 	private function prepareArticleData($all){

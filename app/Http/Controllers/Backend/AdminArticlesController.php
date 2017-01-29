@@ -30,7 +30,7 @@ class AdminArticlesController extends Controller {
 	public function index($type = "company")
 	{
 		App::setLocale('ua');
-		$admin_category = Category::where("link","=","$type")->first();
+		$admin_category = Category::where("link","=",$type)->first();
 		$admin_articles = $admin_category->articles;
 		$langs = Lang::all();
 		return view('backend.articles.list', [
@@ -292,10 +292,6 @@ class AdminArticlesController extends Controller {
 				"message" => 'Виникла помилка при видаленні'
 			]);
 		}
-		//return $article->title;
-		//return back()->with('message','Успішно видалено');
-		//echo '{"message": "Успешно удален"}';
-
 	}
 
 }

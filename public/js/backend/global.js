@@ -198,7 +198,37 @@ $(function(){
 
     });
 /*/Save Category*/
+/*Delete Category*/
+    $('.category-delete').on('click', function(event){
+        event.preventDefault();
+        if(confirm('Разом з категорією будуть видалені всі записи в ній.\nВи впевнені?')){
+            var $thisEl = $(this);
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: $thisEl.attr('href'),
+                method: "POST",
+                data: {
+                    '_method': 'Delete',
+                    '_token' : $('#token').text(),
+                    'id': id
+                },
+                success: function(data){
+                    console.info('Server response: ', data);
+                    if(data.status == 'success'){
 
+                    }
+                    if(data.redirect){
+                        document.location = data.redirect;
+                    }
+                    if(data.status == 'fail'){
+                        alert(data.message);
+                    }
+                    alert(data.message);
+                }
+            })
+        }
+        });
+/*/Delete Category/
 /*Delete Article*/
     $('.resource-delete').on('click', function(event){
         if(confirm('Ви впевнені?')){

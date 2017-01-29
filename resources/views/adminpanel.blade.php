@@ -149,7 +149,7 @@
         <ul class="nav nav-list">
             <li @if( isset($type) && (Request::is('*/'.$type.'') OR Request::is('*/'.$type.'/*'))) class="active open" @endif>
                 <a href="#" class="dropdown-toggle">
-                    <i class="icon-desktop"></i>
+                    <i class="icon-list"></i>
                     <span class="menu-text"> Категорії </span>
 
                     <b class="arrow icon-angle-down"></b>
@@ -181,7 +181,7 @@
 
             <li @if(Request::is('*/texts'))class="active"@endif>
                 <a href="{{ $url }}/texts">
-                    <i class="icon-hospital"></i>
+                    <i class="icon-list-alt"></i>
                     <span class="menu-text"> Текстові блоки </span>
                 </a>
             </li>

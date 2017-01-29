@@ -49,3 +49,6 @@ div.datapicker.datapicker-dropdown.dropdown-menu{
     padding: 6px;
     background-color: #394557;
 }
+a.line_none:hover{
+    text-decoration: none;
+}

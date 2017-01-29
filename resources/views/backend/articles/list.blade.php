@@ -22,20 +22,22 @@
                 <h3 class="header smaller lighter blue">
                     {{$admin_category->getTranslate('title')}}&nbsp;&nbsp;&nbsp;&nbsp;
                     @if( (Auth::user()->name) == 'root' )
-                        <a href='{{ $url }}/categories/{{$type}}'>
+                        <a href='{{ $url }}/categories/{{$type}}' class="line_none">
                             <button class="btn btn-mini btn-success">
                                 <i class="icon-edit bigger-120"></i>
                             </button>
                         </a>
-                        <button class="btn btn-mini btn-danger">
+                    <a href='{{ $url }}/categories/{{$type}}' data-id="{{ $admin_category->id }}" class="category-delete">
+                        <button class="btn btn-mini btn-danger"  >
                             <i class="icon-trash bigger-120"></i>
                         </button>
+                    </a>
                     @endif
                 </h3>
 
                 <div class="table-header">
                     Список в категорії {{$admin_category->getTranslate('title')}}
-                    <a href="{{ $url }}/articles/{{$type}}/create">
+                    <a href="{{ $url }}/articles/{{$type}}/create" class="line_none">
                         <button class="btn btn-warning">
                             <i class="icon-plus"></i>
                                 Додати елемент в категорію {{$admin_category->getTranslate('title')}}
@@ -111,7 +113,7 @@
                                             <i class="icon-pencil bigger-130"></i>
                                         </a>
 
-                                        <a href='{{ $url }}/articles/{{$type}}/{{$admin_article->id}}' data-id='{{$admin_article->id}}' class='resource-delete'">
+                                        <a href='{{ $url }}/articles/{{$type}}/{{$admin_article->id}}' data-id='{{$admin_article->id}}' class='resource-delete'>
                                             <i class="icon-trash bigger-130"></i>
                                         </a>
                                     </div>
@@ -124,7 +126,7 @@
 
                                             <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                 <li>
-                                                    <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                    <a href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}" class="tooltip-info" data-rel="tooltip" title="View">
                                                         <span class="blue">
                                                             <i class="icon-zoom-in bigger-120"></i>
                                                         </span>
@@ -132,7 +134,7 @@
                                                 </li>
 
                                                 <li>
-                                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                    <a href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}" class="tooltip-success" data-rel="tooltip" title="Edit">
                                                         <span class="green">
                                                             <i class="icon-edit bigger-120"></i>
                                                         </span>
@@ -140,7 +142,7 @@
                                                 </li>
 
                                                 <li>
-                                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                    <a href='{{ $url }}/articles/{{$type}}/{{$admin_article->id}}' data-id='{{$admin_article->id}}' class='resource-delete' class="tooltip-error" data-rel="tooltip" title="Delete">
                                                         <span class="red">
                                                             <i class="icon-trash bigger-120"></i>
                                                         </span>
