@@ -123,7 +123,7 @@ trait AuthenticatesAndRegistersUsers {
 			return $this->redirectPath;
 		}
 
-		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/adminSha4';
+		return property_exists($this, 'redirectTo') ? $this->redirectTo : route('admin_dashboard');
 	}
 
 	/**

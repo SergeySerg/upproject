@@ -380,7 +380,8 @@
                                 <div class="accordion-group" style="margin-top: 15px">
                                     <div class="accordion-heading">
                                         <a href="#collapseOne" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed">
-                                            <span class="badge badge-warning"><i class="icon-plus"></i></span>&nbsp;&nbsp;Додати новий атрибут
+                                            <span class="badge badge-warning" id="label-add"><i class="icon-plus"></i>&nbsp;&nbsp;Додати новий атрибут</span>
+                                            <span class="badge badge-warning" id="label-edit" style="display: none"><i class="icon-pencil bigger-130"></i>&nbsp;&nbsp;Редагувати атрибут</span>
                                         </a>
                                     </div>
 

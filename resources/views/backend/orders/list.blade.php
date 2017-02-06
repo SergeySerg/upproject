@@ -4,7 +4,7 @@
 @section('breadcrumbs')
     <li>
         <i class="icon-home home-icon"></i>
-        <a href="/adminSha4/">Головна</a>
+        <a href="{{ route('admin_dashboard') }}">Головна</a>
 
                                     <span class="divider">
                                         <i class="icon-angle-right arrow-icon"></i>

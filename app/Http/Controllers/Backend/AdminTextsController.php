@@ -20,32 +20,24 @@ use Storage;
 
 class AdminTextsController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+	/* List texts - Display a listing of the Texts */
+
 	public function index()
 	{
 		App::setLocale('ua');
-
 		$admin_texts = Text::all()
 			->sortByDesc("priority");
+		// List of Softdeletes items
 		$admin_texts_deleted = Text::onlyTrashed()->get();
-		//$count_text_deleted = Text::onlyTrashed()->count();
-		//dd($admin_texts_deleted);
+
 		return view('backend.texts.list',[
 			'admin_texts' => $admin_texts,
 			'admin_texts_deleted' => $admin_texts_deleted,
-		//	'count_text_deleted' => $count_text_deleted
 		]);
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
+	/*Show the form for creating a new Text.*/
+
 	public function create()
 	{
 		$langs = Lang::all();
@@ -55,27 +47,31 @@ class AdminTextsController extends Controller {
 		]);
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
+	/* Store a newly created Text in storage.*/
+
 	public function store(Request $request)
 	{
 		$langs = Lang::all();
+
+		//validation rules
 		foreach($langs as $lang){
 			$this->validate($request, [
 				'title' => 'required|max:255',
 			]);
 		}
 		$all = $request->all();
+
+		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareTextData($all);
 
+		//Create new entry in DB
 		Text::create($all);
+
+		//JSON respons when entry in DB successfully
 		return response()->json([
 			"status" => 'success',
 			"message" => 'Успішно збережено',
-			"redirect" => URL::to('/adminSha4/texts')
+			"redirect" => URL::route('text_index')
 		]);
 	}
 
@@ -90,12 +86,8 @@ class AdminTextsController extends Controller {
 		//
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	/*Show the form for editing the Text. (@param  int  $id @return Response*/
+
 	public function edit($id)
 	{
 		$langs = Lang::all();
@@ -107,66 +99,36 @@ class AdminTextsController extends Controller {
 		]);
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	/* Update the Text in storage.(@param  int  $id,@return Response*/
+
 	public function update(Request $request, $id)
 	{
 		$langs = Lang::all();
-		/*foreach($langs as $lang){
-			$this->validate($request, [
-				'title_'.$lang['lang'] => 'required|max:255',
 
-			]);
-		}*/
 		$admin_text = Text::where('id', '=', $id)->first();
+
+		//create var all for date from request
 		$all = $request->all();
+
+		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareTextData($all);
-		//dd($all);
+
+		//Update all data in DB
 		$admin_text->update($all);
+
+		//Save all data in DB
 		$admin_text->save();
+
+		//JSON respons when entry in DB successfully
 		return response()->json([
 			"status" => 'success',
 			"message" => 'Успішно збережено',
-			"redirect" => URL::to('/adminSha4/texts')
+			"redirect" => URL::route('text_index')
 		]);
 	}
 
-	private function prepareTextData($all){
-		$langs = Lang::all();
+	/*Remove the Article from storage.(@param  int  $id, @return Response */
 
-		if(isset($all['description']))
-			return $all;
-
-
-		$all['description'] = '';
-		// Удаление пробелов в начале и в конце каждого поля
-		foreach($all as $key => $value){
-			$all[$key] = trim($value);
-		}
-		// Формирование массива типа (ua|ru|en)
-		foreach($langs as $lang){
-
-			if($all['lang_active'] == 0){
-				$all['description'] .= (isset($all["description_{$lang['lang']}"]) ? $all["description_{$lang['lang']}"] : '');
-			}else{
-				$all['description'] .= (isset($all["description_{$lang['lang']}"]) ? $all["description_{$lang['lang']}"] : '') .'@|;';
-			}
-			unset($all["description_{$lang['lang']}"]);
-
-		}
-
-		return $all;
-	}
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
 		$text = Text::where('id', '=', $id)->first();
@@ -196,4 +158,31 @@ class AdminTextsController extends Controller {
 		return redirect()->route('text_index');
 	}
 
+	/* Сreate array for multilanguage (example- (ua|ru|en)) */
+
+	private function prepareTextData($all){
+		$langs = Lang::all();
+
+		if(isset($all['description']))
+			return $all;
+
+		// Removing gaps at the beginning and end of each field
+		foreach($all as $key => $value){
+			$all[$key] = trim($value);
+		}
+		$all['description'] = '';
+
+		// Сreate array example (ua|ru|en)
+		foreach($langs as $lang){
+
+			if($all['lang_active'] == 0){
+				$all['description'] .= (isset($all["description_{$lang['lang']}"]) ? $all["description_{$lang['lang']}"] : '');
+			}else{
+				$all['description'] .= (isset($all["description_{$lang['lang']}"]) ? $all["description_{$lang['lang']}"] : '') .'@|;';
+			}
+			unset($all["description_{$lang['lang']}"]);
+
+		}
+		return $all;
+	}
 }

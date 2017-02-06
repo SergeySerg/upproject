@@ -51,11 +51,11 @@
                             ID
                         </th>
                         <th class="center">Назва</th>
-                        <th class="hidden-phone center">
+                        <th class="center hidden-phone">
                             <i class="icon-time bigger-110 hidden-phone"></i>
                             Дата створення
                         </th>
-                        <th class="hidden-phone center">
+                        <th class="center hidden-phone">
                             <i class="icon-time bigger-110 hidden-phone"></i>
                             Дата оновлення
                         </th>
@@ -65,14 +65,14 @@
                             Update
                         </th>-->
                         @if (Request::is('*/news'))
-                            <th class="hidden-480">
+                            <th class="hidden-phone">
                                 <i class="icon-time bigger-110 hidden-phone"></i>
                                 Дата публікації
                             </th>
                         @else
-                            <th class="hidden-480">Ціна</th>
+                            <th class="hidden-phone">Ціна</th>
                         @endif
-                        <th>Статус</th>
+                        <th class="center">Статус</th>
                         <th>Пріоритет</th>
                         <th></th>
                     </tr>
@@ -90,22 +90,22 @@
                                 <td>
                                     <a href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}">{!! $admin_article->getTranslate('title') !!}</a>
                                 </td>
-                                <td>{{ $admin_article->created_at }}</td>
-                                <td class="hidden-480">{{ $admin_article->updated_at }}</td>
+                                <td  class="hidden-phone">{{ $admin_article->created_at }}</td>
+                                <td  class="hidden-phone">{{ $admin_article->updated_at }}</td>
                                 @if (Request::is('*/news'))
-                                    <td class="hidden-phone">{{ $admin_article->date }}</td>
+                                    <td  class="hidden-phone">{{ $admin_article->date }}</td>
                                 @else
-                                    <td class="hidden-phone">{{ $admin_article->price }}</td>
+                                    <td  class="hidden-phone">{{ $admin_article->price }}</td>
                                 @endif
-                                <td class="hidden-480">
+                                <td class="center">
                                     @if($admin_article->active)
-                                        <span class="label label-success">Активно</span>
+                                        <span class="badge badge-success"><i class="icon-ok bigger-120"></i></span>
                                     @else
-                                        <span class="label label-inverse arrowed-in">Неактивно</span>
+                                        <span class="badge badge-important"><i class="icon-remove"></i></span>
                                     @endif
                                 </td>
 
-                                <td class="hidden-phone">{{ $admin_article->priority }}</td>
+                                <td class="center">{{ $admin_article->priority }}</td>
 
                                 <td class="td-actions">
                                     <div class="hidden-phone visible-desktop action-buttons">

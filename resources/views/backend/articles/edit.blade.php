@@ -48,20 +48,19 @@
                             @if($attribute->type == 'input' )
                                 <div class="control-group">
                                     <label class="control-label" for="form-field-2">{{ $key }}</label>
-
                                     <div class="controls">
-                                        <input type="text" id="form-field-2" name="{{ $key }}" @if(isset($admin_article)) value='{{$admin_article->quantity}}' @endif  />
+                                        <input type="text" id="form-field-2" name='attributes[{{ $key }}]'  value='{{ $attributes -> $key or ''}}'/>
                                     </div>
                                 </div>
                             @elseif ($attribute->type == 'textarea' )
                                 <h4 class="header blue clearfix">{{ $key }}</h4>
                                 <div class="control-group">
-                                    <textarea name="{{ $key }}" class="span12" id="{{ $key }}" placeholder="Опис">{{ $key }}</textarea>
+                                    <textarea name='attributes["{{ $key }}"]' class="span12" data-id="{{ $key }}" placeholder="Опис">{{ $attributes -> $key or ''}}</textarea>
                                 </div>
                             @elseif ($attribute->type == 'textarea-no-wysiwyg' )
                                 <h4 class="header blue clearfix">{{ $key }}</h4>
                                 <div class="control-group">
-                                    <textarea name="{{ $key }}" class="span12 no-wysiwyg" id="{{ $key }}" placeholder="Опис">{{ $key }}</textarea>
+                                    <textarea name='attributes["{{ $key }}"]' class="span12 no-wysiwyg" data-id="{{ $key }}" placeholder="Опис">{{ $attributes -> $key or ''}}</textarea>
                                 </div>
                             @endif
                         @endif
@@ -97,7 +96,7 @@
                         <label class="control-label" for="id-date-picker-1">Дата</label>
                         <div class="controls">
                             <div class="row-fluid input-append">
-                                <input class="span2 date-picker" name="date" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" @if(isset($admin_article)) value='{{date('d-m-Y',strtotime($admin_article->date))}}' @endif/>
+                                <input class="span2 date-picker" name="date" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" @if(isset($admin_article)) value='{{date('d-m-Y',strtotime($admin_article->date)) }}' @endif/>
                                 <span class="add-on">
                                     <i class="icon-calendar"></i>
                                </span>
@@ -126,7 +125,7 @@
                                                     <label class="control-label" for="form-field-3">Назва</label>
 
                                                     <div class="controls">
-                                                        <input type="text" name="title_{{$lang->lang}}" value='@if(isset($admin_article)){{ $admin_article->getTranslate('title', $lang->lang) }}@endif' id="form-field-3" placeholder="Назва номеру,події,послуги" />
+                                                        <input type="text" name="title_{{$lang->lang}}" value='@if(isset($admin_article)){{ $admin_article->getTranslate('title', $lang->lang) }}@endif' id="form-field-3" placeholder="Введіть назву" />
                                                     </div>
                                                 </div>
                                             @endif
@@ -139,18 +138,18 @@
                                                                 <label class="control-label" for="form-field-2">{{ $key }}</label>
 
                                                                 <div class="controls">
-                                                                    <input type="text" name="{{ $key }}_{{$lang->lang}}" value='@if(isset($admin_article)){{ $admin_article->getTranslate('title', $lang->lang) }}@endif' id="form-field-{{ $key }}" placeholder="Назва" />
+                                                                    <input type="text" name='attributes[{{ $key }}_{{$lang->lang}}]' value='{{ $attributes -> {$key .'_'. $lang->lang} or ''}}' id="form-field-{{ $key }}" placeholder="{{ $key }}" />
                                                                 </div>
                                                             </div>
                                                         @elseif ($attribute->type == 'textarea' )
                                                             <h4 class="header blue clearfix">{{ $key }}</h4>
                                                             <div class="control-group">
-                                                                <textarea name="{{ $key }}_{{$lang->lang}}"class="span12" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getTranslate('short_description',$lang->lang) }}@endif</textarea>
+                                                                <textarea name='attributes[{{ $key }}_{{$lang->lang}}]' class="span12" id="form-field-{{ $key }}" placeholder="Текст">{{ $attributes -> {$key .'_'. $lang->lang} or ''}}</textarea>
                                                             </div>
                                                         @elseif ($attribute->type == 'textarea-no-wysiwyg' )
                                                             <h4 class="header blue clearfix">{{ $key }}</h4>
                                                             <div class="control-group">
-                                                                <textarea name="{{ $key }}_{{$lang->lang}}"class="span12 no-wysiwyg" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getTranslate('short_description',$lang->lang) }}@endif</textarea>
+                                                                <textarea name='attributes[{{ $key }}_{{$lang->lang}}]' class="span12 no-wysiwyg" id="form-field-{{ $key }}" placeholder="Текст">{{ $attributes -> {$key .'_'. $lang->lang} or ''}}</textarea>
                                                             </div>
                                                         @endif
                                                     @endif

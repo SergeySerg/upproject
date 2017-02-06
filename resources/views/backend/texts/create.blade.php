@@ -3,14 +3,14 @@
 @section('breadcrumbs')
 <li>
     <i class="icon-home home-icon"></i>
-    <a href="/adminSha4/">Головна</a>
+    <a href="{{ route('admin_dashboard') }}">Головна</a>
         <span class="divider">
             <i class="icon-angle-right arrow-icon"></i>
         </span>
 </li>
 
 <li>
-    <a href="/adminSha4/texts">Текстові блоки</a>
+    <a href="{{ route('text_index') }}">Текстові блоки</a>
 
         <span class="divider">
             <i class="icon-angle-right arrow-icon"></i>
@@ -62,7 +62,7 @@
                     <label class="control-label" for="title">Альтернативна назва блоку</label>
 
                     <div class="controls">
-                        <input type="text" name="name" value='' placeholder="Назва типу header.{назва}" />
+                        <input type="text" name="name" value='' placeholder="Альтернативна назва" />
                     </div>
                 </div>
 

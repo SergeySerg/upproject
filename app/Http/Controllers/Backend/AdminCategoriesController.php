@@ -27,16 +27,13 @@ class AdminCategoriesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($type)
 	{
 		//
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
+	/*Show the form for creating a new Category.*/
+
 	public function create()
 	{
 		$langs = Lang::all();
@@ -47,29 +44,34 @@ class AdminCategoriesController extends Controller {
 		]);
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
+	/* Store a newly created Category in storage.*/
+
 	public function store(Request $request)
 	{
 		$langs = Lang::all();
+
+		//validation rules
 		foreach($langs as $lang){
 			$this->validate($request, [
 				'title_'.$lang['lang'] => 'required|max:255',
 				'link' => "required|max:15|unique:categories"
 			]);
 		}
+
 		$all = $request->all();
+
+		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareArticleData($all);
+
+		//Create new entry in DB
 		Category::create($all);
+
+		//JSON respons when entry in DB successfully
 		return response()->json([
 			"status" => 'success',
 			"message" => 'Успішно збережено',
-			"redirect" => URL::to('/adminSha4')
+			"redirect" => URL::route('admin_dashboard')
 		]);
-		//return back()->with('message', 'Успішно змінено');
 	}
 
 	/**
@@ -80,22 +82,22 @@ class AdminCategoriesController extends Controller {
 	 */
 	public function show($id)
 	{
-		dd('store');
+		//
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	/*Show the form for editing the Category. (@param  int  $id @return Response*/
+
 	public function edit($type = null)
 	{
 		$langs = Lang::all();
 		$admin_category = Category::where("link","=","$type")->first();
+
+		//Decode base and attributes from categories DB
 		$fields = json_decode($admin_category->fields);
+
+		//Decode attributes from articles DB
 		$attributes_fields = $fields->attributes;
-		//dd($attributes_fields);
+
 		return view('backend.categories.edit', [
 			'admin_category' => $admin_category,
 			'langs' => $langs,
@@ -105,53 +107,65 @@ class AdminCategoriesController extends Controller {
 		]);
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	/* Update the Category in storage.(@param  int  $id,@return Response*/
+
 	public function update(Request $request, $type)
 	{
 		$langs = Lang::all();
+
+		//validation rules
 		foreach($langs as $lang){
 			$this->validate($request, [
 				'title_'.$lang['lang'] => 'required|max:255',
 				'link' => "required|max:15"
 			]);
 		}
+
+		//create var all for date from request
 		$all = $request->all();
+
+		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareArticleData($all);
+
 		$category = Category::where('link',$type)->first();
+
+		//Update all data in DB
 		$category->update($all);
+
+		//Save all data in DB
 		$category->save();
 
+		//JSON respons when entry in DB successfully
 		return response()->json([
 			"status" => 'success',
 			"message" => 'Успішно збережено',
-			"redirect" => URL::to('/adminSha4/articles/'.$type)
+			"redirect" => URL::route('admin_dashboard')
 		]);
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	/*Remove Category with Articles from storage.(@param  int  $id, @return Response */
+
 	public function destroy(Request $request, $type)
 	{
 		$all = $request->all();
 		$id = $all['id'];
 		$category = Category::where('id',$id)->first();
 		$articles = $category->articles;
-		if($category AND $category->delete()){
-			Storage::deleteDirectory('upload/articles/' . $id);
+		/*Delete articles in category*/
+		if($articles){
+			foreach($articles as $key => $article){
+				$articles[$key]->delete();
+				Storage::deleteDirectory('upload/articles/' . $article['id']);
+			}
+		}
 
+		/*Delete category*/
+		if($category AND $category->delete()){
+			//Storage::deleteDirectory('upload/articles/' . $id);
 			return response()->json([
 				"status" => 'success',
 				"message" => 'Успішно видалено',
-				"redirect" => URL::to('/adminSha4')
+				"redirect" => URL::route('admin_dashboard')
 			]);
 		}
 		else{
@@ -162,7 +176,7 @@ class AdminCategoriesController extends Controller {
 		}
 
 	}
-	//Функция формирования массива типа (ua|ru|en)
+	/* Сreate array for multilanguage (example- (ua|ru|en)) */
 	private function prepareArticleData($all){
 		$langs = Lang::all();
 		$all['title'] = '';
@@ -171,13 +185,17 @@ class AdminCategoriesController extends Controller {
 		$all['meta_title'] = '';
 		$all['meta_description'] = '';
 		$all['meta_keywords'] ='';
+
+		//Change format DATE
 		if (isset($all['date']))
 			$all['date'] = date('Y-m-d H:i:s',strtotime($all['date']));
-		// Удаление пробелов в начале и в конце каждого поля
+
+		// Removing gaps at the beginning and end of each field
 		foreach($all as $key => $value){
 			$all[$key] = trim($value);
 		}
-		//Формирование массива типа (ua|ru|en)
+
+		// Сreate array example (ua|ru|en)
 		foreach($langs as $lang){
 			$all['title'] .= $all["title_{$lang['lang']}"] .'@|;';
 			$all['short_description'] .= (isset($all["short_description_{$lang['lang']}"]) ? $all["short_description_{$lang['lang']}"] : '') .'@|;';
@@ -185,7 +203,8 @@ class AdminCategoriesController extends Controller {
 			$all['meta_title'] .= (isset($all["meta_title_{$lang['lang']}"]) ? $all["meta_title_{$lang['lang']}"] : '') .'@|;';
 			$all['meta_description'] .= (isset($all["meta_description_{$lang['lang']}"]) ? $all["meta_description_{$lang['lang']}"] : '') .'@|;';
 			$all['meta_keywords'] .= (isset($all["meta_keywords_{$lang['lang']}"]) ? $all["meta_keywords_{$lang['lang']}"] : '') .'@|;';
-			//Удаление переменных типа title_ua,title_ru,title_en и т. д.
+
+			//Delete var title_ua,title_ru,title_en
 			unset($all["title_{$lang['lang']}"]);
 			unset($all["short_description_{$lang['lang']}"]);
 			unset($all["description_{$lang['lang']}"]);

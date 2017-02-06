@@ -97,6 +97,8 @@ $(function(){
 /*Edit attributes*/
         $('.edit-attribute').on('click',function(event){
             event.preventDefault();
+            $('#label-add').hide();
+            $('#label-edit').show();
             var title = $(this).attr('data-id');
             var data = fields.attributes[title];
             $('#modal-table-attributes input[name=title]').val(title);
@@ -115,6 +117,8 @@ $(function(){
 /*Add new attributes*/
     $('.resource-add-attribute').on('click', function(event){
         event.preventDefault();
+        $('#label-add').show();
+        $('#label-edit').hide();
         var serializedData = $('form#resource-form-attributes').serializeArray();
         var data = {};
         console.log("Масив серіалізе", serializedData);

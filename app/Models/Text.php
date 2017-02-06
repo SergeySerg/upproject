@@ -20,11 +20,11 @@ class Text extends Translate {
     ];
     protected $dates = ['deleted_at'];
 
+    /* */
     public function init(){
         $textsArray = $this->all();
         foreach($textsArray as $text){
             $desription = $text->getTranslate('description');
-            //$this->fields[$text->id] = $desription;
             $this->fields[$text->name] = $desription;
         }
         return $this;

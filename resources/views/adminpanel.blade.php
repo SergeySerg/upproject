@@ -73,10 +73,9 @@
 <div class="navbar hidden-print">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <a href="#" class="brand">
-                <img style="display: block;
-    position: absolute;
-    margin-top: -3px;" width="30px" src="{{ asset('/img/frontend/flags.jpg') }}" alt="{{$_SERVER['HTTP_HOST']}}" />
+            <a href="{{ route('admin_dashboard') }}" class="brand">
+                <i class="icon-leaf"></i>
+               <!-- <img style="display: block;position: absolute;margin-top: -3px;" width="30px" src="{{ asset('/img/frontend/flags.jpg') }}" alt="{{$_SERVER['HTTP_HOST']}}" />-->
                 <small style="margin-left: 40px;">
                     {{$_SERVER['HTTP_HOST']}}
                 </small>
@@ -180,12 +179,18 @@
 
 
             <li @if(Request::is('*/texts'))class="active"@endif>
-                <a href="{{ $url }}/texts">
+                <a href="{{ route('text_index') }}">
                     <i class="icon-list-alt"></i>
                     <span class="menu-text"> Текстові блоки </span>
                 </a>
             </li>
 
+            <li @if(Request::is('*/settings'))class="active"@endif>
+                <a href="{{ route('settings_index') }}">
+                    <i class="icon-cog"></i>
+                    <span class="menu-text"> Налаштування </span>
+                </a>
+            </li>
 
 
         </ul><!--/.nav-list-->
