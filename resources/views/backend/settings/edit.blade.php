@@ -16,8 +16,11 @@
             <i class="icon-angle-right arrow-icon"></i>
         </span>
     </li>
-
-    <li class="active">Додати нове налаштування</li>
+    @if(isset($setting))
+        <li class="active">{{ $setting->id }}</li>
+    @else
+        <li class="active">Додати нове налаштування</li>
+    @endif
 @stop
 
 @section('content')
@@ -25,7 +28,11 @@
     <div class="page-content">
         <div class="page-header position-relative">
             <h1>
-                Додати
+                @if(isset($setting))
+                    Редагувати
+                @else
+                    Додати нове налаштування
+                @endif
             </h1>
         </div><!--/.page-header-->
 
@@ -39,7 +46,7 @@
                     <label class="control-label" for="title">Назва</label>
 
                     <div class="controls">
-                        <input type="text" name="title" value='' placeholder="Назва налаштування" />
+                        <input type="text" name="title" value='{{ $setting -> title or '' }}' placeholder="Назва налаштування" />
                     </div>
                 </div>
 
@@ -47,7 +54,7 @@
                     <label class="control-label" for="priority">Значення</label>
 
                     <div class="controls">
-                        <input type="text" name="description" value='' placeholder="Значення налаштування" />
+                        <input type="text" name="description" value='{{ $setting -> description or '' }}' placeholder="Значення налаштування" />
                     </div>
                 </div>
 
@@ -55,7 +62,7 @@
                     <label class="control-label" for="title">Альтернативна назва</label>
 
                     <div class="controls">
-                        <input type="text" name="name" value='' placeholder="Назва типу config.{назва}" />
+                        <input type="text" name="name" value='{{ $setting -> name or '' }}' placeholder="Назва типу config.{назва}" />
                     </div>
                 </div>
                 <div class="space-4"></div>

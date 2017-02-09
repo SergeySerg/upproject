@@ -63,12 +63,11 @@
                                     {{--<input type="text" name="type" value='{{$admin_text->type}}' />--}}
                                     <select name="type">
                                         <option>
-                                        </option><option value="input" @if($admin_text->type == 'input')selected="selected"@endif>Звичайне поле
-                                        </option><option value="textarea" @if($admin_text->type == 'textarea')selected="selected"@endif>Текстове поле
-                                        </option><option value="textarea-no-wysiwyg" @if($admin_text->type == 'textarea-no-wysiwyg')selected="selected"@endif>Текстове поле (без редактора)
-                                        </option><option value="settings" @if($admin_text->type == 'settings')selected="selected"@endif>Налаштування
-                                        </option><option value="settings" @if($admin_text->type == 'settings')selected="selected"@endif>Налаштування
-                                        </option></select>
+                                            </option><option value="input" @if($admin_text->type == 'input')selected="selected"@endif>Звичайне поле
+                                            </option><option value="textarea" @if($admin_text->type == 'textarea')selected="selected"@endif>Текстове поле
+                                            </option><option value="textarea-no-wysiwyg" @if($admin_text->type == 'textarea-no-wysiwyg')selected="selected"@endif>Текстове поле (без редактора)
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
 

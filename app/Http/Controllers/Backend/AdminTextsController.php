@@ -135,23 +135,27 @@ class AdminTextsController extends Controller {
 		if($text AND $text->delete()){
 			return response()->json([
 				"status" => 'success',
-				"message" => 'Успешно удален'
+				"message" => 'Успішно видалено'
 			]);
 		}
 		else{
 			return response()->json([
 				"status" => 'error',
-				"message" => 'Произошла ошибка при удалении'
+				"message" => 'Виникла помилка при видаленні'
 			]);
 		}
-
-
 	}
+
+	/*Recovery Softdeletes items*/
+
 	public function recovery(){
 		Text::onlyTrashed()
 			->restore();
 		return redirect()->route('text_index');
 	}
+
+	/*Final Delete items*/
+
 	public function delete(){
 		$texts_delete = Text::onlyTrashed();
 		$texts_delete->forceDelete();

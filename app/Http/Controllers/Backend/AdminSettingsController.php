@@ -30,7 +30,6 @@ class AdminSettingsController extends Controller {
 
 		// List of Softdeletes items
 		$settings_deleted = Setting::onlyTrashed()->get();
-
 		return view('backend.settings.list',[
 			'settings' => $settings,
 			'settings_deleted' => $settings_deleted
@@ -41,7 +40,7 @@ class AdminSettingsController extends Controller {
 
 	public function create()
 	{
-		return view('backend.settings.create',[
+		return view('backend.settings.edit',[
 			'action_method' => 'post'
 		]);
 	}
@@ -53,8 +52,9 @@ class AdminSettingsController extends Controller {
 		//validation rules
 		$validator = Validator::make($request->all(), [
 			'title' => 'required|max:255',
+			'description' => 'required|max:255',
 			'name' => 'required|max:255',
-			'description' => 'required|max:255'
+
 		]);
 		if ($validator->fails()) {
 			return Response::json(array(
@@ -95,29 +95,81 @@ class AdminSettingsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$setting = Setting::where('id',$id)->first();
+		return view('backend.settings.edit',[
+			'setting' => $setting,
+			'action_method' => 'put'
+		]);
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
+	/* Update the Text in storage.(@param  int  $id,@return Response*/
+
+	public function update(Request $request, $id)
 	{
-		//
+		//validation rules
+		$validator = Validator::make($request->all(), [
+			'title' => 'required|max:255',
+			'description' => 'required|max:255',
+			'name' => 'required|max:255',
+		]);
+		if ($validator->fails()) {
+			return Response::json(array(
+				'success' => false,
+				'message' => $validator->messages()->first()
+			));
+		}
+
+		$setting = Setting::where('id',$id)->first();
+
+		//create var all for date from request
+		$all = $request->all();
+
+		//Update all data in DB
+		$setting->update($all);
+
+		//Save all data in DB
+		$setting->save();
+
+		//JSON respons when entry in DB successfully
+		return response()->json([
+			"status" => 'success',
+			"message" => 'Успішно збережено',
+			"redirect" => URL::route('settings_index')
+		]);
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	/*Remove the Settings from storage.(@param  int  $id, @return Response */
+
 	public function destroy($id)
 	{
-		//
+		$setting = Setting::where('id',$id)->first();
+		if($setting AND $setting->delete()){
+			return response()->json([
+				"status" => 'success',
+				"message" => 'Успішно видалено'
+			]);
+		}
+		else{
+			return response()->json([
+				"status" => 'error',
+				"message" => 'Виникла помилка при видаленні'
+			]);
+		}
+	}
+	/*Recovery Softdeletes items*/
+
+	public function recovery(){
+		Setting::onlyTrashed()
+			->restore();
+		return redirect()->route('settings_index');
+	}
+
+	/*Final Delete items*/
+
+	public function delete(){
+		$settings_delete = Setting::onlyTrashed();
+		$settings_delete->forceDelete();
+		return redirect()->route('settings_index');
 	}
 
 }

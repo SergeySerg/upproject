@@ -61,7 +61,7 @@
                                         <span class="lbl">{{ $admin_text->id }}</span>
                                     </label>
                                 </td>
-                                <td><a href="{{ $url }}/texts/{{$admin_text->id}}">{{ $admin_text->getTranslate('title') }}</a></td>
+                                <td><a href="{{ $url }}/texts/{{ $admin_text->id }}">{{ $admin_text->getTranslate('title') }}</a></td>
                                 <td>{{ str_limit($admin_text->getTranslate('description'), 80, '...') }}</td>
                                 <td class="hidden-phone center">{{ $admin_text->type }}</td>
                                 <td>{{ $admin_text->name }}</td>
@@ -71,7 +71,7 @@
                                         <a class="green" href="{{ $url }}/texts/{{$admin_text->id}}">
                                             <i class="icon-pencil bigger-130"></i>
                                         </a>
-                                        <a href='{{ $url }}/texts/{{$admin_text->id}}' data-id='{{$admin_text->id}}' class='resource-delete'>
+                                        <a href='{{ $url }}/texts/{{ $admin_text->id }}' data-id='{{ $admin_text->id }}' class='resource-delete'>
                                         <i class="icon-trash bigger-130"></i>
                                         </a>
                                     </div>

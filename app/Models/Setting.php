@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Setting extends Model {
+class Setting extends Translate {
     use SoftDeletes;
 
 	protected $fillable = [
@@ -12,4 +12,5 @@ class Setting extends Model {
     ];
 
     protected $dates = ['deleted_at'];
+
 }

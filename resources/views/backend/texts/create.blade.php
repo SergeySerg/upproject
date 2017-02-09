@@ -42,11 +42,11 @@
                         <div class="controls">
                             <select name="type">
                                 <option>
-                                </option><option value="input" selected="selected">Звичайне поле
-                                </option><option value="textarea">Текстве поле
-                                </option><option value="textarea-no-wysiwyg">Текстве поле(без редактора)
-                                </option><option value="settings">Налаштування
-                                </option></select>
+                                    </option><option value="input" selected="selected">Звичайне поле
+                                    </option><option value="textarea">Текстве поле
+                                    </option><option value="textarea-no-wysiwyg">Текстве поле(без редактора)
+                                 </option>
+                            </select>
                         </div>
                     </div>
 
@@ -80,9 +80,10 @@
                         <div class="controls">
                             <select name="lang_active">
                                 <option>
-                                </option><option value="1" selected>На декількох мовах
-                                </option><option value="0">Одне значення на всі мови
-                                </option></select>
+                                    </option><option value="1" selected>На декількох мовах
+                                    </option><option value="0">Одне значення на всі мови
+                                </option>
+                            </select>
                         </div>
                     </div>
 
@@ -103,7 +104,6 @@
                             <div class="tab-content">
                                 @foreach($langs as $lang)
                                 <div id="{{$lang->lang}}" @if(($lang->lang) == 'ua') class="tab-pane in active" @else class="tab-pane" @endif>
-
 
                                     <div class="control-group">
                                         <label class="control-label" for="description_{{$lang->lang}}">Значення</label>

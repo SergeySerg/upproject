@@ -66,10 +66,10 @@
                                     <td>{{ $setting->name }}</td>
                                     <td class="td-actions">
                                         <div class="visible-phone visible-desktop action-buttons">
-                                            <a class="green" href="#">
+                                            <a class="green" href="{{ $url }}/settings/{{ $setting->id }}">
                                                 <i class="icon-pencil bigger-130"></i>
                                             </a>
-                                            <a href='#' class='resource-delete'>
+                                            <a href='{{ $url }}/settings/{{ $setting->id }}' data-id='{{ $setting->id }}' class='resource-delete'>
                                                 <i class="icon-trash bigger-130"></i>
                                             </a>
                                         </div>
@@ -112,11 +112,11 @@
                                             @foreach($settings_deleted as $setting_deleted)
                                                 <tr>
                                                     <td>
-                                                        <a href="#">{{ $settings_deleted->title }}</a>
+                                                        <a href="#">{{ $setting_deleted->title }}</a>
                                                     </td>
-                                                    <td>{{ $settings_deleted->description }}</td>
-                                                    <td>{{ $settings_deleted->name }}</td>
-                                                    <td>{{ $settings_deleted->deleted_at }}</td>
+                                                    <td>{{ $setting_deleted->description }}</td>
+                                                    <td>{{ $setting_deleted->name }}</td>
+                                                    <td>{{ $setting_deleted->deleted_at }}</td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
