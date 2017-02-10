@@ -9,6 +9,7 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Text;
 use App\Models\Lang;
+use App\Models\Setting;
 use League\Flysystem\Config;
 
 class BackendInit {
@@ -26,6 +27,7 @@ class BackendInit {
 		$admin_categories = Category::all();
 		//Подключение в Backend url типа
 		$url = url('adminSha4');
+
 		//Подключение в Backend version
 		view()->share('version', config('app.version'));
 		view()->share('url', $url);

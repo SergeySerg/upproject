@@ -12,5 +12,4 @@ class Setting extends Translate {
     ];
 
     protected $dates = ['deleted_at'];
-
 }

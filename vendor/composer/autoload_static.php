@@ -18,6 +18,7 @@ class ComposerStaticInitb7887ae7b6c910dea90c8ef87cc8ead4
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        '6d394c3a532652dafb4dd296ba6a3f0b' => __DIR__ . '/../..' . '/app/Http/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -266,7 +267,6 @@ class ComposerStaticInitb7887ae7b6c910dea90c8ef87cc8ead4
     public static $classMap = array (
         'ArticlesSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'CategoriesSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
-        'ChangeArticleTableFullTiitle' => __DIR__ . '/../..' . '/database/migrations/2017_01_10_215452_change_article_table_full-tiitle.php',
         'ChangeTextTableSoft' => __DIR__ . '/../..' . '/database/migrations/2016_12_26_140118_change_text_table_soft.php',
         'CreateArticlesTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_14_124503_create_articles_table.php',
         'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_14_124813_create_categories_table.php',
@@ -274,6 +274,7 @@ class ComposerStaticInitb7887ae7b6c910dea90c8ef87cc8ead4
         'CreateLangsTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_14_124942_create_langs_table.php',
         'CreateOrdersTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_02_155628_create_orders_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreateSettingsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_06_120655_create_settings_table.php',
         'CreateTextsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_06_124518_create_texts_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',

@@ -8,7 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'ArticlesSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'CategoriesSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
-    'ChangeArticleTableFullTiitle' => $baseDir . '/database/migrations/2017_01_10_215452_change_article_table_full-tiitle.php',
     'ChangeTextTableSoft' => $baseDir . '/database/migrations/2016_12_26_140118_change_text_table_soft.php',
     'CreateArticlesTable' => $baseDir . '/database/migrations/2016_09_14_124503_create_articles_table.php',
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2016_09_14_124813_create_categories_table.php',
@@ -16,6 +15,7 @@ return array(
     'CreateLangsTable' => $baseDir . '/database/migrations/2016_09_14_124942_create_langs_table.php',
     'CreateOrdersTable' => $baseDir . '/database/migrations/2017_01_02_155628_create_orders_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateSettingsTable' => $baseDir . '/database/migrations/2017_02_06_120655_create_settings_table.php',
     'CreateTextsTable' => $baseDir . '/database/migrations/2016_10_06_124518_create_texts_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',

@@ -14,6 +14,7 @@ use App\Models\Translate;
 use App\Models\Text;
 use App\Models\Setting;
 use App;
+use Helper;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\MessageBag;
 use Storage;
@@ -30,6 +31,8 @@ class AdminSettingsController extends Controller {
 
 		// List of Softdeletes items
 		$settings_deleted = Setting::onlyTrashed()->get();
+
+
 		return view('backend.settings.list',[
 			'settings' => $settings,
 			'settings_deleted' => $settings_deleted
