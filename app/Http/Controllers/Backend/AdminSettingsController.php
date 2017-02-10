@@ -26,8 +26,9 @@ class AdminSettingsController extends Controller {
 
 	public function index()
 	{
+		$v = getSetting('config.email');
+		dd($v);
 		$settings = Setting::all();
-
 		// List of Softdeletes items
 		$settings_deleted = Setting::onlyTrashed()->get();
 		return view('backend.settings.list',[
