@@ -19,6 +19,7 @@ use Illuminate\Support\MessageBag;
 use Storage;
 use Validator;
 use Redirect;
+use Mail;
 
 class AdminSettingsController extends Controller {
 
@@ -26,8 +27,6 @@ class AdminSettingsController extends Controller {
 
 	public function index()
 	{
-		$v = getSetting('config.email');
-		dd($v);
 		$settings = Setting::all();
 		// List of Softdeletes items
 		$settings_deleted = Setting::onlyTrashed()->get();

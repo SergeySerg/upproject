@@ -23,11 +23,14 @@ if (! function_exists('getSetting')) {
      * @param  string  $value
      * @return string
      */
-    function getSetting($value)
-    {
+    function getSetting($value){
         $setting = Setting::where('name',$value)->first();
-        $setting_content = $setting->description;
-        // Format text
-        return $setting_content;
+        if(isset($setting->description)){
+            $setting_content = $setting->description;
+            return $setting_content;
+        }
+        else{
+            return $value;
+        }
     }
 }

@@ -71,8 +71,8 @@ class ResumeController extends Controller {
 		Resume::create($all);
 		//Отправка уведомления про добавления нового отзыва на email
 		Mail::send('emails.resume', $all, function($message){
-		$email = $this->getEmail();
-		$message->to($email, 'Eurostandard')->subject('Повідомлення про про нове резюме з сайту "Eurostandard" ');
+			$email = $this->getEmail();
+			$message->to($email, 'Eurostandard')->subject('Повідомлення про про нове резюме з сайту "Eurostandard" ');
 		});
 		return response()->json([
 			"success" => true

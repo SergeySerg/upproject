@@ -65,6 +65,7 @@
                         <input type="text" name="name" value='{{ $setting -> name or '' }}' placeholder="Назва типу config.{назва}" />
                     </div>
                 </div>
+
                 <div class="space-4"></div>
                 <input type="hidden" name="_method" value='{{$action_method}}'/>
                 <input type="hidden" name="_token" value="{{csrf_token()}}"/>
