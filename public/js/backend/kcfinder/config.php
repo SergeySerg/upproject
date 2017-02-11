@@ -31,6 +31,9 @@ switch($_SESSION['type'])
     case "articles":
             include 'config_articles.php';
         break;
+    case "categories":
+        include 'config_categories.php';
+        break;
     default:
             include 'config_default.php';
         break;

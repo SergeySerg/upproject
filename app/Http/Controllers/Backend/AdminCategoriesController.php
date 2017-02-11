@@ -31,6 +31,37 @@ class AdminCategoriesController extends Controller {
 	{
 		//
 	}
+	/* Optimize images - Minimize uploaded files @return Response */
+
+	public function fileoptimize(Request $request, $type)
+	{
+		App::setLocale('ua');
+		if (isset($type)){
+			$categories = [Category::where('link',$type)];
+		}
+		else {
+			$categories = Category::all();
+		}
+
+		foreach($categories as $category){
+			$files = Storage::Files('upload/categories/'.$category->id.'/images/');
+
+			foreach($files as $key => $file){
+				try{
+					Image::make($file)
+						->resize(1200, null, function ($constraint) { $constraint->aspectRatio();})
+						->save($file, 90);
+
+					echo $file . ' > resized <br />';
+				}catch(\Exeption $e){
+					echo '<span style="color:red">'. $file . ' > error ' . $e->getMessage() . ' </span><br />';
+				}
+
+			}
+		}
+		exit;
+	}
+
 
 	/*Show the form for creating a new Category.*/
 
@@ -89,8 +120,13 @@ class AdminCategoriesController extends Controller {
 
 	public function edit($type = null)
 	{
+
+
 		$langs = Lang::all();
 		$admin_category = Category::where("link","=","$type")->first();
+
+		//Создание папки соответсвующие id
+		Storage::makeDirectory('upload/categories/' . $admin_category->id, '0777', true, true);
 
 		//Decode base and attributes from categories DB
 		$fields = json_decode($admin_category->fields);
@@ -128,6 +164,40 @@ class AdminCategoriesController extends Controller {
 		$all = $this->prepareArticleData($all);
 
 		$category = Category::where('link',$type)->first();
+
+		//Pull imgs from folder and present in JSON format
+		$files = Storage::Files('upload/categories/'.$category->id.'/images/');
+
+		Storage::deleteDirectory('upload/categories/' . $category->id . '/min');
+		Storage::deleteDirectory('upload/categories/' . $category->id . '/full');
+
+		Storage::makeDirectory('upload/categories/' . $category->id . '/min', '0777', true, true);
+		Storage::makeDirectory('upload/categories/' . $category->id . '/full', '0777', true, true);
+
+		foreach($files as $key => $file){
+			$savePathMin = str_replace('/'.$category->id.'/images/', '/'.$category->id.'/min/', $file);
+			$savePathFull = str_replace('/'.$category->id.'/images/', '/'.$category->id.'/full/', $file);
+			try{
+				$image = Image::make($file)
+					->resize(1200, null, function ($constraint) { $constraint->aspectRatio();})
+					->save($savePathFull, 80)
+					->resize(320, null, function ($constraint) { $constraint->aspectRatio(); })
+					->save($savePathMin, 80);
+
+				$files[$key] = [
+					'full' => $savePathFull,
+					'min' => $savePathMin
+				];
+			}catch(\Exception $e){
+				$files[$key] = [
+					'full' => $file,
+					'min' => $file
+				];
+			}
+		}
+
+		//Encode images from request
+		$all['imgs'] = json_encode($files);
 
 		//Update all data in DB
 		$category->update($all);

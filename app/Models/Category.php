@@ -36,5 +36,25 @@ class Category extends Translate {
     public function getDateAttribute($date){
         return Carbon::createFromFormat('Y-m-d H:i:s',$date)->toDateString();
     }
+
+    public function getCategoryImages(){
+        if (isset($this->imgs)){
+            $imgs = json_decode($this->imgs, true);
+            if(is_array($imgs)){
+                foreach($imgs as $key => $img){
+                    if(!is_array($img)){
+                        $imgs[$key] = [
+                            'min' => $img,
+                            'full' => $img
+                        ];
+                    }
+                }
+            }
+            return $imgs ?: [];
+        }
+        else{
+            return [];
+        }
+    }
 }
 
