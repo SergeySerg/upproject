@@ -24,6 +24,15 @@ class Article extends Translate {
     public function category(){
         return $this->belongsTo('App\Models\Category');
     }
+
+    public function article_parent(){
+        return $this->belongsTo('App\Models\Article', 'article_id');
+    }
+
+    public function article_children(){
+        return $this->hasMany('App\Models\Article', 'article_id');
+    }
+
     public function getImages(){
         if (isset($this->imgs)){
             $imgs = json_decode($this->imgs, true);

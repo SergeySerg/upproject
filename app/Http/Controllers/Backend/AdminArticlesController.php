@@ -24,6 +24,13 @@ class AdminArticlesController extends Controller {
 
 	public function index($type)
 	{
+		/*//$all_categories = Category::find(4);
+		//dd($all_categories);
+		$categories = Category::find(4);
+		$v = $categories->children()->get();
+		//$v = $categories->children()->get();;
+		//dd($v);*/
+
 		App::setLocale('ua');
 		$admin_category = Category::where("link","=",$type)->first();
 		$admin_articles = $admin_category->articles;
@@ -33,7 +40,7 @@ class AdminArticlesController extends Controller {
 			'admin_category' => $admin_category,
 			'admin_articles' => $admin_articles,
 			'type' => $type,
-			'langs' => $langs,
+			'langs' => $langs
 		]);
 	}
 

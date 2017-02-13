@@ -120,8 +120,6 @@ class AdminCategoriesController extends Controller {
 
 	public function edit($type = null)
 	{
-
-
 		$langs = Lang::all();
 		$admin_category = Category::where("link","=","$type")->first();
 

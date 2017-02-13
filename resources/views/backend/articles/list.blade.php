@@ -16,7 +16,7 @@
 <div class="page-content">
     <div class="row-fluid">
         <div class="span12">
-            <!--PAGE CONTENT BEGINS-->
+             <!--PAGE CONTENT BEGINS-->
             <div class="row-fluid">
 
                 <h3 class="header smaller lighter blue">

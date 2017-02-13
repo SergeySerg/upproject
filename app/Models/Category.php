@@ -7,7 +7,19 @@ class Category extends Translate {
     public function articles(){
         return $this->hasMany('App\Models\Article');
     }
+
+    public function parent()
+    {
+        return $this->belongsTo('App\Models\Category', 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany('App\Models\Category', 'parent_id');
+    }
+
     protected $fillable = [
+        'parent_id',
         'title',
         'link',
         'description',
@@ -36,7 +48,7 @@ class Category extends Translate {
     public function getDateAttribute($date){
         return Carbon::createFromFormat('Y-m-d H:i:s',$date)->toDateString();
     }
-
+    /*Get images from DB*/
     public function getCategoryImages(){
         if (isset($this->imgs)){
             $imgs = json_decode($this->imgs, true);
