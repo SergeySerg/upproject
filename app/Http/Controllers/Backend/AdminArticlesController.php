@@ -114,9 +114,12 @@ class AdminArticlesController extends Controller {
 		// Get current category ID
 		$category = Category::where('link','=',$type)->first();
 		$all['category_id'] = $category->id;
+		//$all['article_id'] = $category->article_parent;
 
 		//Encode all attributes in DB
-		$all['attributes'] = json_encode($all['attributes']);
+		if (isset($all['attributes'])){
+			$all['attributes'] = json_encode($all['attributes']);
+		}
 
 		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareArticleData($all);
@@ -145,6 +148,10 @@ class AdminArticlesController extends Controller {
 		//Decode attributes from articles DB
 		$attributes = json_decode($admin_article->attributes);
 		$admin_category = Category::where("link","=","$type")->first();
+
+		//Get group attributes for article_parent
+		$article_group =  Article::where('category_id',$admin_category['article_parent'])->get();
+		dd($article_group);
 
 		//Decode base and attributes from categories DB
 		$fields = json_decode($admin_category->fields);
@@ -212,7 +219,9 @@ class AdminArticlesController extends Controller {
 		}
 
 		//Encode attributes from request
-		$all['attributes'] = json_encode($all['attributes']);
+		if (isset($all['attributes'])){
+			$all['attributes'] = json_encode($all['attributes']);
+		}
 
 		//Encode images from request
 		$all['imgs'] = json_encode($files);

@@ -9,7 +9,7 @@
             <i class="icon-angle-right arrow-icon"></i>
         </span>
     </li>
-    <li class="active">{{$type}}</li>
+    <li class="active">{{ $admin_category->getTranslate('title') }}</li>
 @stop
 
 @section('content')

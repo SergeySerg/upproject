@@ -6,6 +6,7 @@ use Carbon\Carbon;
 class Article extends Translate {
     protected $fillable=[
         'category_id',
+        'article_id',
         'title',
         'short_description',
         'description',

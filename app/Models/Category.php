@@ -20,6 +20,7 @@ class Category extends Translate {
 
     protected $fillable = [
         'parent_id',
+        'article_parent',
         'title',
         'link',
         'description',

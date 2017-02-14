@@ -123,6 +123,9 @@ class AdminCategoriesController extends Controller {
 		$langs = Lang::all();
 		$admin_category = Category::where("link","=","$type")->first();
 
+		//Var article_parent
+		$article_parent = $admin_category['article_parent'];
+
 		//Создание папки соответсвующие id
 		Storage::makeDirectory('upload/categories/' . $admin_category->id, '0777', true, true);
 
@@ -137,7 +140,8 @@ class AdminCategoriesController extends Controller {
 			'langs' => $langs,
 			'type' => $type,
 			'action_method' => 'put',
-			'attributes_fields' => $attributes_fields
+			'attributes_fields' => $attributes_fields,
+			'article_parent' => $article_parent
 		]);
 	}
 

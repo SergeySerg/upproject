@@ -161,6 +161,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="control-group">
+                    <label class="control-label" for="form-field-select-1">Відношення до записів</label>
+                    <div class="controls">
+                        <select name="article_parent" id="form-field-select-1">
+                            <option value="">
+                                @foreach($admin_categories as $admin_category)
+                                    </option><option value="{{ $admin_category->id}}" @if(isset($article_parent) && ($article_parent == $admin_category->id)) selected="selected" @endif>{{ $admin_category->getTranslate('title') }}
+                                 @endforeach
+                            </option>
+                        </select>
+                    </div>
+                </div>
                 <div class="hr hr-18 dotted hr-double"></div>
                 <h4 class="pink">
                     <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
@@ -294,6 +306,19 @@
 
                                         <td>
                                             Статус
+                                        </td>
+                                        <td>active</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" name="article_parent" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            Відношення до записів
                                         </td>
                                         <td>active</td>
                                     </tr>

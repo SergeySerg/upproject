@@ -10,7 +10,14 @@
     </li>
     @if(isset($type))
         <li>
-            <a href="{{ $url }}/articles/{{$type}}">{{$type}}</a>
+            <a href="{{ $url }}/articles/{{ $type }}">{{ $admin_category->getTranslate('title') }}</a>
+        <span class="divider">
+            <i class="icon-angle-right arrow-icon"></i>
+        </span>
+        </li>
+    @else
+        <li>
+            <a href="{{ $url }}/articles/{{ $admin_category->link }}">{{ $admin_category->getTranslate('title') }}</a>
         <span class="divider">
             <i class="icon-angle-right arrow-icon"></i>
         </span>
@@ -20,7 +27,7 @@
     @if(isset($admin_article))
         <li class="active">{{$admin_article->id}}</li>
     @else
-        <li class="active">Додати нову</li>
+        <li class="active">Додати новий запис</li>
     @endif
 @stop
 
@@ -88,6 +95,21 @@
                                     </label>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                @endif
+                @if($admin_category->hasField('article_parent'))
+                    <div class="control-group">
+                        <label class="control-label" for="form-field-select-1">Відношення до записів</label>
+                        <div class="controls">
+                            <select name="article_parent" id="form-field-select-1">
+                                <option value="">
+                                    @foreach($admin_categories as $admin_category)
+
+                                </option><option value="{{ $admin_category->id}}">{{ $admin_category->getTranslate('title') }}
+                                    @endforeach
+                                </option>
+                            </select>
                         </div>
                     </div>
                 @endif
