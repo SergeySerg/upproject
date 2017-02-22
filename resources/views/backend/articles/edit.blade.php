@@ -102,11 +102,10 @@
                     <div class="control-group">
                         <label class="control-label" for="form-field-select-1">Відношення до записів</label>
                         <div class="controls">
-                            <select name="article_parent" id="form-field-select-1">
+                            <select name="article_id" id="form-field-select-1">
                                 <option value="">
-                                    @foreach($admin_categories as $admin_category)
-
-                                </option><option value="{{ $admin_category->id}}">{{ $admin_category->getTranslate('title') }}
+                                    @foreach($article_group as $article)
+                                        </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
                                     @endforeach
                                 </option>
                             </select>

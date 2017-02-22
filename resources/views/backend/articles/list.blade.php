@@ -86,7 +86,6 @@
                                         <span class="lbl">{{ $admin_article->id }}</span>
                                     </label>
                                 </td>
-
                                 <td>
                                     <a href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}">{!! $admin_article->getTranslate('title') !!}</a>
                                 </td>

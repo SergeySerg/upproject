@@ -24,16 +24,10 @@ class AdminArticlesController extends Controller {
 
 	public function index($type)
 	{
-		/*//$all_categories = Category::find(4);
-		//dd($all_categories);
-		$categories = Category::find(4);
-		$v = $categories->children()->get();
-		//$v = $categories->children()->get();;
-		//dd($v);*/
-
 		App::setLocale('ua');
 		$admin_category = Category::where("link","=",$type)->first();
 		$admin_articles = $admin_category->articles;
+		//dd($admin_articles);
 		$langs = Lang::all();
 
 		return view('backend.articles.list', [
@@ -82,6 +76,9 @@ class AdminArticlesController extends Controller {
 		$langs = Lang::all();
 		$admin_category = Category::where("link","=","$type")->first();
 
+		//Get group attributes for article_parent
+		$article_group =  Article::where('category_id',$admin_category['article_parent'])->get();
+
 		//list of base and attributes from Category
 		$fields = json_decode($admin_category->fields);
 
@@ -92,7 +89,8 @@ class AdminArticlesController extends Controller {
 			'langs'=>$langs,
 			'admin_category'=>$admin_category,
 			'action_method' => 'post',
-			'attributes_fields' => $attributes_fields
+			'attributes_fields' => $attributes_fields,
+			'article_group' => $article_group,
 		]);
 	}
 
@@ -145,13 +143,16 @@ class AdminArticlesController extends Controller {
 		$langs = Lang::all();
 		$admin_article = Article::where("id","=","$id")->first();
 
+		//Var article_id
+		$article_id = $admin_article['article_id'];
+
 		//Decode attributes from articles DB
 		$attributes = json_decode($admin_article->attributes);
 		$admin_category = Category::where("link","=","$type")->first();
 
 		//Get group attributes for article_parent
 		$article_group =  Article::where('category_id',$admin_category['article_parent'])->get();
-		dd($article_group);
+		//dd($article_group);
 
 		//Decode base and attributes from categories DB
 		$fields = json_decode($admin_category->fields);
@@ -166,7 +167,9 @@ class AdminArticlesController extends Controller {
 			'langs'=>$langs,
 			'action_method' => 'put',
 			'attributes_fields' => $attributes_fields,
-			'attributes' => $attributes
+			'attributes' => $attributes,
+			'article_group' => $article_group,
+			'article_id' => $article_id
 		]);
 	}
 

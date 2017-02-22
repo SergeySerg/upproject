@@ -166,9 +166,9 @@
                     <div class="controls">
                         <select name="article_parent" id="form-field-select-1">
                             <option value="">
-                                @foreach($admin_categories as $admin_category)
-                                    </option><option value="{{ $admin_category->id}}" @if(isset($article_parent) && ($article_parent == $admin_category->id)) selected="selected" @endif>{{ $admin_category->getTranslate('title') }}
-                                 @endforeach
+                                @foreach($admin_categories as $category_item)
+                                    </option><option value="{{ $category_item->id}}" @if(isset($article_parent) && ($article_parent == $category_item->id)) selected="selected" @endif>{{ $category_item->getTranslate('title') }}
+                                @endforeach
                             </option>
                         </select>
                     </div>
