@@ -37,36 +37,66 @@
                         <input type="text" id="form-field-1" name="link" @if(isset($admin_category)) value='{{$admin_category->link}}'@endif  />
                     </div>
                 </div>
-                <div class="controls">
-                    <div class="row-fluid">
-                        <div class="span3">
-                            <div class="widget-box collapsed">
-                                <div class="widget-header">
-                                    <h4>Картинка категорії</h4>
-                                        <span class="widget-toolbar">
-                                            <a href="#" data-action="collapse">
-                                                <i class="icon-chevron-up"></i>
-                                            </a>
-                                            {{-- <a href="#" data-action="close">
-                                                 <i class="icon-remove"></i>
-                                             </a>--}}
-                                        </span>
+                <div class="control-group">
+                    @if($admin_category->img)
+                        <label class="control-label">Картинка категорії</label>
+                        <div class="controls" id="show-image" >
+                            <div class="row-fluid">
+                            <div class="span4">
+                                <div class="profile-activity clearfix" style="border-bottom: none">
+                                    <div>
+                                        <img class="pull-left" alt="{{ $admin_category->link }}" style="max-width:80px" src="{{ asset($admin_category->img) }}">
+                                    </div>
+
+                                    <div class="tools action-buttons">
+                                        <a href="#" class="blue">
+                                            <i class="icon-pencil bigger-125" ></i>
+                                        </a>
+
+                                        <a href="#" class="red">
+                                            <i class="icon-remove bigger-125" id="image-close"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="widget-body">
-                                    <div class="widget-main">
-                                        {{--
-                                         <div class="ace-file-input"><input type="file" name="img" id="id-input-file-2"><label data-title="Choose"><span data-title="No File ..."><i class="icon-upload-alt"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
-                                        --}}
-                                        <div class="ace-file-input ace-file-multiple"><input multiple="" name='img' type="file" id="id-input-file-3"><label data-title="Drop files here or click to choose"><span data-title="No File ..."><i class="icon-cloud-upload"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
-                                        <label>
-                                            <input type="checkbox" name="file-format" id="id-file-format">
-                                            <span class="lbl"> Allow only images</span>
-                                        </label>
+                            </div>
+                                </div>
+                        </div>
+                    @else
+                        <div class="controls" id="image-upload">
+                            <div class="row-fluid">
+                                <div class="span4">
+                                    <div class="widget-box collapsed">
+                                        <div class="widget-header">
+                                            <h4>Картинка категорії</h4>
+                                                <span class="widget-toolbar">
+                                                    <a href="#" data-action="collapse">
+                                                        <i class="icon-chevron-up"></i>
+                                                    </a>
+                                                    {{-- <a href="#" data-action="close">
+                                                         <i class="icon-remove"></i>
+                                                     </a>--}}
+                                                </span>
+                                        </div>
+                                        <div class="widget-body">
+                                            <div class="widget-main">
+                                                {{--
+                                                 <div class="ace-file-input"><input type="file" name="img" id="id-input-file-2"><label data-title="Choose"><span data-title="No File ..."><i class="icon-upload-alt"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
+                                                --}}
+                                                <div class="ace-file-input ace-file-multiple">
+                                                    <input name='img' type="file" id="id-input-file-3">
+                                                    <a class="remove" href="#"><i class="icon-remove"></i></a>
+                                                </div>
+                                                {{--<label>
+                                                    <input type="checkbox" name="file-format" id="id-file-format">
+                                                    <span class="lbl"> Allow only images</span>
+                                                </label>--}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
 
                 {{--<div class="control-group">

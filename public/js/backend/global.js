@@ -163,7 +163,6 @@ $(function(){
         console.log(attr_list);
 
         var data = new FormData($('form#resource-form-category')[0]);
-
            /* var data = $('form#resource-form-category').serialize();
             var $input = $("#uploadimage");
             var fd = new FormData();
@@ -310,7 +309,12 @@ $(function(){
 
     });
 /*/Save Article*/
-
+/*show-hide image in category*/
+    $('#image-close').on('click', function(event){
+        event.preventDefault();
+        alert('hi');
+    })
+/*show-hide image in category*/
     init_wysiwyg();
 });
 

@@ -25,6 +25,7 @@ class Category extends Translate {
         'link',
         'description',
         'short_description',
+        'img',
         'imgs',
         'fields',
         'date',

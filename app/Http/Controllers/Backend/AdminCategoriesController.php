@@ -151,17 +151,27 @@ class AdminCategoriesController extends Controller {
 	{
 		$langs = Lang::all();
 
+		//create var all for date from request
+		$all = $request->all();
+
 		//validation rules
 		foreach($langs as $lang){
 			$this->validate($request, [
 				'title_'.$lang['lang'] => 'required|max:255',
-				'link' => "required|max:15"
+				'link' => "required|max:15",
+				'img' => 'mimes:jpeg,jpg,png,bmp,gif|max:5000'
 			]);
 		}
 
-		//create var all for date from request
-		$all = $request->all();
-		dd($all);
+		$category_img = $request->file('img');
+
+		if($category_img){
+			$extension = $category_img->getClientOriginalExtension();
+			$name_img = $all['link'] . '.' . $extension;
+			Storage::put('upload/categories/' . $name_img, file_get_contents($category_img));
+			$all['img'] = 'upload/categories/' . $name_img;
+		}
+
 		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareArticleData($all);
 

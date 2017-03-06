@@ -301,38 +301,6 @@
 <script src="{{ asset('/js/plugins/sweetalert.min.js') }}"></script>
 
 <!--inline scripts related to this page-->
-
-<script type="text/javascript">
-    $(function() {
-
-
-
-        $('table th input:checkbox').on('click' , function(){
-            var that = this;
-            $(this).closest('table').find('tr > td:first-child input:checkbox')
-                .each(function(){
-                    this.checked = that.checked;
-                    $(this).closest('tr').toggleClass('selected');
-                });
-
-        });
-
-
-        $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-        function tooltip_placement(context, source) {
-            var $source = $(source);
-            var $parent = $source.closest('table')
-            var off1 = $parent.offset();
-            var w1 = $parent.width();
-
-            var off2 = $source.offset();
-            var w2 = $source.width();
-
-            if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-            return 'left';
-        }
-    })
-</script>
 <!--для Формы-->
 <script type="text/javascript">
     $(function() {
@@ -452,9 +420,9 @@
 
         $('#id-input-file-3').ace_file_input({
             style:'well',
-            btn_choose:'Drop files here or click to choose',
+            btn_choose:'Drop images here or click to choose',
             btn_change:null,
-            no_icon:'icon-cloud-upload',
+            no_icon:'icon-picture',
             droppable:true,
             thumbnail:'small'
             //,icon_remove:null//set null, to hide remove/reset button
@@ -501,7 +469,7 @@
                         else {
                             var type = $.trim(file.type);
                             if( ( type.length > 0 && ! (/^image\/(jpe?g|png|gif|bmp)$/i).test(type) )
-                                || ( type.length == 0 && ! (/\.(jpe?g|png|gif|bmp)$/i).test(file.name) )//for android's default browser which gives an empty string for file.type
+                                    || ( type.length == 0 && ! (/\.(jpe?g|png|gif|bmp)$/i).test(file.name) )//for android's default browser which gives an empty string for file.type
                             ) continue;//not an image so don't keep this file
                         }
 
@@ -528,9 +496,9 @@
 
 
         $('#spinner1').ace_spinner({value:0,min:0,max:200,step:10, btn_up_class:'btn-info' , btn_down_class:'btn-info'})
-            .on('change', function(){
-                //alert(this.value)
-            });
+                .on('change', function(){
+                    //alert(this.value)
+                });
         $('#spinner2').ace_spinner({value:0,min:0,max:10000,step:100, icon_up:'icon-caret-up', icon_down:'icon-caret-down'});
         $('#spinner3').ace_spinner({value:0,min:-100,max:100,step:10, icon_up:'icon-plus', icon_down:'icon-minus', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
 
@@ -557,7 +525,7 @@
 
 
         //we could just set the data-provide="tag" of the element inside HTML, but IE8 fails!
-        var tag_input = $('.form-field-tags');
+        var tag_input = $('#form-field-tags');
         if(! ( /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase())) )
             tag_input.tag({placeholder:tag_input.attr('placeholder')});
         else {
@@ -597,6 +565,36 @@
 
     });
 </script>
+<script type="text/javascript">
+    $(function() {
+
+        $('table th input:checkbox').on('click' , function(){
+            var that = this;
+            $(this).closest('table').find('tr > td:first-child input:checkbox')
+                .each(function(){
+                    this.checked = that.checked;
+                    $(this).closest('tr').toggleClass('selected');
+                });
+
+        });
+
+
+        $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+        function tooltip_placement(context, source) {
+            var $source = $(source);
+            var $parent = $source.closest('table')
+            var off1 = $parent.offset();
+            var w1 = $parent.width();
+
+            var off2 = $source.offset();
+            var w2 = $source.width();
+
+            if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+            return 'left';
+        }
+    })
+</script>
+
 <!--Для формы переключения языков-->
 <script type="text/javascript">
     $(function() {
