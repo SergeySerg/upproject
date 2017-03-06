@@ -161,7 +161,7 @@ class AdminCategoriesController extends Controller {
 
 		//create var all for date from request
 		$all = $request->all();
-
+		dd($all);
 		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareArticleData($all);
 

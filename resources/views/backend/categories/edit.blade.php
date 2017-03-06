@@ -30,13 +30,51 @@
         <div class="row-fluid">
             <div class="span12">
                 <!--PAGE CONTENT BEGINS-->
-                <form class="form-horizontal" id="resource-form-category" method="POST" action="" />
+                <form class="form-horizontal" id="resource-form-category" method="POST" action="" enctype="multipart/form-data" />
                 <div class="control-group">
                     <label class="control-label" for="form-field-1">Link</label>
                     <div class="controls">
                         <input type="text" id="form-field-1" name="link" @if(isset($admin_category)) value='{{$admin_category->link}}'@endif  />
                     </div>
                 </div>
+                <div class="controls">
+                    <div class="row-fluid">
+                        <div class="span3">
+                            <div class="widget-box collapsed">
+                                <div class="widget-header">
+                                    <h4>Картинка категорії</h4>
+                                        <span class="widget-toolbar">
+                                            <a href="#" data-action="collapse">
+                                                <i class="icon-chevron-up"></i>
+                                            </a>
+                                            {{-- <a href="#" data-action="close">
+                                                 <i class="icon-remove"></i>
+                                             </a>--}}
+                                        </span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        {{--
+                                         <div class="ace-file-input"><input type="file" name="img" id="id-input-file-2"><label data-title="Choose"><span data-title="No File ..."><i class="icon-upload-alt"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
+                                        --}}
+                                        <div class="ace-file-input ace-file-multiple"><input multiple="" name='img' type="file" id="id-input-file-3"><label data-title="Drop files here or click to choose"><span data-title="No File ..."><i class="icon-cloud-upload"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
+                                        <label>
+                                            <input type="checkbox" name="file-format" id="id-file-format">
+                                            <span class="lbl"> Allow only images</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{--<div class="control-group">
+                    <label class="control-label" for="form-field-21">Картинка категорії</label>
+                    <div class="controls">
+                        <input type="file" id="uploadimage" name="img" --}}{{--@if(isset($admin_category)) value='{{$admin_category->link}}'@endif--}}{{--  />
+                    </div>
+                </div>--}}
 
                 <div class="space-12"></div>
 

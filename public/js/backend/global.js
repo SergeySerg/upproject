@@ -161,11 +161,19 @@ $(function(){
         $('#fields').val(JSON.stringify(fields));
         var attr_list = $('#attr-list').serializeArray();
         console.log(attr_list);
-        var data = $('form#resource-form-category').serialize();
+
+        var data = new FormData($('form#resource-form-category')[0]);
+
+           /* var data = $('form#resource-form-category').serialize();
+            var $input = $("#uploadimage");
+            var fd = new FormData();
+            fd.append('img', $input.prop('files')[0]);*/
         console.log(data);
         $.ajax({
             url: '',
             method: "POST",
+            processData: false,
+            contentType: false,
             data: data,
             dataType : "json",
             success: function(data){
