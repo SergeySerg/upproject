@@ -85,11 +85,28 @@ class AdminCategoriesController extends Controller {
 		foreach($langs as $lang){
 			$this->validate($request, [
 				'title_'.$lang['lang'] => 'required|max:255',
-				'link' => "required|max:15|unique:categories"
+				'link' => "required|max:15|unique:categories",
+				'img' => 'mimes:jpeg,jpg,png,bmp,gif|max:5000'
 			]);
 		}
 
 		$all = $request->all();
+
+		$category_img = $request->file('img');
+		//dd($category_img);
+
+		//add category img and save in file
+		if($category_img){
+			$extension = $category_img->getClientOriginalExtension();
+			$name_img = $all['link'] . '.' . $extension;
+			Storage::put('upload/categories/' .$all['link'] .'/' . $name_img, file_get_contents($category_img));
+			$all['img'] = 'upload/categories/' .$all['link'] .'/' . $name_img;
+		}
+		/*else{
+			$all['img'] = null;
+			Storage::deleteDirectory('upload/categories/' . $type);
+
+		}*/
 
 		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareArticleData($all);
@@ -164,13 +181,20 @@ class AdminCategoriesController extends Controller {
 		}
 
 		$category_img = $request->file('img');
+		//dd($category_img);
 
+		//add category img and save in file
 		if($category_img){
 			$extension = $category_img->getClientOriginalExtension();
 			$name_img = $all['link'] . '.' . $extension;
-			Storage::put('upload/categories/' . $name_img, file_get_contents($category_img));
-			$all['img'] = 'upload/categories/' . $name_img;
+			Storage::put('upload/categories/' .$all['link'] .'/' . $name_img, file_get_contents($category_img));
+			$all['img'] = 'upload/categories/' .$all['link'] .'/' . $name_img;
 		}
+		/*else{
+			$all['img'] = null;
+			Storage::deleteDirectory('upload/categories/' . $type);
+
+		}*/
 
 		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareArticleData($all);
@@ -243,7 +267,8 @@ class AdminCategoriesController extends Controller {
 
 		/*Delete category*/
 		if($category AND $category->delete()){
-			//Storage::deleteDirectory('upload/articles/' . $id);
+			Storage::deleteDirectory('upload/categories/' . $type);
+			Storage::deleteDirectory('upload/categories/' . $id);
 			return response()->json([
 				"status" => 'success',
 				"message" => 'Успішно видалено',

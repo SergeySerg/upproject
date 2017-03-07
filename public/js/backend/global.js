@@ -310,9 +310,10 @@ $(function(){
     });
 /*/Save Article*/
 /*show-hide image in category*/
-    $('#image-close').on('click', function(event){
+    $('#image-close,#image-edit').on('click', function(event){
         event.preventDefault();
-        alert('hi');
+        $('#show-image').hide();
+        $('#image-upload').show();
     })
 /*show-hide image in category*/
     init_wysiwyg();
