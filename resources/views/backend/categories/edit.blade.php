@@ -29,109 +29,238 @@
         </div><!--/.page-header-->
         <div class="row-fluid">
             <div class="span12">
+
+
+
                 <!--PAGE CONTENT BEGINS-->
                 <form class="form-horizontal" id="resource-form-category" method="POST" action="" enctype="multipart/form-data" />
-                <div class="control-group">
-                    <label class="control-label" for="form-field-1">Link</label>
-                    <div class="controls">
-                        <input type="text" id="form-field-1" name="link" @if(isset($admin_category)) value='{{$admin_category->link}}'@endif  />
+
+                <div class="tabbable tabs-left">
+                    <ul class="nav nav-tabs" id="myTab3">
+                        <li class="active">
+                            <a data-toggle="tab" href="#link3">
+                                <i class="pink icon-external-link bigger-110"></i>
+                                Link
+                            </a>
+                        </li>
+
+                        <li>
+                            <a data-toggle="tab" href="#picture3">
+                                <i class="fa fa-file-image-o fa-fw" aria-hidden="true"></i>
+                                Картинка категории
+                            </a>
+                        </li>
+
+                        <li>
+                            <a data-toggle="tab" href="#active13">
+                                <i class="fa fa-check fa-fw" aria-hidden="true"></i>
+                                Статус
+                            </a>
+                        </li>
+
+                        <li>
+                            <a data-toggle="tab" href="#priority13">
+                                <i class="fa fa-sort-numeric-desc fa-fw" aria-hidden="true"></i>
+                                Пріоритет
+                            </a>
+                        </li>
+
+                        <li>
+                            <a data-toggle="tab" href="#date13">
+                                <i class="fa fa-calendar fa-fw" aria-hidden="true"></i>
+                                Дата
+                            </a>
+                        </li>
+
+                        <li>
+                            <a data-toggle="tab" href="#parrent13">
+                                <i class="fa fa-link fa-fw" aria-hidden="true"></i>
+                                Відношення до записів
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <div class="tab-content" style="min-height: 160px;">
+                        <div id="link3" class="tab-pane in active">
+                            <div class="control-group">
+{{--
+                                <label class="control-label" for="form-field-1">Link</label>
+--}}
+                                <div class="controls">
+                                    <input type="text" id="form-field-1" name="link" @if(isset($admin_category)) value='{{$admin_category->link}}'@endif  />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="picture3" class="tab-pane">
+                            <div class="control-group">
+                                @if(isset($admin_category) && $admin_category->img)
+{{--
+                                    <label class="control-label">Картинка категорії</label>
+--}}
+                                    <div class="controls" id="show-image" >
+                                        <div class="row-fluid">
+                                            <div class="span3">
+                                                <div class="profile-activity clearfix" style="border-bottom: none">
+                                                    <div>
+                                                        <img class="pull-left" alt="{{ $admin_category->link }}" style="max-width:100px" src="{{ asset($admin_category->img) }}">
+                                                    </div>
+
+                                                    <div class="tools action-buttons">
+                                                        <a href="#" class="blue">
+                                                            <i class="icon-pencil bigger-125 " id="image-edit" ></i>
+                                                        </a>
+
+                                                        <a href="#" class="red">
+                                                            <i class="icon-remove bigger-125" id="image-close"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="controls" id="image-upload" style="display:none">
+                                        <div class="row-fluid">
+                                            <div class="span6">
+                                                <div class="widget-box">
+                                                    <div class="widget-header">
+                                                        <h4>Картинка категорії</h4>
+                                                <span class="widget-toolbar">
+                                                    <a href="#" data-action="collapse">
+                                                        <i class="icon-chevron-up"></i>
+                                                    </a>
+                                                    {{-- <a href="#" data-action="close">
+                                                         <i class="icon-remove"></i>
+                                                     </a>--}}
+                                                </span>
+                                                    </div>
+                                                    <div class="widget-body">
+                                                        <div class="widget-main">
+                                                            {{--
+                                                             <div class="ace-file-input"><input type="file" name="img" id="id-input-file-2"><label data-title="Choose"><span data-title="No File ..."><i class="icon-upload-alt"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
+                                                            --}}
+                                                            <div class="ace-file-input ace-file-multiple">
+                                                                <input name='img' type="file" id="id-input-file-3">
+                                                                <a class="remove" href="#"><i class="icon-remove"></i></a>
+                                                            </div>
+                                                            {{--<label>
+                                                                <input type="checkbox" name="file-format" id="id-file-format">
+                                                                <span class="lbl"> Allow only images</span>
+                                                            </label>--}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="controls">
+                                        <div class="row-fluid">
+                                            <div class="span6">
+                                                <div class="widget-box collapsed">
+                                                    <div class="widget-header">
+                                                        <h4>Картинка категорії</h4>
+                                                <span class="widget-toolbar">
+                                                    <a href="#" data-action="collapse">
+                                                        <i class="icon-chevron-up"></i>
+                                                    </a>
+                                                    {{-- <a href="#" data-action="close">
+                                                         <i class="icon-remove"></i>
+                                                     </a>--}}
+                                                </span>
+                                                    </div>
+                                                    <div class="widget-body">
+                                                        <div class="widget-main">
+                                                            {{--
+                                                             <div class="ace-file-input"><input type="file" name="img" id="id-input-file-2"><label data-title="Choose"><span data-title="No File ..."><i class="icon-upload-alt"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
+                                                            --}}
+                                                            <div class="ace-file-input ace-file-multiple">
+                                                                <input name='img' type="file" id="id-input-file-3">
+                                                                <a class="remove" href="#"><i class="icon-remove"></i></a>
+                                                            </div>
+                                                            {{--<label>
+                                                                <input type="checkbox" name="file-format" id="id-file-format">
+                                                                <span class="lbl"> Allow only images</span>
+                                                            </label>--}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div id="active13" class="tab-pane">
+                            <div class="control-group">
+{{--
+                                <label class="control-label">Статус</label>
+--}}
+                                <div class="controls">
+                                    <div class="row-fluid">
+                                        <div class="span3">
+                                            <label>
+                                                <input name='active' type='hidden' value='0'>
+                                                <input name='active' class="ace-switch ace-switch-6" type="checkbox" value=1 @if(isset($admin_category) AND $admin_category->active) checked="checked" @endif />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="priority13" class="tab-pane">
+                            <div class="control-group">
+{{--
+                                <label class="control-label" for="form-field-2">Пріоритет</label>
+--}}
+
+                                <div class="controls">
+                                    <input type="number" id="form-field-2" name="priority" @if(isset($admin_category)) value='{{$admin_category->priority}}' @endif  />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="date13" class="tab-pane">
+                            <div class="control-group">
+{{--
+                                <label class="control-label" for="id-date-picker-1">Дата</label>
+--}}
+                                <div class="controls">
+                                    <div class="row-fluid input-append">
+                                        <input class="span2 date-picker" name="date" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" @if(isset($admin_category)) value='{{date('d-m-Y',strtotime($admin_category->date))}}' @endif/>
+                                    <span class="add-on">
+                                        <i class="icon-calendar"></i>
+                                   </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="parrent13" class="tab-pane">
+                            <div class="control-group">
+{{--
+                                <label class="control-label" for="form-field-select-1">Відношення до записів</label>
+--}}
+                                <div class="controls">
+                                    <select name="article_parent" id="form-field-select-1">
+                                        <option value="">
+                                            @foreach($admin_categories as $category_item)
+                                        </option><option value="{{ $category_item->id}}" @if(isset($article_parent) && ($article_parent == $category_item->id)) selected="selected" @endif>{{ $category_item->getTranslate('title') }}
+                                            @endforeach
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    @if(isset($admin_category) && $admin_category->img)
-                        <label class="control-label">Картинка категорії</label>
-                        <div class="controls" id="show-image" >
-                            <div class="row-fluid">
-                            <div class="span3">
-                                <div class="profile-activity clearfix" style="border-bottom: none">
-                                    <div>
-                                        <img class="pull-left" alt="{{ $admin_category->link }}" style="max-width:130px" src="{{ asset($admin_category->img) }}">
-                                    </div>
 
-                                    <div class="tools action-buttons">
-                                        <a href="#" class="blue">
-                                            <i class="icon-pencil bigger-125 " id="image-edit" ></i>
-                                        </a>
 
-                                        <a href="#" class="red">
-                                            <i class="icon-remove bigger-125" id="image-close"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                                </div>
-                        </div>
-                        <div class="controls" id="image-upload" style="display:none">
-                            <div class="row-fluid">
-                                <div class="span4">
-                                    <div class="widget-box">
-                                        <div class="widget-header">
-                                            <h4>Картинка категорії</h4>
-                                                <span class="widget-toolbar">
-                                                    <a href="#" data-action="collapse">
-                                                        <i class="icon-chevron-up"></i>
-                                                    </a>
-                                                    {{-- <a href="#" data-action="close">
-                                                         <i class="icon-remove"></i>
-                                                     </a>--}}
-                                                </span>
-                                        </div>
-                                        <div class="widget-body">
-                                            <div class="widget-main">
-                                                {{--
-                                                 <div class="ace-file-input"><input type="file" name="img" id="id-input-file-2"><label data-title="Choose"><span data-title="No File ..."><i class="icon-upload-alt"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
-                                                --}}
-                                                <div class="ace-file-input ace-file-multiple">
-                                                    <input name='img' type="file" id="id-input-file-3">
-                                                    <a class="remove" href="#"><i class="icon-remove"></i></a>
-                                                </div>
-                                                {{--<label>
-                                                    <input type="checkbox" name="file-format" id="id-file-format">
-                                                    <span class="lbl"> Allow only images</span>
-                                                </label>--}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @else
-                        <div class="controls">
-                            <div class="row-fluid">
-                                <div class="span4">
-                                    <div class="widget-box collapsed">
-                                        <div class="widget-header">
-                                            <h4>Картинка категорії</h4>
-                                                <span class="widget-toolbar">
-                                                    <a href="#" data-action="collapse">
-                                                        <i class="icon-chevron-up"></i>
-                                                    </a>
-                                                    {{-- <a href="#" data-action="close">
-                                                         <i class="icon-remove"></i>
-                                                     </a>--}}
-                                                </span>
-                                        </div>
-                                        <div class="widget-body">
-                                            <div class="widget-main">
-                                                {{--
-                                                 <div class="ace-file-input"><input type="file" name="img" id="id-input-file-2"><label data-title="Choose"><span data-title="No File ..."><i class="icon-upload-alt"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
-                                                --}}
-                                                <div class="ace-file-input ace-file-multiple">
-                                                    <input name='img' type="file" id="id-input-file-3">
-                                                    <a class="remove" href="#"><i class="icon-remove"></i></a>
-                                                </div>
-                                                {{--<label>
-                                                    <input type="checkbox" name="file-format" id="id-file-format">
-                                                    <span class="lbl"> Allow only images</span>
-                                                </label>--}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                </div>
+
 
                 {{--<div class="control-group">
                     <label class="control-label" for="form-field-21">Картинка категорії</label>
@@ -231,7 +360,7 @@
                     </div>
                 </div>
                 <div class="space-4"></div>
-                <div class="control-group">
+               {{-- <div class="control-group">
                     <label class="control-label">Статус</label>
                     <div class="controls">
                         <div class="row-fluid">
@@ -274,7 +403,7 @@
                             </option>
                         </select>
                     </div>
-                </div>
+                </div>--}}
                 <div class="hr hr-18 dotted hr-double"></div>
                 <h4 class="pink">
                     <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
@@ -596,4 +725,5 @@
             </div><!--/.span-->
         </div><!--/.row-fluid-->
     </div><!--/.page-content-->
+
 @stop

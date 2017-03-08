@@ -47,10 +47,17 @@
     <link href="{{ asset('/css/backend/ace.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/backend/ace-responsive.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/backend/ace-skins.min.css') }}" rel="stylesheet">
+    <!--Font Awesome CDN-->
+
+    <link rel="stylesheet" href="{{ asset('/libs\font-awesome-4.7.0\css\font-awesome.min.css') }}" >
 
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="{{ asset('/css/backend/ace-ie.min.css') }} >
     <![endif]-->
+
+
+
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -157,7 +164,7 @@
                 <ul class="submenu">
                     @foreach($admin_categories as $admin_category)
                         <li @if(Request::is('*/'.$admin_category->link.'') || Request::is('*/'.$admin_category->link.'/*')) class="active" @endif>
-                            <a href="{{ $url }}/articles/{{ $admin_category->link }}">
+                            <a href="{{ $url }}/articles/{{ $admin_category->link }}" @if($admin_category->active == 0) style="color:#e4e1e1" @endif>
                                 <i class="icon-double-angle-right"></i>
                                 {{ $admin_category->getTranslate('title') }}
                             </a>
@@ -634,6 +641,5 @@
     });
 </script>
 <!-- Scripts -->
-
 </body>
 </html>
