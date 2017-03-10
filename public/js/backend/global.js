@@ -312,6 +312,7 @@ $(function(){
 /*show-hide image in category*/
     $('#image-close,#image-edit').on('click', function(event){
         event.preventDefault();
+        $('input[name=img_status]').prop('value',false);
         $('#show-image').hide();
         $('#image-upload').show();
     })

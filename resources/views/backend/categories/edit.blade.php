@@ -259,9 +259,6 @@
                     </div>
                 </div>
 
-
-
-
                 {{--<div class="control-group">
                     <label class="control-label" for="form-field-21">Картинка категорії</label>
                     <div class="controls">
@@ -418,6 +415,7 @@
                 </h4>
                 <div class="hr hr-18 dotted hr-double"></div>
                 <input type="hidden" id="fields" name="fields" @if(isset($admin_category->fields)) value='{{ $admin_category->fields }}'@else value="" @endif/>
+                <input type="hidden" name="img_status" value= 'true'/>
                 <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                 <input type="hidden" name="_method" value='{{$action_method}}'/>
                 <div class="form-actions">

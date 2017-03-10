@@ -168,6 +168,8 @@ class AdminCategoriesController extends Controller {
 	{
 		$langs = Lang::all();
 
+		$category = Category::where('link',$type)->first();
+
 		//create var all for date from request
 		$all = $request->all();
 
@@ -186,20 +188,18 @@ class AdminCategoriesController extends Controller {
 		//add category img and save in file
 		if($category_img){
 			$extension = $category_img->getClientOriginalExtension();
-			$name_img = $all['link'] . '.' . $extension;
-			Storage::put('upload/categories/' .$all['link'] .'/' . $name_img, file_get_contents($category_img));
-			$all['img'] = 'upload/categories/' .$all['link'] .'/' . $name_img;
+			$name_img = $all['link'] . '-' . time() . '.' . $extension;
+			Storage::put('upload/categories/' . $category->id . '/main/' . $name_img, file_get_contents($category_img));
+			$all['img'] = 'upload/categories/' . $category->id . '/main/' . $name_img;
 		}
-		/*else{
+		elseif($all['img_status'] == 'false'){
 			$all['img'] = null;
-			Storage::deleteDirectory('upload/categories/' . $type);
+			Storage::deleteDirectory('upload/categories/' . $category->id . '/main');
 
-		}*/
+		}
 
 		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareArticleData($all);
-
-		$category = Category::where('link',$type)->first();
 
 		//Pull imgs from folder and present in JSON format
 		$files = Storage::Files('upload/categories/'.$category->id.'/images/');
@@ -267,7 +267,6 @@ class AdminCategoriesController extends Controller {
 
 		/*Delete category*/
 		if($category AND $category->delete()){
-			Storage::deleteDirectory('upload/categories/' . $type);
 			Storage::deleteDirectory('upload/categories/' . $id);
 			return response()->json([
 				"status" => 'success',
