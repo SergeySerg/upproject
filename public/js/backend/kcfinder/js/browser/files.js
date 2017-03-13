@@ -316,7 +316,7 @@ browser.menuFile = function(file, e) {
                     if ((browser.clipboard[i].name == cdata.name) &&
                         (browser.clipboard[i].dir == browser.dir)
                     ) {
-                        failed = true
+                        failed = true;
                         msg += cdata.name + ": " + browser.label("This file is already added to the Clipboard.") + "\n";
                         break;
                     }
@@ -376,7 +376,7 @@ browser.menuFile = function(file, e) {
                 browser.confirm(
                     browser.label("{count} selected files are not removable. Do you want to delete the rest?", {count:failed}),
                     go
-                )
+                );
 
             else
                 browser.confirm(

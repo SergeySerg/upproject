@@ -60,7 +60,7 @@ $(function(){
                     '</div>' +
                 '</td> ' +
             '</tr>');
-    };
+    }
     //Функция инициализации базовых аттрибутов
     function renderBaseAttributes(){
         var base = fields.base.length;
@@ -91,7 +91,7 @@ $(function(){
             $('tr[data-id-row = '+title_delete+']').fadeOut(300);
             $('input[name="fields"]').val(JSON.stringify(fields));//запись в поле fields значений attributes
             console.log('Після видалення ==>', fields.attributes);
-        })
+        });
 /*/Delete attributes*/
 
 /*Edit attributes*/
@@ -109,9 +109,9 @@ $(function(){
             console.log('PЗначення по ключу', data);
             //сворачивание формы добавления аттрибутов после успешного добавления
             $('div#collapseOne').removeClass("in").css("height",'0px');
-        })
+        });
 /*/Edit attributes*/
-    };
+    }
     renderAttributesTable();//Отрисовка таблицы
 
 /*Add new attributes*/
@@ -315,7 +315,7 @@ $(function(){
         $('input[name=img_status]').prop('value',false);
         $('#show-image').hide();
         $('#image-upload').show();
-    })
+    });
 /*show-hide image in category*/
     init_wysiwyg();
 });

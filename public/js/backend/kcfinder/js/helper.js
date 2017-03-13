@@ -57,7 +57,7 @@ _.htmlData = function(value) {
         .replace(/\</g, "&lt;")
         .replace(/\>/g, "&gt;")
         .replace(/\ /g, "&nbsp;");
-}
+};
 
 _.jsValue = function(value) {
     return value
@@ -104,7 +104,7 @@ _.escapeDirs = function(path) {
         prefix = "";
     if (fullDirExpr.test(path)) {
         var port = path.replace(fullDirExpr, "$4");
-        prefix = path.replace(fullDirExpr, "$1://$2")
+        prefix = path.replace(fullDirExpr, "$1://$2");
         if (port.length)
             prefix += ":" + port;
         prefix += "/";

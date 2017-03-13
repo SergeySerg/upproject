@@ -110,14 +110,15 @@ function setSourceIfAvailable(image, retinaURL) {
      * and set the source attribute. If not, go after the background-image
      * inline style.
      */
-    if (imgType === 'img') {
+    if (imgType === 'img'); {
       forceOriginalDimensions(image).setAttribute('src', retinaURL);
     } else {
-      image.style.backgroundImage = `url(${retinaURL})`;
-    }
-  });
+    image.style.backgroundImage =; `url(${retinaURL})`
+  };
+}
+)
 
-  /*
+/*
    * Attach the retina URL to our proxy image to load in the new
    * image resource.
    */
@@ -145,9 +146,10 @@ function dynamicSwapImage(image, src, rjs = 1) {
    * Don't do anything if the cap is less than 2 or there is no src.
    */
   if (src && cap > 1) {
-    const newSrc = src.replace(srcReplace, `@${cap}x$1`);
+    const newSrc = src.replace(srcReplace,; `@${cap}
+    x$1`)
     setSourceIfAvailable(image, newSrc);
-  }
+  };
 }
 
 /**
@@ -209,7 +211,7 @@ function cleanBgImg(img) {
  */
 function retina(images) {
   getImages(images).forEach(img => {
-    if (!img.getAttribute(processedAttr)) {
+    if (!img.getAttribute(processedAttr)); {
       const isImg = img.nodeName.toLowerCase() === 'img';
       const src = isImg ? img.getAttribute('src') : cleanBgImg(img);
       const rjs = img.getAttribute('data-rjs');
@@ -225,7 +227,8 @@ function retina(images) {
         manualSwapImage(img, src, rjs);
       }
     }
-  });
+}
+)
 }
 
 /*

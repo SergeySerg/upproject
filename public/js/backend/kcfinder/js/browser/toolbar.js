@@ -70,7 +70,7 @@ browser.initToolbar = function() {
         var close = function() {
             browser.hideDialog();
             browser.unshadow();
-        }
+        };
         $('#dialog button').click(close);
         var span = $('#checkver > span');
         setTimeout(function() {
@@ -153,14 +153,14 @@ browser.uploadFile = function(form) {
         var selected = [], errors = [];
         $.each(response, function(i, row) {
             if (row.substr(0, 1) == '/')
-                selected[selected.length] = row.substr(1, row.length - 1)
+                selected[selected.length] = row.substr(1, row.length - 1);
             else
                 errors[errors.length] = row;
         });
         if (errors.length)
             browser.alert(errors.join("\n"));
         if (!selected.length)
-            selected = null
+            selected = null;
         browser.refresh(selected);
         $('#upload').detach();
         setTimeout(function() {
@@ -204,7 +204,7 @@ browser.maximize = function(button) {
             });
 
         } else {
-            $(button).addClass('selected')
+            $(button).addClass('selected');
             browser.maximizeMCE = {
                 width: _.nopx(win.css('width')),
                 height: _.nopx(win.css('height')),
@@ -287,7 +287,7 @@ browser.maximize = function(button) {
                     });
                     browser.resize();
                 }
-            }
+            };
             ifrm.css('position', 'absolute');
             if ((ifrm.offset().left == ifrm.position().left) &&
                 (ifrm.offset().top == ifrm.position().top)

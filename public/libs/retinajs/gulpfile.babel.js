@@ -141,7 +141,7 @@ gulp.task('build-css', cssBuildTask);
 // then build for the browser and build for node.
 gulp.task('dist', ['clean', 'lint'], (cb) => {
   runSequence('dist-css', 'build-js', cb);
-});
+})
 
 // The dev task will build the code, then start the server.
 // It will also watch for changes in the source and in the
@@ -150,10 +150,12 @@ gulp.task('dist', ['clean', 'lint'], (cb) => {
 gulp.task('dev', ['clean', 'lint'], () => {
   runSequence(['build-js', 'build-css'], 'serve', () => {
     gulp.watch(['./test/functional/public/index.html', './src/**/*'], () => {
-      runSequence('lint', ['build-js', 'build-css'], () => server.reload());
-    });
-    gulp.watch('./test/functional/public/styles/*', () => {
-      runSequence('build-css', () => server.reload());
-    });
-  });
-});
+      runSequence('lint', ['build-js', 'build-css'], () = > server.reload()
+)
+})
+gulp.watch('./test/functional/public/styles/*', () => {
+        runSequence('build-css', () = > server.reload()
+)
+})
+})
+})

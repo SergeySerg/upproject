@@ -32,7 +32,7 @@ browser.initSettings = function() {
 
     $('#show input[type="checkbox"]').click(function() {
         var kuki = $(this).get(0).checked ? 'on' : 'off';
-        _.kuki.set('show' + $(this).get(0).name, kuki)
+        _.kuki.set('show' + $(this).get(0).name, kuki);
         if ($(this).get(0).checked)
             $('#files .file div.' + $(this).get(0).name).css('display', 'block');
         else

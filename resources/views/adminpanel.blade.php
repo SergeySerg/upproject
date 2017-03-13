@@ -459,9 +459,9 @@
 
         //dynamically change allowed formats by changing before_change callback function
         $('#id-file-format').removeAttr('checked').on('change', function() {
-            var before_change
-            var btn_choose
-            var no_icon
+            var before_change;
+            var btn_choose;
+            var no_icon;
             if(this.checked) {
                 btn_choose = "Drop images here or click to choose";
                 no_icon = "icon-picture";
@@ -495,7 +495,7 @@
                 }
             }
             var file_input = $('#id-input-file-3');
-            file_input.ace_file_input('update_settings', {'before_change':before_change, 'btn_choose': btn_choose, 'no_icon':no_icon})
+            file_input.ace_file_input('update_settings', {'before_change':before_change, 'btn_choose': btn_choose, 'no_icon':no_icon});
             file_input.ace_file_input('reset_input');
         });
 
@@ -522,7 +522,7 @@
             minuteStep: 1,
             showSeconds: true,
             showMeridian: false
-        })
+        });
 
         $('#colorpicker1').colorpicker();
         $('#simple-colorpicker-1').ace_colorpicker();
@@ -550,7 +550,7 @@
             no_icon:'icon-cloud-upload',
             droppable:true,
             thumbnail:'large'
-        })
+        });
 
         //chosen plugin inside a modal will have a zero width because the select element is originally hidden
         //and its width cannot be determined.
@@ -561,7 +561,7 @@
                 $(this).find('.chzn-drop').css('width' , '210px');
                 $(this).find('.chzn-search input').css('width' , '200px');
             });
-        })
+        });
         /**
          //or you can activate the chosen plugin after modal is shown
          //this way select element has a width now and chosen works as expected
@@ -589,7 +589,7 @@
         $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
         function tooltip_placement(context, source) {
             var $source = $(source);
-            var $parent = $source.closest('table')
+            var $parent = $source.closest('table');
             var off1 = $parent.offset();
             var w1 = $parent.width();
 

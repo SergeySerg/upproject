@@ -64,7 +64,7 @@ browser.initDropUpload = function() {
             browser.alert("Cannot write to upload folder.");
             return false;
         }
-        filesCount += e.dataTransfer.files.length
+        filesCount += e.dataTransfer.files.length;
         for (var i = 0; i < e.dataTransfer.files.length; i++) {
             var file = e.dataTransfer.files[i];
             file.thisTargetDir = browser.dir;
@@ -86,7 +86,7 @@ browser.initDropUpload = function() {
             browser.alert("Cannot write to upload folder.");
             return false;
         }
-        filesCount += e.dataTransfer.files.length
+        filesCount += e.dataTransfer.files.length;
         for (var i = 0; i < e.dataTransfer.files.length; i++) {
             var file = e.dataTransfer.files[i];
             file.thisTargetDir = $(dir).data('path');
@@ -196,7 +196,7 @@ browser.initDropUpload = function() {
                     processUploadQueue();
                     if (xhr.responseText.substr(0, 1) != '/')
                         errors[errors.length] = xhr.responseText;
-                }
+                };
 
                 xhr.sendAsBinary(postbody);
             };

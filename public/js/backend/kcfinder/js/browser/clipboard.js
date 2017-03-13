@@ -183,7 +183,7 @@ browser.copyClipboard = function(dir) {
         browser.confirm(
             browser.label("{count} files in the Clipboard are not readable. Do you want to copy the rest?", {count:failed}),
             go
-        )
+        );
     else
         go();
 
@@ -199,7 +199,7 @@ browser.moveClipboard = function(dir) {
         else
             failed++;
     if (this.clipboard.length == failed) {
-        browser.alert(this.label("The files in the Clipboard are not movable."))
+        browser.alert(this.label("The files in the Clipboard are not movable."));
         return;
     }
 
@@ -247,7 +247,7 @@ browser.deleteClipboard = function() {
         else
             failed++;
     if (this.clipboard.length == failed) {
-        browser.alert(this.label("The files in the Clipboard are not removable."))
+        browser.alert(this.label("The files in the Clipboard are not removable."));
         return;
     }
     var go = function(callBack) {

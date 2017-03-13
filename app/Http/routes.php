@@ -24,7 +24,7 @@ Route::get('/', 'Frontend\HomeController@index');//Перенаправленн�
 
 /*Callback group route*/
 Route::post('/contact', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
-Route::post('/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'contact']);//Обработчик Обратной связи
+Route::post('/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи
 /*/Callback group route*/
 
 /*Backend group routes*/
@@ -78,7 +78,6 @@ Route::group(['prefix'=>'adminSha4', 'middleware' => ['auth', 'backend.init']], 
 	Route::delete('/resume/{id}',['uses' => 'Backend\AdminResumeController@destroy','as' => 'resume_delete']);//Удаление элемента
 	Route::get('/resume/{id}',['uses'=> 'Backend\AdminResumeController@show','as' => 'resume_show']);//Вывод формы редакторирование..
 	//Route::put('/comments/{article_id}/{id}','Backend\AdminResumeController@update');//Сохранение после редактирования..
-
 });
 /*/Backend group routes*/
 

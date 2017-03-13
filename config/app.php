@@ -149,7 +149,7 @@ return [
 		/*
 		 * laravel spec provides
 		 */
-		//'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider'
+		Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 	],
 
 	/*

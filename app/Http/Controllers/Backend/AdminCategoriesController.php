@@ -118,7 +118,7 @@ class AdminCategoriesController extends Controller {
 		return response()->json([
 			"status" => 'success',
 			"message" => 'Успішно збережено',
-			"redirect" => URL::route('admin_dashboard')
+			"redirect" => route('admin_dashboard')
 		]);
 	}
 
@@ -151,15 +151,26 @@ class AdminCategoriesController extends Controller {
 
 		//Decode attributes from articles DB
 		$attributes_fields = $fields->attributes;
+		return view('backend.categories.edit')
+			->with(compact('langs','admin_category','type','attributes_fields','article_parent'))
+			->with(['action_method' => 'put']);
 
-		return view('backend.categories.edit', [
+		/*return view('backend.categories.edit', [
 			'admin_category' => $admin_category,
 			'langs' => $langs,
 			'type' => $type,
 			'action_method' => 'put',
 			'attributes_fields' => $attributes_fields,
 			'article_parent' => $article_parent
-		]);
+		]);*/
+        /*[
+			'admin_category' => $admin_category,
+			'langs' => $langs,
+			'type' => $type,
+			'action_method' => 'put',
+			'attributes_fields' => $attributes_fields,
+			'article_parent' => $article_parent
+		]);*/
 	}
 
 	/* Update the Category in storage.(@param  int  $id,@return Response*/

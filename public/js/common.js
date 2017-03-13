@@ -103,7 +103,7 @@ $('.show-popup-news').click(function(event){
             }
        );
    });
-})
+});
 //Popup advice
 //Popup advice OPEN
 $('.show-popup-advices').click(function(event){
@@ -125,7 +125,7 @@ $('.show-popup-advices').click(function(event){
             }
         );
     });
-})
+});
 //Popup services
 $('.services-block_short-description').click( function(event){
     var service_id = $(this).parent('li').attr('data-service-id');

@@ -722,7 +722,7 @@
 		}
 
 		if (this.is('animating')) {
-			$.support.transform ? this.animate(stage.x) : this.$stage.stop()
+			$.support.transform ? this.animate(stage.x) : this.$stage.stop();
 			this.invalidate('position');
 		}
 
